@@ -14,6 +14,9 @@ public class PlayerProgression : MonoBehaviour
     [Tooltip("XP given the first time a vocabulary word is discovered.")]
     [SerializeField] int xpPerDiscovery = 10;
 
+    [Tooltip("XP given the first time a grammar lesson is opened. Opening it again does not add XP.")]
+    [SerializeField] int xpPerGrammar = 10;
+
     [Tooltip("XP required to go up one level. Level 1 starts at 0 XP.")]
     [SerializeField] int xpPerLevel = 50;
 
@@ -21,6 +24,8 @@ public class PlayerProgression : MonoBehaviour
     PlayerProgressData data = new PlayerProgressData();
 
     public int XpPerDiscovery => Mathf.Max(0, xpPerDiscovery);
+
+    public int XpPerGrammar => Mathf.Max(0, xpPerGrammar);
 
     public int XpPerLevel => Mathf.Max(1, xpPerLevel);
 
@@ -55,6 +60,16 @@ public class PlayerProgression : MonoBehaviour
         {
             PersonalDictionary.Instance.WordDiscovered += OnWordDiscovered;
         }
+
+        if (GrammarProgress.Instance != null)
+        {
+            GrammarProgress.Instance.LessonDiscovered += OnLessonDiscovered;
+        }
+
+        if (RevisionProgress.Instance != null)
+        {
+            RevisionProgress.Instance.ReviewRewarded += OnReviewRewarded;
+        }
     }
 
     void Start()
@@ -64,6 +79,18 @@ public class PlayerProgression : MonoBehaviour
             PersonalDictionary.Instance.WordDiscovered -= OnWordDiscovered;
             PersonalDictionary.Instance.WordDiscovered += OnWordDiscovered;
         }
+
+        if (GrammarProgress.Instance != null)
+        {
+            GrammarProgress.Instance.LessonDiscovered -= OnLessonDiscovered;
+            GrammarProgress.Instance.LessonDiscovered += OnLessonDiscovered;
+        }
+
+        if (RevisionProgress.Instance != null)
+        {
+            RevisionProgress.Instance.ReviewRewarded -= OnReviewRewarded;
+            RevisionProgress.Instance.ReviewRewarded += OnReviewRewarded;
+        }
     }
 
     void OnDisable()
@@ -71,6 +98,16 @@ public class PlayerProgression : MonoBehaviour
         if (PersonalDictionary.Instance != null)
         {
             PersonalDictionary.Instance.WordDiscovered -= OnWordDiscovered;
+        }
+
+        if (GrammarProgress.Instance != null)
+        {
+            GrammarProgress.Instance.LessonDiscovered -= OnLessonDiscovered;
+        }
+
+        if (RevisionProgress.Instance != null)
+        {
+            RevisionProgress.Instance.ReviewRewarded -= OnReviewRewarded;
         }
     }
 
@@ -90,6 +127,30 @@ public class PlayerProgression : MonoBehaviour
         }
 
         data.totalXp += XpPerDiscovery;
+        store.Save(data);
+        Changed?.Invoke();
+    }
+
+    void OnLessonDiscovered(string lessonId)
+    {
+        if (string.IsNullOrWhiteSpace(lessonId) || XpPerGrammar == 0)
+        {
+            return;
+        }
+
+        data.totalXp += XpPerGrammar;
+        store.Save(data);
+        Changed?.Invoke();
+    }
+
+    void OnReviewRewarded(int xp)
+    {
+        if (xp <= 0)
+        {
+            return;
+        }
+
+        data.totalXp += xp;
         store.Save(data);
         Changed?.Invoke();
     }

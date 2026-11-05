@@ -62,7 +62,7 @@ public class PlayerInteractor : MonoBehaviour
 
     void Update()
     {
-        if (DictionaryPanel.IsOpenNow || (learningPanel != null && learningPanel.IsOpen))
+        if (DictionaryPanel.IsOpenNow || GrammarPanel.IsOpenNow || RevisionPanel.IsOpenNow || (learningPanel != null && learningPanel.IsOpen))
         {
             ClearFocus();
             if (learningPanel != null)

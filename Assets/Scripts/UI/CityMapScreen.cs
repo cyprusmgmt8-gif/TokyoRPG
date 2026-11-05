@@ -157,9 +157,16 @@ public class CityMapScreen : MonoBehaviour
                 ? new Color(0.24f, 0.34f, 0.46f, 1f)
                 : new Color(0.18f, 0.19f, 0.22f, 1f);
 
+        string readingLine = place.reading;
+        string romaji = JapaneseReading.ShownRomaji(place.japaneseName, place.reading, "");
+        if (!string.IsNullOrEmpty(romaji))
+        {
+            readingLine += "    " + romaji;
+        }
+
         Button button = MenuUi.CreateButton(
             listContent,
-            place.japaneseName + "\n" + place.reading + "    " + place.englishName + "    " + status,
+            place.japaneseName + "\n" + readingLine + "    " + place.englishName + "    " + status,
             font,
             color,
             () => Select(place),
@@ -186,14 +193,14 @@ public class CityMapScreen : MonoBehaviour
 
         if (unlocked)
         {
-            detailText.text = place.japaneseName + "  " + place.reading + "\n"
+            detailText.text = PlaceHeading(place) + "\n"
                 + place.englishName + "\n\n"
                 + place.summary + "\n\n"
                 + "This place is unlocked for the premium test. The room is not built yet. The bedroom is ready to visit.";
         }
         else
         {
-            detailText.text = place.japaneseName + "  " + place.reading + "\n"
+            detailText.text = PlaceHeading(place) + "\n"
                 + place.englishName + "\n\n"
                 + place.summary + "\n\n"
                 + "Premium access\n"
@@ -202,6 +209,17 @@ public class CityMapScreen : MonoBehaviour
         }
 
         detailRoot.SetActive(true);
+    }
+
+    static string PlaceHeading(CityLocation place)
+    {
+        string romaji = JapaneseReading.ShownRomaji(place.japaneseName, place.reading, "");
+        if (string.IsNullOrEmpty(romaji))
+        {
+            return place.japaneseName + "  " + place.reading;
+        }
+
+        return place.japaneseName + "  " + place.reading + "  " + romaji;
     }
 
     void OpenSettings()

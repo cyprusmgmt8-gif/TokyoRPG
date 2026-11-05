@@ -16,8 +16,10 @@ MonoBehaviour:
   - id: bedroom.bed
     japanese: "ベッド"
     reading: "ベッド"
+    romaji: "beddo"
     exampleSentence: "これはベッドです。"
     exampleReading: "これはベッドです。"
+    exampleRomaji: "Kore wa beddo desu."
     audioReference: bedroom_bed
     wordClip: {fileID: 8300000, guid: 784bc2e94e294eab85ff8b0f023f0fff, type: 3}
     exampleClip: {fileID: 8300000, guid: 7f88e1ba73314892b0ac68a0016d0cfe, type: 3}
@@ -31,8 +33,10 @@ MonoBehaviour:
   - id: bedroom.desk
     japanese: "机"
     reading: "つくえ"
+    romaji: "tsukue"
     exampleSentence: "机で勉強します。"
     exampleReading: "つくえでべんきょうします。"
+    exampleRomaji: "Tsukue de benkyou shimasu."
     audioReference: bedroom_desk
     wordClip: {fileID: 8300000, guid: caf23f09ff2e49ee922f1ffeb211897b, type: 3}
     exampleClip: {fileID: 8300000, guid: 5830b8e4105a4483b2f24a7f4073af36, type: 3}
@@ -46,8 +50,10 @@ MonoBehaviour:
   - id: bedroom.chair
     japanese: "椅子"
     reading: "いす"
+    romaji: "isu"
     exampleSentence: "椅子に座ります。"
     exampleReading: "いすにすわります。"
+    exampleRomaji: "Isu ni suwarimasu."
     audioReference: bedroom_chair
     wordClip: {fileID: 8300000, guid: a81aae2004e94acfabdc93b72c4614ac, type: 3}
     exampleClip: {fileID: 8300000, guid: 09f1f1383afc4190bcf2c44865a2bf3c, type: 3}
@@ -61,8 +67,10 @@ MonoBehaviour:
   - id: bedroom.door
     japanese: "ドア"
     reading: "ドア"
+    romaji: "doa"
     exampleSentence: "ドアを開けます。"
     exampleReading: "ドアをあけます。"
+    exampleRomaji: "Doa o akemasu."
     audioReference: bedroom_door
     wordClip: {fileID: 8300000, guid: d4d4e8dc18644a1c9bc7c2efca08d0fb, type: 3}
     exampleClip: {fileID: 8300000, guid: faed457ac8f947928dd652a434a48c33, type: 3}
@@ -76,8 +84,10 @@ MonoBehaviour:
   - id: bedroom.window
     japanese: "窓"
     reading: "まど"
+    romaji: "mado"
     exampleSentence: "窓を開けます。"
     exampleReading: "まどをあけます。"
+    exampleRomaji: "Mado o akemasu."
     audioReference: bedroom_window
     wordClip: {fileID: 8300000, guid: c4d0b4fd462a4c87a57f85b2a18033e7, type: 3}
     exampleClip: {fileID: 8300000, guid: 3309d0aed8f74d1a9f9d33e42f959421, type: 3}
@@ -91,8 +101,10 @@ MonoBehaviour:
   - id: bedroom.wardrobe
     japanese: "箪笥"
     reading: "たんす"
+    romaji: "tansu"
     exampleSentence: "服は箪笥の中です。"
     exampleReading: "ふくはたんすのなかです。"
+    exampleRomaji: "Fuku wa tansu no naka desu."
     audioReference: bedroom_wardrobe
     wordClip: {fileID: 8300000, guid: 026302b1d9cd4865bd2517141f72a028, type: 3}
     exampleClip: {fileID: 8300000, guid: e1f98acd1b7e4e0483675261ad2c09f1, type: 3}
@@ -106,8 +118,10 @@ MonoBehaviour:
   - id: bedroom.refrigerator
     japanese: "冷蔵庫"
     reading: "れいぞうこ"
+    romaji: "reizouko"
     exampleSentence: "冷蔵庫に牛乳があります。"
     exampleReading: "れいぞうこにぎゅうにゅうがあります。"
+    exampleRomaji: "Reizouko ni gyuunyuu ga arimasu."
     audioReference: bedroom_refrigerator
     wordClip: {fileID: 8300000, guid: 6dbc3017742b40b2a0753f1cc0b5a165, type: 3}
     exampleClip: {fileID: 8300000, guid: f5b34870479c4c528341f5bc75031f4c, type: 3}
@@ -121,8 +135,10 @@ MonoBehaviour:
   - id: bedroom.television
     japanese: "テレビ"
     reading: "テレビ"
+    romaji: "terebi"
     exampleSentence: "テレビを見ます。"
     exampleReading: "テレビをみます。"
+    exampleRomaji: "Terebi o mimasu."
     audioReference: bedroom_television
     wordClip: {fileID: 8300000, guid: 9cec0c48bfdc432bb406725d5bced846, type: 3}
     exampleClip: {fileID: 8300000, guid: 4cb61ed285ab425483340a586f45b989, type: 3}
@@ -136,8 +152,10 @@ MonoBehaviour:
   - id: bedroom.shelf
     japanese: "棚"
     reading: "たな"
+    romaji: "tana"
     exampleSentence: "本は棚の上です。"
     exampleReading: "ほんはたなのうえです。"
+    exampleRomaji: "Hon wa tana no ue desu."
     audioReference: bedroom_shelf
     wordClip: {fileID: 8300000, guid: 38473d604d184ca69673b2de74e576a3, type: 3}
     exampleClip: {fileID: 8300000, guid: cf87234868e34b968ccc4c6cc9c19215, type: 3}
@@ -151,8 +169,10 @@ MonoBehaviour:
   - id: bedroom.clock
     japanese: "時計"
     reading: "とけい"
+    romaji: "tokei"
     exampleSentence: "時計を見ます。"
     exampleReading: "とけいをみます。"
+    exampleRomaji: "Tokei o mimasu."
     audioReference: bedroom_clock
     wordClip: {fileID: 8300000, guid: 09272bea58e84de4905edcd592968ec0, type: 3}
     exampleClip: {fileID: 8300000, guid: 01d03201184e4f849f45b219b6d37a5c, type: 3}
@@ -166,8 +186,10 @@ MonoBehaviour:
   - id: bedroom.plant
     japanese: "植物"
     reading: "しょくぶつ"
+    romaji: "shokubutsu"
     exampleSentence: "部屋に植物があります。"
     exampleReading: "へやにしょくぶつがあります。"
+    exampleRomaji: "Heya ni shokubutsu ga arimasu."
     audioReference: bedroom_plant
     wordClip: {fileID: 8300000, guid: 3272b44152034252b2d9d1f58cb07aa2, type: 3}
     exampleClip: {fileID: 8300000, guid: e53f7df733cf48239311c83ce26c0275, type: 3}
@@ -181,8 +203,10 @@ MonoBehaviour:
   - id: bedroom.light
     japanese: "電気"
     reading: "でんき"
+    romaji: "denki"
     exampleSentence: "電気をつけます。"
     exampleReading: "でんきをつけます。"
+    exampleRomaji: "Denki o tsukemasu."
     audioReference: bedroom_light
     wordClip: {fileID: 8300000, guid: e11c4e8492f14dc5bfc027b9ce5e9b57, type: 3}
     exampleClip: {fileID: 8300000, guid: 4c47f58d73324ba4a8a26cc8196f56c1, type: 3}
@@ -196,8 +220,10 @@ MonoBehaviour:
   - id: bedroom.curtain
     japanese: "カーテン"
     reading: "カーテン"
+    romaji: "kaaten"
     exampleSentence: "カーテンを閉めます。"
     exampleReading: "カーテンをしめます。"
+    exampleRomaji: "Kaaten o shimemasu."
     audioReference: bedroom_curtain
     wordClip: {fileID: 8300000, guid: 15fb48227c05433eaea748674c9a7d8d, type: 3}
     exampleClip: {fileID: 8300000, guid: e11afc385338420c8a99b76fb8e339bf, type: 3}
@@ -211,8 +237,10 @@ MonoBehaviour:
   - id: bedroom.rug
     japanese: "絨毯"
     reading: "じゅうたん"
+    romaji: "juutan"
     exampleSentence: "絨毯の上に座ります。"
     exampleReading: "じゅうたんのうえにすわります。"
+    exampleRomaji: "Juutan no ue ni suwarimasu."
     audioReference: bedroom_rug
     wordClip: {fileID: 8300000, guid: 377c68f0bdf14bed9cf35e4f75c7e944, type: 3}
     exampleClip: {fileID: 8300000, guid: 0f50bd3e9571480fb8b7452044978d9e, type: 3}
@@ -226,8 +254,10 @@ MonoBehaviour:
   - id: bedroom.nightstand
     japanese: "目覚まし時計"
     reading: "めざましどけい"
+    romaji: "mezamashidokei"
     exampleSentence: "目覚まし時計が鳴ります。"
     exampleReading: "めざましどけいがなります。"
+    exampleRomaji: "Mezamashidokei ga narimasu."
     audioReference: bedroom_nightstand
     wordClip: {fileID: 8300000, guid: 156508fda6634203b5087ba7eac64f63, type: 3}
     exampleClip: {fileID: 8300000, guid: 9de9feb1c1064f72bb4b2086aa252000, type: 3}

@@ -14,6 +14,9 @@ public class PlayerProfileData
     public string nickname = "";
     public string avatarId = "traveler";
     public string languageCode = "";
+
+    [Tooltip("0 shows Japanese and Romaji. 1 shows Japanese only. Furigana is not used yet.")]
+    public int readingDisplay;
 }
 
 public interface IProfileStore
@@ -31,7 +34,7 @@ public class LocalProfileStore : IProfileStore
 {
     public const string FileName = "tokyo-rpg-profile.json";
 
-    public static string SavePath => Path.Combine(Application.persistentDataPath, FileName);
+    public static string SavePath => SaveSlots.FilePath(FileName);
 
     public bool Exists()
     {
@@ -203,14 +206,25 @@ public static class PlayerProfile
         return string.IsNullOrWhiteSpace(fallback) ? "en" : fallback.Trim();
     }
 
+    public static void Reload()
+    {
+        loaded = false;
+        Data = new PlayerProfileData();
+        EnsureLoaded();
+    }
+
     public static void SaveNew(string nickname, string avatarId, string languageCode)
     {
         EnsureLoaded();
+        int readingDisplay = Data != null ? Data.readingDisplay : 0;
+        Data = new PlayerProfileData();
         Data.nickname = nickname.Trim();
         Data.avatarId = AvatarChoices.Find(avatarId).id;
         Data.languageCode = InterfaceLanguageChoices.IsKnown(languageCode) ? languageCode.Trim() : "en";
+        Data.readingDisplay = readingDisplay;
         Data.hasStarted = true;
         Data.version = 1;
+        loaded = true;
         store.Save(Data);
     }
 
@@ -223,6 +237,18 @@ public static class PlayerProfile
         }
 
         Data.languageCode = languageCode.Trim();
+        store.Save(Data);
+    }
+
+    public static void SetReadingDisplay(JapaneseScriptDisplay mode)
+    {
+        EnsureLoaded();
+        if (mode != JapaneseScriptDisplay.JapaneseOnly && mode != JapaneseScriptDisplay.JapaneseAndRomaji)
+        {
+            return;
+        }
+
+        Data.readingDisplay = (int)mode;
         store.Save(Data);
     }
 }

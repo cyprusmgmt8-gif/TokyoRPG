@@ -35,8 +35,10 @@ public class VocabularyCatalog : ScriptableObject
             id = record.id,
             japanese = record.japanese,
             reading = record.reading,
+            romaji = record.romaji,
             exampleSentence = record.exampleSentence,
             exampleReading = record.exampleReading,
+            exampleRomaji = record.exampleRomaji,
             audioReference = record.audioReference,
             wordClip = record.wordClip,
             exampleClip = record.exampleClip,
@@ -83,8 +85,11 @@ public class VocabularyRecord
     [Tooltip("The word in Japanese. Use kanji when the word is normally written with kanji.")]
     public string japanese;
 
-    [Tooltip("Hiragana reading of the word.")]
+    [Tooltip("Hiragana or katakana reading. Required when the word uses kanji. Romaji is built from this, not from the kanji.")]
     public string reading;
+
+    [Tooltip("Hepburn romaji for the word. Leave empty when the reading is kana and does not need a special particle reading.")]
+    public string romaji;
 
     [TextArea(2, 3)]
     [Tooltip("Example sentence in Japanese.")]
@@ -93,6 +98,10 @@ public class VocabularyRecord
     [TextArea(2, 3)]
     [Tooltip("Hiragana reading of the example sentence. Leave empty when the sentence is already in hiragana or katakana.")]
     public string exampleReading;
+
+    [TextArea(2, 3)]
+    [Tooltip("Romaji for the whole example. Write wa for the particle は and o for を. Example: Kore wa beddo desu.")]
+    public string exampleRomaji;
 
     [Tooltip("Reminder of the file name, for example bedroom_bed. The clips below are what the game plays.")]
     public string audioReference;

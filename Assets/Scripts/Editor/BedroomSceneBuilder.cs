@@ -307,6 +307,14 @@ public static class BedroomSceneBuilder
         serializedLibrary.ApplyModifiedPropertiesWithoutUndo();
         player.AddComponent<PersonalDictionary>();
         player.AddComponent<PlayerProgression>();
+
+        GrammarLibrary grammar = player.AddComponent<GrammarLibrary>();
+        SerializedObject serializedGrammar = new SerializedObject(grammar);
+        serializedGrammar.FindProperty("catalog").objectReferenceValue =
+            AssetDatabase.LoadAssetAtPath<GrammarCatalog>("Assets/Data/Grammar/BedroomGrammar.asset");
+        serializedGrammar.ApplyModifiedPropertiesWithoutUndo();
+        player.AddComponent<GrammarProgress>();
+        player.AddComponent<RevisionProgress>();
         player.AddComponent<BedroomMapButton>();
         player.AddComponent<TouchControls>();
     }

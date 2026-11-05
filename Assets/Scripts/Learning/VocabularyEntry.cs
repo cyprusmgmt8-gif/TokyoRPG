@@ -9,9 +9,11 @@ public class VocabularyEntry
     public string id;
     public string japanese;
     public string reading;
+    public string romaji;
     public string translation;
     public string exampleSentence;
     public string exampleReading;
+    public string exampleRomaji;
     public string exampleTranslation;
     public string audioReference;
     public AudioClip wordClip;

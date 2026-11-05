@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,6 +12,9 @@ public class MainMenuScreen : MonoBehaviour
     GameObject homeRoot;
     GameObject createRoot;
     GameObject confirmRoot;
+    GameObject profilesRoot;
+    Button savedProfilesButton;
+    RectTransform profileList;
     SettingsPanel settings;
     Text welcomeText;
     Image avatarImage;
@@ -36,6 +40,7 @@ public class MainMenuScreen : MonoBehaviour
         homeRoot = BuildHome(canvas.transform);
         createRoot = BuildCreate(canvas.transform);
         confirmRoot = BuildConfirm(canvas.transform);
+        profilesRoot = BuildProfiles(canvas.transform);
         settings = new SettingsPanel(canvas.transform, font, ShowHome);
         ShowHome();
     }
@@ -45,6 +50,7 @@ public class MainMenuScreen : MonoBehaviour
         homeRoot.SetActive(true);
         createRoot.SetActive(false);
         confirmRoot.SetActive(false);
+        profilesRoot.SetActive(false);
         settings.Root.SetActive(false);
         RefreshHome();
     }
@@ -53,6 +59,7 @@ public class MainMenuScreen : MonoBehaviour
     {
         bool saved = PlayerProfile.HasStarted;
         continueButton.interactable = saved;
+        savedProfilesButton.gameObject.SetActive(SaveSlots.Count > 1);
         if (saved)
         {
             AvatarChoice avatar = AvatarChoices.Find(PlayerProfile.Data.avatarId);
@@ -100,7 +107,8 @@ public class MainMenuScreen : MonoBehaviour
 
         welcomeText = MenuUi.AddText(card.transform, "No saved profile yet.", font, 26, FontStyle.Normal, Color.white, 40, TextAnchor.MiddleCenter);
         MenuUi.CreateButton(card.transform, "New Game", font, MenuUi.Amber, OnNewGame, 76);
-        continueButton = MenuUi.CreateButton(card.transform, "Continue", font, MenuUi.Stone, () => GameScenes.Load(GameScenes.CityMap), 76);
+        continueButton = MenuUi.CreateButton(card.transform, "Continue", font, MenuUi.Stone, ContinueGame, 76);
+        savedProfilesButton = MenuUi.CreateButton(card.transform, "Saved profiles", font, MenuUi.Stone, ShowProfiles, 64);
         MenuUi.CreateButton(card.transform, "Settings", font, MenuUi.Stone, ShowSettings, 76);
         MenuUi.AddText(
             card.transform,
@@ -130,6 +138,7 @@ public class MainMenuScreen : MonoBehaviour
     {
         homeRoot.SetActive(false);
         confirmRoot.SetActive(false);
+        profilesRoot.SetActive(false);
         createRoot.SetActive(true);
         settings.Root.SetActive(false);
         selectedAvatarId = PlayerProfile.Data.avatarId;
@@ -144,6 +153,7 @@ public class MainMenuScreen : MonoBehaviour
         homeRoot.SetActive(false);
         createRoot.SetActive(false);
         confirmRoot.SetActive(false);
+        profilesRoot.SetActive(false);
         settings.Refresh();
         settings.Root.SetActive(true);
     }
@@ -152,18 +162,18 @@ public class MainMenuScreen : MonoBehaviour
     {
         GameObject root = MenuUi.CreateRect("Confirm", parent);
         MenuUi.Stretch(root.GetComponent<RectTransform>(), Vector2.zero, Vector2.one);
-        GameObject card = MenuUi.CreateCard(root.transform, new Vector2(0.18f, 0.28f), new Vector2(0.82f, 0.72f));
+        GameObject card = MenuUi.CreateCard(root.transform, new Vector2(0.16f, 0.18f), new Vector2(0.84f, 0.82f));
         MenuUi.AddText(card.transform, "Start a new profile?", font, 40, FontStyle.Bold, Color.white, 56, TextAnchor.MiddleCenter);
         MenuUi.AddText(
             card.transform,
-            "This replaces your nickname and avatar. Words in your dictionary and your XP stay on this device.",
+            "This creates a new profile at Level 1 with 0 XP. Your current profile, dictionary, grammar and revision stay in Saved profiles. Continue opens the profile you used most recently.",
             font,
             26,
             FontStyle.Normal,
             MenuUi.Muted,
-            100,
+            150,
             TextAnchor.MiddleCenter);
-        MenuUi.CreateButton(card.transform, "Replace profile", font, MenuUi.Amber, OpenCreate, 72);
+        MenuUi.CreateButton(card.transform, "Create new profile", font, MenuUi.Amber, OpenCreate, 72);
         MenuUi.CreateButton(card.transform, "Cancel", font, MenuUi.Stone, ShowHome, 72);
         return root;
     }
@@ -269,7 +279,70 @@ public class MainMenuScreen : MonoBehaviour
             return;
         }
 
+        SaveSlots.BeginNewProfile();
         PlayerProfile.SaveNew(nickname, selectedAvatarId, selectedLanguageCode);
+        GameScenes.Load(GameScenes.Bedroom);
+    }
+
+    void ContinueGame()
+    {
+        if (!PlayerProfile.HasStarted)
+        {
+            return;
+        }
+
+        GameScenes.Load(GameScenes.CityMap);
+    }
+
+    void ShowProfiles()
+    {
+        homeRoot.SetActive(false);
+        createRoot.SetActive(false);
+        confirmRoot.SetActive(false);
+        settings.Root.SetActive(false);
+        profilesRoot.SetActive(true);
+        RebuildProfileList();
+    }
+
+    GameObject BuildProfiles(Transform parent)
+    {
+        GameObject root = MenuUi.CreateRect("Profiles", parent);
+        MenuUi.Stretch(root.GetComponent<RectTransform>(), Vector2.zero, Vector2.one);
+        GameObject card = MenuUi.CreateCard(root.transform, new Vector2(0.14f, 0.1f), new Vector2(0.86f, 0.9f));
+        MenuUi.AddText(card.transform, "Saved profiles", font, 40, FontStyle.Bold, Color.white, 52, TextAnchor.MiddleCenter);
+        MenuUi.AddText(card.transform, "Choose a profile to continue. New Game does not delete these.", font, 22, FontStyle.Normal, MenuUi.Muted, 56, TextAnchor.MiddleCenter);
+        MenuUi.CreateScroll(card.transform, out profileList);
+        MenuUi.CreateButton(card.transform, "Back", font, MenuUi.Stone, ShowHome, 64);
+        return root;
+    }
+
+    void RebuildProfileList()
+    {
+        for (int i = profileList.childCount - 1; i >= 0; i--)
+        {
+            Destroy(profileList.GetChild(i).gameObject);
+        }
+
+        List<SaveSlotSummary> slots = SaveSlots.List();
+        for (int i = 0; i < slots.Count; i++)
+        {
+            SaveSlotSummary slot = slots[i];
+            int level = 1 + slot.totalXp / 50;
+            string label = slot.nickname + "   ·   Level " + level + "   ·   " + slot.totalXp + " XP";
+            if (slot.active)
+            {
+                label += "   ·   Current";
+            }
+
+            string id = slot.id;
+            MenuUi.CreateButton(profileList, label, font, slot.active ? MenuUi.Amber : MenuUi.Stone, () => PlayProfile(id), 72);
+        }
+    }
+
+    void PlayProfile(string id)
+    {
+        SaveSlots.Activate(id);
+        PlayerProfile.Reload();
         GameScenes.Load(GameScenes.CityMap);
     }
 }

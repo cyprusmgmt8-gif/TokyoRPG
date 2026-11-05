@@ -31,7 +31,7 @@ public class LocalProgressionStore : IProgressionStore
 {
     public const string FileName = "tokyo-rpg-progress.json";
 
-    public static string SavePath => Path.Combine(Application.persistentDataPath, FileName);
+    public static string SavePath => SaveSlots.FilePath(FileName);
 
     public PlayerProgressData Load()
     {

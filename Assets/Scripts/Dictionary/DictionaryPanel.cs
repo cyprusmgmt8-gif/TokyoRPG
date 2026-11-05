@@ -14,16 +14,34 @@ public class DictionaryPanel : MonoBehaviour
 {
     public static bool IsOpenNow { get; private set; }
 
+    static DictionaryPanel current;
+
+    enum MemoryView
+    {
+        Any,
+        New,
+        Learning,
+        Familiar,
+        Mastered,
+        Difficult
+    }
+
     DictionaryFilter filter = DictionaryFilter.All;
+    MemoryView memoryView = MemoryView.Any;
+    readonly List<Image> memoryImages = new List<Image>();
+    readonly List<MemoryView> memoryValues = new List<MemoryView>();
+    string searchQuery = "";
     GameObject screenRoot;
     RectTransform listContent;
     Text emptyText;
+    GameObject dictionaryButton;
     Font uiFont;
     FirstPersonController pausedMovement;
     bool isOpen;
 
     void Awake()
     {
+        current = this;
         uiFont = FindJapaneseFont();
         EnsureEventSystem();
         BuildUi();
@@ -40,14 +58,31 @@ public class DictionaryPanel : MonoBehaviour
 
     void OnDestroy()
     {
+        if (current == this)
+        {
+            current = null;
+        }
+
         if (PersonalDictionary.Instance != null)
         {
             PersonalDictionary.Instance.Changed -= RebuildList;
         }
     }
 
+    public static void ApplyLauncher()
+    {
+        if (current == null || current.dictionaryButton == null)
+        {
+            return;
+        }
+
+        current.dictionaryButton.SetActive(!current.isOpen && !GameplayHud.Hidden);
+    }
+
     void Update()
     {
+        ApplyLauncher();
+
         if (!isOpen)
         {
             return;
@@ -92,6 +127,28 @@ public class DictionaryPanel : MonoBehaviour
         }
     }
 
+    public void ReviewWord(string vocabularyId)
+    {
+        Close();
+        if (RevisionPanel.Instance == null)
+        {
+            gameObject.AddComponent<RevisionPanel>();
+        }
+
+        RevisionPanel.Instance.ReviewWord(vocabularyId);
+    }
+
+    public void OpenRevision()
+    {
+        Close();
+        if (RevisionPanel.Instance == null)
+        {
+            gameObject.AddComponent<RevisionPanel>();
+        }
+
+        RevisionPanel.Instance.ShowSummary();
+    }
+
     public void Close()
     {
         screenRoot.SetActive(false);
@@ -127,17 +184,98 @@ public class DictionaryPanel : MonoBehaviour
         }
 
         List<DictionaryWordProgress> words = PersonalDictionary.Instance.GetWords(filter);
-        emptyText.gameObject.SetActive(words.Count == 0);
-        if (words.Count == 0)
-        {
-            emptyText.text = EmptyMessage(filter);
-            return;
-        }
-
+        int shown = 0;
         for (int i = 0; i < words.Count; i++)
         {
+            if (!MatchesSearch(words[i]) || !MatchesMemory(words[i]))
+            {
+                continue;
+            }
+
+            shown++;
             CreateRow(words[i]);
         }
+
+        emptyText.gameObject.SetActive(shown == 0);
+        if (shown == 0)
+        {
+            emptyText.text = words.Count == 0
+                ? EmptyMessage(filter)
+                : string.IsNullOrWhiteSpace(searchQuery) ? "No words in this set." : "No words match that search.";
+        }
+    }
+
+    bool MatchesSearch(DictionaryWordProgress progress)
+    {
+        if (string.IsNullOrWhiteSpace(searchQuery) || progress == null)
+        {
+            return true;
+        }
+
+        string query = searchQuery.Trim();
+        if (ContainsText(progress.vocabularyId, query))
+        {
+            return true;
+        }
+
+        if (VocabularyLibrary.Instance == null || !VocabularyLibrary.Instance.TryGet(progress.vocabularyId, out VocabularyEntry entry))
+        {
+            return false;
+        }
+
+        return ContainsText(entry.japanese, query)
+            || ContainsText(entry.reading, query)
+            || ContainsText(entry.romaji, query)
+            || ContainsText(entry.translation, query)
+            || ContainsText(entry.exampleSentence, query)
+            || ContainsText(entry.exampleReading, query)
+            || ContainsText(entry.exampleRomaji, query)
+            || ContainsText(JapaneseReading.Resolve(entry.japanese, entry.reading, entry.romaji), query)
+            || ContainsText(JapaneseReading.Resolve(entry.exampleSentence, entry.exampleReading, entry.exampleRomaji), query);
+    }
+
+    bool MatchesMemory(DictionaryWordProgress progress)
+    {
+        if (memoryView == MemoryView.Any)
+        {
+            return true;
+        }
+
+        if (progress == null)
+        {
+            return false;
+        }
+
+        RevisionCardProgress card = RevisionProgress.Instance != null
+            ? RevisionProgress.Instance.GetCard(progress.vocabularyId)
+            : null;
+        if (memoryView == MemoryView.Difficult)
+        {
+            return RevisionProgress.IsDifficult(card);
+        }
+
+        int status = card != null ? card.status : (int)RevisionStatus.New;
+        if (memoryView == MemoryView.New)
+        {
+            return status == (int)RevisionStatus.New;
+        }
+
+        if (memoryView == MemoryView.Learning)
+        {
+            return status == (int)RevisionStatus.Learning;
+        }
+
+        if (memoryView == MemoryView.Familiar)
+        {
+            return status == (int)RevisionStatus.Familiar;
+        }
+
+        return status == (int)RevisionStatus.Mastered;
+    }
+
+    static bool ContainsText(string value, string query)
+    {
+        return !string.IsNullOrEmpty(value) && value.IndexOf(query, StringComparison.OrdinalIgnoreCase) >= 0;
     }
 
     void CreateRow(DictionaryWordProgress progress)
@@ -157,7 +295,7 @@ public class DictionaryPanel : MonoBehaviour
         layout.childForceExpandWidth = true;
         layout.childForceExpandHeight = false;
         LayoutElement element = row.AddComponent<LayoutElement>();
-        element.preferredHeight = found ? 240 : 80;
+        element.preferredHeight = found ? 530 : 80;
 
         if (!found)
         {
@@ -166,9 +304,63 @@ public class DictionaryPanel : MonoBehaviour
         }
 
         AddText(row.transform, entry.japanese, 36, FontStyle.Bold, Color.white, 46, TextAnchor.MiddleLeft);
-        AddText(row.transform, entry.reading, 24, FontStyle.Normal, new Color(1f, 0.86f, 0.55f), 32, TextAnchor.MiddleLeft);
+        string romaji = JapaneseReading.ShownRomaji(entry.japanese, entry.reading, entry.romaji);
+        if (!string.IsNullOrEmpty(romaji))
+        {
+            AddText(row.transform, romaji, 22, FontStyle.Italic, new Color(1f, 0.86f, 0.55f), 30, TextAnchor.MiddleLeft);
+        }
+
+        AddText(row.transform, entry.reading, 22, FontStyle.Normal, new Color(0.8f, 0.8f, 0.76f), 30, TextAnchor.MiddleLeft);
         AddText(row.transform, entry.translation, 24, FontStyle.Normal, new Color(0.9f, 0.9f, 0.88f), 32, TextAnchor.MiddleLeft);
+        RevisionCardProgress cardProgress = RevisionProgress.Instance != null ? RevisionProgress.Instance.GetCard(entry.id) : null;
+        string memory = cardProgress != null ? RevisionProgress.StatusLabel(cardProgress.status) : "New";
+        string due = RevisionProgress.Instance != null ? RevisionProgress.Instance.DescribeWait(entry.id) : "Due now";
+        AddText(row.transform, memory + "  ·  " + due, 20, FontStyle.Bold, new Color(0.78f, 0.9f, 0.75f), 32, TextAnchor.MiddleLeft);
+        string reviewId = entry.id;
+        GameObject reviewObject = CreateRect("Review Word", row.transform);
+        LayoutElement reviewLayout = reviewObject.AddComponent<LayoutElement>();
+        reviewLayout.preferredHeight = 44;
+        Image reviewImage = reviewObject.AddComponent<Image>();
+        reviewImage.color = new Color(0.72f, 0.42f, 0.22f, 1f);
+        Button reviewButton = reviewObject.AddComponent<Button>();
+        reviewButton.targetGraphic = reviewImage;
+        reviewButton.onClick.AddListener(() => ReviewWord(reviewId));
+        Text reviewLabel = AddText(reviewObject.transform, "Review this word", 20, FontStyle.Bold, Color.white, 44, TextAnchor.MiddleCenter);
+        Stretch(reviewLabel.rectTransform, Vector2.zero, Vector2.one);
         AddText(row.transform, entry.exampleSentence, 22, FontStyle.Italic, new Color(0.82f, 0.82f, 0.78f), 48, TextAnchor.MiddleLeft);
+        if (!string.IsNullOrWhiteSpace(entry.exampleReading))
+        {
+            AddText(row.transform, entry.exampleReading, 20, FontStyle.Normal, new Color(0.8f, 0.8f, 0.76f), 32, TextAnchor.MiddleLeft);
+        }
+        string exampleRomaji = JapaneseReading.ShownRomaji(entry.exampleSentence, entry.exampleReading, entry.exampleRomaji);
+        if (!string.IsNullOrEmpty(exampleRomaji))
+        {
+            AddText(row.transform, exampleRomaji, 20, FontStyle.Normal, new Color(1f, 0.86f, 0.55f), 36, TextAnchor.MiddleLeft);
+        }
+
+        if (entry.wordClip != null || entry.exampleClip != null)
+        {
+            GameObject audioRow = CreateRect("Audio", row.transform);
+            LayoutElement audioLayout = audioRow.AddComponent<LayoutElement>();
+            audioLayout.preferredHeight = 44;
+            HorizontalLayoutGroup audioLayoutGroup = audioRow.AddComponent<HorizontalLayoutGroup>();
+            audioLayoutGroup.spacing = 8;
+            audioLayoutGroup.childControlWidth = true;
+            audioLayoutGroup.childControlHeight = true;
+            audioLayoutGroup.childForceExpandWidth = true;
+            audioLayoutGroup.childForceExpandHeight = true;
+            if (entry.wordClip != null)
+            {
+                AudioClip wordClip = entry.wordClip;
+                CreateAudioButton(audioRow.transform, "Play word", wordClip);
+            }
+
+            if (entry.exampleClip != null)
+            {
+                AudioClip exampleClip = entry.exampleClip;
+                CreateAudioButton(audioRow.transform, "Play sentence", exampleClip);
+            }
+        }
 
         GameObject buttonObject = CreateRect("Revision", row.transform);
         LayoutElement buttonLayout = buttonObject.AddComponent<LayoutElement>();
@@ -205,7 +397,8 @@ public class DictionaryPanel : MonoBehaviour
         scaler.matchWidthOrHeight = 0.5f;
         canvasObject.AddComponent<GraphicRaycaster>();
 
-        GameObject openButton = CreateRect("Open Dictionary", canvasObject.transform);
+        dictionaryButton = CreateRect("Open Dictionary", canvasObject.transform);
+        GameObject openButton = dictionaryButton;
         Stretch(openButton.GetComponent<RectTransform>(), new Vector2(0.74f, 0.86f), new Vector2(0.98f, 0.98f));
         Image openImage = openButton.AddComponent<Image>();
         openImage.color = new Color(0.14f, 0.13f, 0.12f, 0.92f);
@@ -233,6 +426,18 @@ public class DictionaryPanel : MonoBehaviour
         cardLayout.childForceExpandHeight = false;
 
         AddText(card.transform, "Dictionary", 36, FontStyle.Bold, Color.white, 48, TextAnchor.MiddleCenter);
+        CreateSearchField(card.transform);
+
+        GameObject reviseObject = CreateRect("Revise", card.transform);
+        LayoutElement reviseLayout = reviseObject.AddComponent<LayoutElement>();
+        reviseLayout.preferredHeight = 64;
+        Image reviseImage = reviseObject.AddComponent<Image>();
+        reviseImage.color = new Color(0.72f, 0.42f, 0.22f, 1f);
+        Button reviseButton = reviseObject.AddComponent<Button>();
+        reviseButton.targetGraphic = reviseImage;
+        reviseButton.onClick.AddListener(OpenRevision);
+        Text reviseText = AddText(reviseObject.transform, "Revise words", 28, FontStyle.Bold, Color.white, 64, TextAnchor.MiddleCenter);
+        Stretch(reviseText.rectTransform, Vector2.zero, Vector2.one);
 
         GameObject filters = CreateRect("Filters", card.transform);
         LayoutElement filterLayout = filters.AddComponent<LayoutElement>();
@@ -246,6 +451,22 @@ public class DictionaryPanel : MonoBehaviour
         CreateFilterButton(filters.transform, "All", DictionaryFilter.All);
         CreateFilterButton(filters.transform, "Recent", DictionaryFilter.Recent);
         CreateFilterButton(filters.transform, "Revision", DictionaryFilter.Revision);
+
+        GameObject memoryFilters = CreateRect("Memory", card.transform);
+        LayoutElement memoryLayout = memoryFilters.AddComponent<LayoutElement>();
+        memoryLayout.preferredHeight = 56;
+        HorizontalLayoutGroup memoryRow = memoryFilters.AddComponent<HorizontalLayoutGroup>();
+        memoryRow.spacing = 8;
+        memoryRow.childControlWidth = true;
+        memoryRow.childControlHeight = true;
+        memoryRow.childForceExpandWidth = true;
+        memoryRow.childForceExpandHeight = true;
+        CreateMemoryButton(memoryFilters.transform, "Any", MemoryView.Any);
+        CreateMemoryButton(memoryFilters.transform, "New", MemoryView.New);
+        CreateMemoryButton(memoryFilters.transform, "Learning", MemoryView.Learning);
+        CreateMemoryButton(memoryFilters.transform, "Familiar", MemoryView.Familiar);
+        CreateMemoryButton(memoryFilters.transform, "Mastered", MemoryView.Mastered);
+        CreateMemoryButton(memoryFilters.transform, "Tricky", MemoryView.Difficult);
 
         GameObject scrollObject = CreateRect("Scroll", card.transform);
         LayoutElement scrollLayout = scrollObject.AddComponent<LayoutElement>();
@@ -289,6 +510,102 @@ public class DictionaryPanel : MonoBehaviour
         closeButton.onClick.AddListener(Close);
         Text closeText = AddText(closeObject.transform, "Close", 28, FontStyle.Bold, Color.white, 64, TextAnchor.MiddleCenter);
         Stretch(closeText.rectTransform, Vector2.zero, Vector2.one);
+    }
+
+    void CreateSearchField(Transform parent)
+    {
+        GameObject root = CreateRect("Search", parent);
+        LayoutElement layout = root.AddComponent<LayoutElement>();
+        layout.preferredHeight = 64;
+        layout.minHeight = 64;
+        Image image = root.AddComponent<Image>();
+        image.color = new Color(0.05f, 0.05f, 0.06f, 1f);
+
+        GameObject textObject = CreateRect("Search Text", root.transform);
+        Stretch(textObject.GetComponent<RectTransform>(), Vector2.zero, Vector2.one);
+        textObject.GetComponent<RectTransform>().offsetMin = new Vector2(16f, 8f);
+        textObject.GetComponent<RectTransform>().offsetMax = new Vector2(-16f, -8f);
+        Text text = textObject.AddComponent<Text>();
+        text.font = uiFont;
+        text.fontSize = 28;
+        text.color = Color.white;
+        text.alignment = TextAnchor.MiddleLeft;
+        text.supportRichText = false;
+
+        GameObject placeholderObject = CreateRect("Search Placeholder", root.transform);
+        Stretch(placeholderObject.GetComponent<RectTransform>(), Vector2.zero, Vector2.one);
+        placeholderObject.GetComponent<RectTransform>().offsetMin = new Vector2(16f, 8f);
+        placeholderObject.GetComponent<RectTransform>().offsetMax = new Vector2(-16f, -8f);
+        Text placeholder = placeholderObject.AddComponent<Text>();
+        placeholder.font = uiFont;
+        placeholder.fontSize = 28;
+        placeholder.fontStyle = FontStyle.Italic;
+        placeholder.color = new Color(1f, 1f, 1f, 0.4f);
+        placeholder.alignment = TextAnchor.MiddleLeft;
+        placeholder.text = "Search Japanese or Romaji";
+
+        InputField field = root.AddComponent<InputField>();
+        field.targetGraphic = image;
+        field.textComponent = text;
+        field.placeholder = placeholder;
+        field.lineType = InputField.LineType.SingleLine;
+        field.onValueChanged.AddListener(value =>
+        {
+            searchQuery = value;
+            RebuildList();
+        });
+    }
+
+    void CreateAudioButton(Transform parent, string label, AudioClip clip)
+    {
+        GameObject buttonObject = CreateRect(label, parent);
+        Image image = buttonObject.AddComponent<Image>();
+        image.color = new Color(0.28f, 0.26f, 0.24f, 1f);
+        Button button = buttonObject.AddComponent<Button>();
+        button.targetGraphic = image;
+        button.onClick.AddListener(() =>
+        {
+            JapaneseAudioPlayer player = JapaneseAudioPlayer.Ensure();
+            if (player.IsPlaying(clip))
+            {
+                player.Stop();
+            }
+            else
+            {
+                player.Play(clip);
+            }
+        });
+        Text text = AddText(buttonObject.transform, label, 20, FontStyle.Bold, Color.white, 44, TextAnchor.MiddleCenter);
+        Stretch(text.rectTransform, Vector2.zero, Vector2.one);
+    }
+
+    void CreateMemoryButton(Transform parent, string label, MemoryView nextView)
+    {
+        GameObject buttonObject = CreateRect(label, parent);
+        Image image = buttonObject.AddComponent<Image>();
+        memoryImages.Add(image);
+        memoryValues.Add(nextView);
+        image.color = memoryView == nextView ? new Color(0.72f, 0.42f, 0.22f, 1f) : new Color(0.28f, 0.26f, 0.24f, 1f);
+        Button button = buttonObject.AddComponent<Button>();
+        button.targetGraphic = image;
+        button.onClick.AddListener(() =>
+        {
+            memoryView = nextView;
+            RefreshMemoryButtons();
+            RebuildList();
+        });
+        Text text = AddText(buttonObject.transform, label, 18, FontStyle.Bold, Color.white, 56, TextAnchor.MiddleCenter);
+        Stretch(text.rectTransform, Vector2.zero, Vector2.one);
+    }
+
+    void RefreshMemoryButtons()
+    {
+        for (int i = 0; i < memoryImages.Count && i < memoryValues.Count; i++)
+        {
+            memoryImages[i].color = memoryValues[i] == memoryView
+                ? new Color(0.72f, 0.42f, 0.22f, 1f)
+                : new Color(0.28f, 0.26f, 0.24f, 1f);
+        }
     }
 
     void CreateFilterButton(Transform parent, string label, DictionaryFilter nextFilter)

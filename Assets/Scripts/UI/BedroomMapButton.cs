@@ -11,8 +11,9 @@ public class BedroomMapButton : MonoBehaviour
     {
         MenuUi.EnsureEventSystem();
         Canvas canvas = MenuUi.CreateCanvas(transform, "Map Button Canvas", 30);
+        GameplayHud.Register(canvas.gameObject);
         GameObject buttonObject = MenuUi.CreateRect("Map", canvas.transform);
-        MenuUi.Stretch(buttonObject.GetComponent<RectTransform>(), new Vector2(0.5f, 0.86f), new Vector2(0.72f, 0.98f));
+        MenuUi.Stretch(buttonObject.GetComponent<RectTransform>(), new Vector2(0.56f, 0.86f), new Vector2(0.73f, 0.98f));
         Image image = buttonObject.AddComponent<Image>();
         image.color = new Color(0.14f, 0.13f, 0.12f, 0.92f);
         Button button = buttonObject.AddComponent<Button>();

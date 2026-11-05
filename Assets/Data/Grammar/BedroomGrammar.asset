@@ -1,0 +1,654 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b7e1c4a29d3f4e6a8b0c1d2e3f4a5b6c, type: 3}
+  m_Name: BedroomGrammar
+  m_EditorClassIdentifier: 
+  lessons:
+  - id: wa
+    title: "The topic"
+    grammarElement: "は"
+    reading: "わ"
+    englishExplanation: "は marks the topic: what the sentence is about. As a particle it is said わ, not は. It is not always the same job as an English subject. が is the one that points to who or what does the action."
+    beginnerDescription: "は tells the listener what you are talking about. In これはベッドです, the topic is これ, the thing near you."
+    exampleSentence: "これはベッドです。"
+    romaji: "Kore wa beddo desu."
+    exampleTranslation: "This is a bed."
+    breakdown:
+    - japanese: "これ"
+      reading: "これ"
+      meaning: "this, near the speaker"
+    - japanese: "は"
+      reading: "わ"
+      meaning: "topic marker"
+    - japanese: "ベッド"
+      reading: "ベッド"
+      meaning: "bed"
+    - japanese: "です"
+      reading: "です"
+      meaning: "polite ending that names it"
+    difficulty: 1
+    locationId: bedroom
+    relatedVocabularyIds:
+    - bedroom.bed
+    - bedroom.wardrobe
+    - bedroom.shelf
+  - id: wo
+    title: "The thing you act on"
+    grammarElement: "を"
+    reading: "お"
+    englishExplanation: "を marks the thing an action is done to. As a particle it is said お, not を. English objects do not always use を. A place where you do something often uses で, and a place where something exists often uses に."
+    beginnerDescription: "を points to the thing you open, watch, or turn on. In ドアを開けます, the door is what gets opened."
+    exampleSentence: "ドアを開けます。"
+    romaji: "Doa o akemasu."
+    exampleTranslation: "I open the door."
+    breakdown:
+    - japanese: "ドア"
+      reading: "ドア"
+      meaning: "door"
+    - japanese: "を"
+      reading: "お"
+      meaning: "object marker"
+    - japanese: "開けます"
+      reading: "あけます"
+      meaning: "open, polite"
+    difficulty: 1
+    locationId: bedroom
+    relatedVocabularyIds:
+    - bedroom.door
+    - bedroom.window
+    - bedroom.television
+    - bedroom.clock
+    - bedroom.light
+    - bedroom.curtain
+  - id: ga
+    title: "Who or what does it"
+    grammarElement: "が"
+    reading: "が"
+    englishExplanation: "が marks the person or thing that does the action, or the thing that exists. は sets the topic. が points out the actor or the thing being introduced. They are not two spellings of the same English word."
+    beginnerDescription: "が names who or what does the action. In 目覚まし時計が鳴ります, the alarm clock is the thing that rings."
+    exampleSentence: "目覚まし時計が鳴ります。"
+    romaji: "Mezamashidokei ga narimasu."
+    exampleTranslation: "The alarm clock rings."
+    breakdown:
+    - japanese: "目覚まし時計"
+      reading: "めざましどけい"
+      meaning: "alarm clock"
+    - japanese: "が"
+      reading: "が"
+      meaning: "marks the thing that rings"
+    - japanese: "鳴ります"
+      reading: "なります"
+      meaning: "rings, polite"
+    difficulty: 1
+    locationId: bedroom
+    relatedVocabularyIds:
+    - bedroom.nightstand
+    - bedroom.refrigerator
+    - bedroom.plant
+  - id: ni
+    title: "Time, place, or destination"
+    grammarElement: "に"
+    reading: "に"
+    englishExplanation: "に can mark a time, a destination, or the place where something exists or ends up. 椅子に座ります uses に for the place you sit. 冷蔵庫に牛乳があります uses に for the place the milk is. で is different: で marks the place where an action is carried out."
+    beginnerDescription: "に can mean the time, the place something is, or the place you are heading. Here it is the chair you sit on."
+    exampleSentence: "椅子に座ります。"
+    romaji: "Isu ni suwarimasu."
+    exampleTranslation: "I sit on the chair."
+    breakdown:
+    - japanese: "椅子"
+      reading: "いす"
+      meaning: "chair"
+    - japanese: "に"
+      reading: "に"
+      meaning: "the place you sit"
+    - japanese: "座ります"
+      reading: "すわります"
+      meaning: "sit, polite"
+    difficulty: 1
+    locationId: bedroom
+    relatedVocabularyIds:
+    - bedroom.chair
+    - bedroom.refrigerator
+    - bedroom.plant
+    - bedroom.rug
+  - id: de
+    title: "Where an action happens"
+    grammarElement: "で"
+    reading: "で"
+    englishExplanation: "で marks the place where an action happens, or the means used to do it, such as going by train. It is not the same as に. に can mark where something exists or the destination. 机で勉強します means the studying happens at the desk."
+    beginnerDescription: "で marks the place of an action. In 机で勉強します, the desk is where you study."
+    exampleSentence: "机で勉強します。"
+    romaji: "Tsukue de benkyou shimasu."
+    exampleTranslation: "I study at the desk."
+    breakdown:
+    - japanese: "机"
+      reading: "つくえ"
+      meaning: "desk"
+    - japanese: "で"
+      reading: "で"
+      meaning: "place of the action"
+    - japanese: "勉強します"
+      reading: "べんきょうします"
+      meaning: "study, polite"
+    difficulty: 1
+    locationId: bedroom
+    relatedVocabularyIds:
+    - bedroom.desk
+  - id: no
+    title: "Linking two nouns"
+    grammarElement: "の"
+    reading: "の"
+    englishExplanation: "の links two nouns. It can show belonging, as in 私の本, or a relationship, as in 箪笥の中, the inside of the wardrobe. It is not only the English word of possession."
+    beginnerDescription: "の joins two nouns. 箪笥の中 is the inside of the wardrobe, not a separate word for inside."
+    exampleSentence: "服は箪笥の中です。"
+    romaji: "Fuku wa tansu no naka desu."
+    exampleTranslation: "The clothes are in the wardrobe."
+    breakdown:
+    - japanese: "服"
+      reading: "ふく"
+      meaning: "clothes"
+    - japanese: "は"
+      reading: "わ"
+      meaning: "topic marker"
+    - japanese: "箪笥"
+      reading: "たんす"
+      meaning: "wardrobe"
+    - japanese: "の"
+      reading: "の"
+      meaning: "links wardrobe to inside"
+    - japanese: "中"
+      reading: "なか"
+      meaning: "inside"
+    - japanese: "です"
+      reading: "です"
+      meaning: "polite ending"
+    difficulty: 1
+    locationId: bedroom
+    relatedVocabularyIds:
+    - bedroom.wardrobe
+    - bedroom.shelf
+    - bedroom.rug
+  - id: desu
+    title: "Polite naming"
+    grammarElement: "です"
+    reading: "です"
+    englishExplanation: "です is a polite ending used to name or describe something. It is not a full English verb to be, and it is not added to a ます verb. これはベッドです names the thing. ドアを開けます does not use です."
+    beginnerDescription: "です politely says what something is. It sits at the end of これはベッドです."
+    exampleSentence: "これはベッドです。"
+    romaji: "Kore wa beddo desu."
+    exampleTranslation: "This is a bed."
+    breakdown:
+    - japanese: "これ"
+      reading: "これ"
+      meaning: "this, near the speaker"
+    - japanese: "は"
+      reading: "わ"
+      meaning: "topic marker"
+    - japanese: "ベッド"
+      reading: "ベッド"
+      meaning: "bed"
+    - japanese: "です"
+      reading: "です"
+      meaning: "polite ending that names it"
+    difficulty: 1
+    locationId: bedroom
+    relatedVocabularyIds:
+    - bedroom.bed
+    - bedroom.wardrobe
+    - bedroom.shelf
+  - id: masu
+    title: "Polite verb ending"
+    grammarElement: "ます"
+    reading: "ます"
+    englishExplanation: "ます is the polite non-past ending of a verb. It replaces the plain ending. It does not add a new meaning such as will or do. 開けます is the polite form of 開ける. The negative and past forms replace ます. They are not added after it."
+    beginnerDescription: "ます makes a verb polite. 開けます means open. It does not mean will open."
+    exampleSentence: "ドアを開けます。"
+    romaji: "Doa o akemasu."
+    exampleTranslation: "I open the door."
+    breakdown:
+    - japanese: "ドア"
+      reading: "ドア"
+      meaning: "door"
+    - japanese: "を"
+      reading: "お"
+      meaning: "object marker"
+    - japanese: "開けます"
+      reading: "あけます"
+      meaning: "open, polite non-past"
+    difficulty: 1
+    locationId: bedroom
+    relatedVocabularyIds:
+    - bedroom.desk
+    - bedroom.chair
+    - bedroom.door
+    - bedroom.window
+    - bedroom.television
+    - bedroom.clock
+    - bedroom.light
+    - bedroom.curtain
+    - bedroom.rug
+    - bedroom.nightstand
+  - id: masen
+    title: "Polite negative"
+    grammarElement: "ません"
+    reading: "ません"
+    englishExplanation: "ません is the polite negative. It replaces ます. 見ます becomes 見ません. You do not say 見ますません. The bedroom sentence テレビを見ます is affirmative. This lesson uses a different sentence so the negative is clear."
+    beginnerDescription: "ません replaces ます to say you do not do something. 見ます becomes 見ません."
+    exampleSentence: "テレビを見ません。"
+    romaji: "Terebi o mimasen."
+    exampleTranslation: "I do not watch television."
+    breakdown:
+    - japanese: "テレビ"
+      reading: "テレビ"
+      meaning: "television"
+    - japanese: "を"
+      reading: "お"
+      meaning: "object marker"
+    - japanese: "見ません"
+      reading: "みません"
+      meaning: "do not watch, polite"
+    difficulty: 1
+    locationId: bedroom
+    relatedVocabularyIds:
+    - bedroom.television
+  - id: mashita
+    title: "Polite past"
+    grammarElement: "ました"
+    reading: "ました"
+    englishExplanation: "ました is the polite past. It replaces ます. 開けます becomes 開けました. You do not say 開けますました. The bedroom sentence ドアを開けます is not past. This lesson uses the past form on its own."
+    beginnerDescription: "ました replaces ます to talk about the past. 開けます becomes 開けました."
+    exampleSentence: "ドアを開けました。"
+    romaji: "Doa o akemashita."
+    exampleTranslation: "I opened the door."
+    breakdown:
+    - japanese: "ドア"
+      reading: "ドア"
+      meaning: "door"
+    - japanese: "を"
+      reading: "お"
+      meaning: "object marker"
+    - japanese: "開けました"
+      reading: "あけました"
+      meaning: "opened, polite past"
+    difficulty: 1
+    locationId: bedroom
+    relatedVocabularyIds:
+    - bedroom.door
+  - id: kore
+    title: "This, that, and that over there"
+    grammarElement: "これ / それ / あれ"
+    reading: "これ / それ / あれ"
+    englishExplanation: "これ is near the speaker. それ is near the listener. あれ is away from both. These words do not mean the English word the. The bedroom example uses これ because the bed is beside you."
+    beginnerDescription: "これ is this, near you. それ is that, near the other person. あれ is that, away from both of you."
+    exampleSentence: "これはベッドです。"
+    romaji: "Kore wa beddo desu."
+    exampleTranslation: "This is a bed."
+    breakdown:
+    - japanese: "これ"
+      reading: "これ"
+      meaning: "this, near the speaker"
+    - japanese: "は"
+      reading: "わ"
+      meaning: "topic marker"
+    - japanese: "ベッド"
+      reading: "ベッド"
+      meaning: "bed"
+    - japanese: "です"
+      reading: "です"
+      meaning: "polite ending that names it"
+    difficulty: 1
+    locationId: bedroom
+    relatedVocabularyIds:
+    - bedroom.bed
+  - id: ka
+    title: "Making a question"
+    grammarElement: "か"
+    reading: "か"
+    englishExplanation: "か at the end of a sentence makes it a question. The word order often stays the same. これはベッドです becomes これはベッドですか. Spoken questions can rise in pitch, and か is sometimes left off in casual speech. This beginner pattern keeps か."
+    beginnerDescription: "Add か at the end to ask a question. The rest of the sentence can stay in the same order."
+    exampleSentence: "これはベッドですか。"
+    romaji: "Kore wa beddo desu ka."
+    exampleTranslation: "Is this a bed?"
+    breakdown:
+    - japanese: "これ"
+      reading: "これ"
+      meaning: "this, near the speaker"
+    - japanese: "は"
+      reading: "わ"
+      meaning: "topic marker"
+    - japanese: "ベッド"
+      reading: "ベッド"
+      meaning: "bed"
+    - japanese: "です"
+      reading: "です"
+      meaning: "polite ending"
+    - japanese: "か"
+      reading: "か"
+      meaning: "question marker"
+    difficulty: 1
+    locationId: bedroom
+    relatedVocabularyIds:
+    - bedroom.bed
+  sentences:
+  - vocabularyId: bedroom.bed
+    japaneseSentence: "これはベッドです。"
+    romaji: "Kore wa beddo desu."
+    englishTranslation: "This is a bed."
+    explanation: "これ points to the bed near you. は, said わ, marks これ as the topic. です is the polite ending that names it as a bed."
+    lessonIds:
+    - wa
+    - desu
+    - kore
+    breakdown:
+    - japanese: "これ"
+      reading: "これ"
+      meaning: "this, near the speaker"
+    - japanese: "は"
+      reading: "わ"
+      meaning: "topic marker, said わ"
+    - japanese: "ベッド"
+      reading: "ベッド"
+      meaning: "bed"
+    - japanese: "です"
+      reading: "です"
+      meaning: "polite ending that names it"
+  - vocabularyId: bedroom.desk
+    japaneseSentence: "机で勉強します。"
+    romaji: "Tsukue de benkyou shimasu."
+    englishTranslation: "I study at the desk."
+    explanation: "で marks the desk as the place where the studying happens. します is the polite ます form. This is not に, because に would mark a destination or a place something exists."
+    lessonIds:
+    - de
+    - masu
+    breakdown:
+    - japanese: "机"
+      reading: "つくえ"
+      meaning: "desk"
+    - japanese: "で"
+      reading: "で"
+      meaning: "place of the action"
+    - japanese: "勉強します"
+      reading: "べんきょうします"
+      meaning: "study, polite"
+  - vocabularyId: bedroom.chair
+    japaneseSentence: "椅子に座ります。"
+    romaji: "Isu ni suwarimasu."
+    englishTranslation: "I sit on the chair."
+    explanation: "に marks the chair as the place you sit. 座ります is the polite ます form of sit."
+    lessonIds:
+    - ni
+    - masu
+    breakdown:
+    - japanese: "椅子"
+      reading: "いす"
+      meaning: "chair"
+    - japanese: "に"
+      reading: "に"
+      meaning: "the place you sit"
+    - japanese: "座ります"
+      reading: "すわります"
+      meaning: "sit, polite"
+  - vocabularyId: bedroom.door
+    japaneseSentence: "ドアを開けます。"
+    romaji: "Doa o akemasu."
+    englishTranslation: "I open the door."
+    explanation: "を, said お, marks the door as the thing you open. 開けます is the polite ます form."
+    lessonIds:
+    - wo
+    - masu
+    breakdown:
+    - japanese: "ドア"
+      reading: "ドア"
+      meaning: "door"
+    - japanese: "を"
+      reading: "お"
+      meaning: "object marker, said お"
+    - japanese: "開けます"
+      reading: "あけます"
+      meaning: "open, polite"
+  - vocabularyId: bedroom.window
+    japaneseSentence: "窓を開けます。"
+    romaji: "Mado o akemasu."
+    englishTranslation: "I open the window."
+    explanation: "を, said お, marks the window as the thing you open. 開けます is the polite ます form."
+    lessonIds:
+    - wo
+    - masu
+    breakdown:
+    - japanese: "窓"
+      reading: "まど"
+      meaning: "window"
+    - japanese: "を"
+      reading: "お"
+      meaning: "object marker, said お"
+    - japanese: "開けます"
+      reading: "あけます"
+      meaning: "open, polite"
+  - vocabularyId: bedroom.wardrobe
+    japaneseSentence: "服は箪笥の中です。"
+    romaji: "Fuku wa tansu no naka desu."
+    englishTranslation: "The clothes are in the wardrobe."
+    explanation: "は, said わ, marks the clothes as the topic. の links 箪笥 and 中, so the phrase is the inside of the wardrobe. です is the polite ending."
+    lessonIds:
+    - wa
+    - no
+    - desu
+    breakdown:
+    - japanese: "服"
+      reading: "ふく"
+      meaning: "clothes"
+    - japanese: "は"
+      reading: "わ"
+      meaning: "topic marker, said わ"
+    - japanese: "箪笥"
+      reading: "たんす"
+      meaning: "wardrobe"
+    - japanese: "の"
+      reading: "の"
+      meaning: "links wardrobe to inside"
+    - japanese: "中"
+      reading: "なか"
+      meaning: "inside"
+    - japanese: "です"
+      reading: "です"
+      meaning: "polite ending"
+  - vocabularyId: bedroom.refrigerator
+    japaneseSentence: "冷蔵庫に牛乳があります。"
+    romaji: "Reizouko ni gyuunyuu ga arimasu."
+    englishTranslation: "There is milk in the refrigerator."
+    explanation: "に marks the refrigerator as the place the milk is. が marks the milk as the thing that exists. あります is the polite way to say a thing is there."
+    lessonIds:
+    - ni
+    - ga
+    breakdown:
+    - japanese: "冷蔵庫"
+      reading: "れいぞうこ"
+      meaning: "refrigerator"
+    - japanese: "に"
+      reading: "に"
+      meaning: "place where it exists"
+    - japanese: "牛乳"
+      reading: "ぎゅうにゅう"
+      meaning: "milk"
+    - japanese: "が"
+      reading: "が"
+      meaning: "marks the thing that exists"
+    - japanese: "あります"
+      reading: "あります"
+      meaning: "there is, for a thing"
+  - vocabularyId: bedroom.television
+    japaneseSentence: "テレビを見ます。"
+    romaji: "Terebi o mimasu."
+    englishTranslation: "I watch television."
+    explanation: "を, said お, marks the television as the thing you watch. 見ます is the polite ます form. This sentence is not negative. The negative 見ません is a separate lesson."
+    lessonIds:
+    - wo
+    - masu
+    breakdown:
+    - japanese: "テレビ"
+      reading: "テレビ"
+      meaning: "television"
+    - japanese: "を"
+      reading: "お"
+      meaning: "object marker, said お"
+    - japanese: "見ます"
+      reading: "みます"
+      meaning: "watch, polite"
+  - vocabularyId: bedroom.shelf
+    japaneseSentence: "本は棚の上です。"
+    romaji: "Hon wa tana no ue desu."
+    englishTranslation: "The book is on the shelf."
+    explanation: "は, said わ, marks the book as the topic. の links 棚 and 上, so the phrase is the top of the shelf. です is the polite ending."
+    lessonIds:
+    - wa
+    - no
+    - desu
+    breakdown:
+    - japanese: "本"
+      reading: "ほん"
+      meaning: "book"
+    - japanese: "は"
+      reading: "わ"
+      meaning: "topic marker, said わ"
+    - japanese: "棚"
+      reading: "たな"
+      meaning: "shelf"
+    - japanese: "の"
+      reading: "の"
+      meaning: "links shelf to top"
+    - japanese: "上"
+      reading: "うえ"
+      meaning: "top"
+    - japanese: "です"
+      reading: "です"
+      meaning: "polite ending"
+  - vocabularyId: bedroom.clock
+    japaneseSentence: "時計を見ます。"
+    romaji: "Tokei o mimasu."
+    englishTranslation: "I look at the clock."
+    explanation: "を, said お, marks the clock as the thing you look at. 見ます is the polite ます form."
+    lessonIds:
+    - wo
+    - masu
+    breakdown:
+    - japanese: "時計"
+      reading: "とけい"
+      meaning: "clock"
+    - japanese: "を"
+      reading: "お"
+      meaning: "object marker, said お"
+    - japanese: "見ます"
+      reading: "みます"
+      meaning: "look at, polite"
+  - vocabularyId: bedroom.plant
+    japaneseSentence: "部屋に植物があります。"
+    romaji: "Heya ni shokubutsu ga arimasu."
+    englishTranslation: "There is a plant in the room."
+    explanation: "に marks the room as the place the plant is. が marks the plant as the thing that exists. あります is the polite way to say a thing is there."
+    lessonIds:
+    - ni
+    - ga
+    breakdown:
+    - japanese: "部屋"
+      reading: "へや"
+      meaning: "room"
+    - japanese: "に"
+      reading: "に"
+      meaning: "place where it exists"
+    - japanese: "植物"
+      reading: "しょくぶつ"
+      meaning: "plant"
+    - japanese: "が"
+      reading: "が"
+      meaning: "marks the thing that exists"
+    - japanese: "あります"
+      reading: "あります"
+      meaning: "there is, for a thing"
+  - vocabularyId: bedroom.light
+    japaneseSentence: "電気をつけます。"
+    romaji: "Denki o tsukemasu."
+    englishTranslation: "I turn on the light."
+    explanation: "を, said お, marks the light as the thing you turn on. つけます is the polite ます form."
+    lessonIds:
+    - wo
+    - masu
+    breakdown:
+    - japanese: "電気"
+      reading: "でんき"
+      meaning: "light"
+    - japanese: "を"
+      reading: "お"
+      meaning: "object marker, said お"
+    - japanese: "つけます"
+      reading: "つけます"
+      meaning: "turn on, polite"
+  - vocabularyId: bedroom.curtain
+    japaneseSentence: "カーテンを閉めます。"
+    romaji: "Kaaten o shimemasu."
+    englishTranslation: "I close the curtain."
+    explanation: "を, said お, marks the curtain as the thing you close. 閉めます is the polite ます form."
+    lessonIds:
+    - wo
+    - masu
+    breakdown:
+    - japanese: "カーテン"
+      reading: "カーテン"
+      meaning: "curtain"
+    - japanese: "を"
+      reading: "お"
+      meaning: "object marker, said お"
+    - japanese: "閉めます"
+      reading: "しめます"
+      meaning: "close, polite"
+  - vocabularyId: bedroom.rug
+    japaneseSentence: "絨毯の上に座ります。"
+    romaji: "Juutan no ue ni suwarimasu."
+    englishTranslation: "I sit on the rug."
+    explanation: "の links 絨毯 and 上, the top of the rug. に marks that place as where you sit. 座ります is the polite ます form."
+    lessonIds:
+    - no
+    - ni
+    - masu
+    breakdown:
+    - japanese: "絨毯"
+      reading: "じゅうたん"
+      meaning: "rug"
+    - japanese: "の"
+      reading: "の"
+      meaning: "links rug to top"
+    - japanese: "上"
+      reading: "うえ"
+      meaning: "top"
+    - japanese: "に"
+      reading: "に"
+      meaning: "the place you sit"
+    - japanese: "座ります"
+      reading: "すわります"
+      meaning: "sit, polite"
+  - vocabularyId: bedroom.nightstand
+    japaneseSentence: "目覚まし時計が鳴ります。"
+    romaji: "Mezamashidokei ga narimasu."
+    englishTranslation: "The alarm clock rings."
+    explanation: "が marks the alarm clock as the thing that rings. は would set it as the topic instead. 鳴ります is the polite ます form."
+    lessonIds:
+    - ga
+    - masu
+    breakdown:
+    - japanese: "目覚まし時計"
+      reading: "めざましどけい"
+      meaning: "alarm clock"
+    - japanese: "が"
+      reading: "が"
+      meaning: "marks the thing that rings"
+    - japanese: "鳴ります"
+      reading: "なります"
+      meaning: "rings, polite"

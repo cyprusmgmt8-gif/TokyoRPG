@@ -43,7 +43,7 @@ public class LocalDictionaryStore : IDictionaryStore
 {
     public const string FileName = "tokyo-rpg-dictionary.json";
 
-    public static string SavePath => Path.Combine(Application.persistentDataPath, FileName);
+    public static string SavePath => SaveSlots.FilePath(FileName);
 
     public DictionarySaveData Load()
     {

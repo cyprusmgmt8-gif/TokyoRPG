@@ -14,6 +14,8 @@ public class SettingsPanel
     readonly Action onClose;
     readonly Text premiumLabel;
     readonly Image[] languageImages;
+    readonly Image romajiImage;
+    readonly Image japaneseOnlyImage;
     readonly Text statusText;
 
     public SettingsPanel(Transform parent, Font font, Action onClose)
@@ -26,7 +28,7 @@ public class SettingsPanel
         Image dim = Root.AddComponent<Image>();
         dim.color = new Color(0f, 0f, 0f, 0.55f);
 
-        GameObject card = MenuUi.CreateCard(Root.transform, new Vector2(0.08f, 0.1f), new Vector2(0.92f, 0.9f));
+        GameObject card = MenuUi.CreateCard(Root.transform, new Vector2(0.08f, 0.04f), new Vector2(0.92f, 0.96f));
         MenuUi.AddText(card.transform, "Settings", font, 40, FontStyle.Bold, Color.white, 52, TextAnchor.MiddleCenter);
         statusText = MenuUi.AddText(card.transform, "", font, 24, FontStyle.Normal, MenuUi.Muted, 36, TextAnchor.MiddleCenter);
 
@@ -56,7 +58,24 @@ public class SettingsPanel
             22,
             FontStyle.Normal,
             MenuUi.Muted,
-            80,
+            64,
+            TextAnchor.MiddleLeft);
+
+        MenuUi.AddText(card.transform, "Japanese reading display", font, 26, FontStyle.Bold, MenuUi.Paper, 36, TextAnchor.MiddleLeft);
+        Button romajiButton = MenuUi.CreateButton(card.transform, "Japanese + Romaji", font, MenuUi.Amber, () => ChooseReading(JapaneseScriptDisplay.JapaneseAndRomaji), 64);
+        romajiImage = romajiButton.GetComponent<Image>();
+        Button japaneseOnlyButton = MenuUi.CreateButton(card.transform, "Japanese only", font, MenuUi.Stone, () => ChooseReading(JapaneseScriptDisplay.JapaneseOnly), 64);
+        japaneseOnlyImage = japaneseOnlyButton.GetComponent<Image>();
+        Button furiganaButton = MenuUi.CreateButton(card.transform, "Japanese + Furigana (not available yet)", font, MenuUi.Stone, () => { }, 64);
+        furiganaButton.interactable = false;
+        MenuUi.AddText(
+            card.transform,
+            "Romaji is the Latin spelling, such as tsukue under 机. Furigana is not in the game yet, so that choice stays off.",
+            font,
+            22,
+            FontStyle.Normal,
+            MenuUi.Muted,
+            72,
             TextAnchor.MiddleLeft);
 
         MenuUi.AddText(card.transform, "Premium test", font, 26, FontStyle.Bold, MenuUi.Paper, 36, TextAnchor.MiddleLeft);
@@ -92,6 +111,15 @@ public class SettingsPanel
         }
 
         premiumLabel.text = AccessEntitlement.HasPremium ? "Simulate premium: On" : "Simulate premium: Off";
+        bool romaji = JapaneseReading.ShowRomaji;
+        romajiImage.color = romaji ? MenuUi.Amber : MenuUi.Stone;
+        japaneseOnlyImage.color = romaji ? MenuUi.Stone : MenuUi.Amber;
+    }
+
+    void ChooseReading(JapaneseScriptDisplay mode)
+    {
+        PlayerProfile.SetReadingDisplay(mode);
+        Refresh();
     }
 
     void ChooseLanguage(string code)

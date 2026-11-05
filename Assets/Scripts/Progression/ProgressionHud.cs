@@ -66,12 +66,13 @@ public class ProgressionHud : MonoBehaviour
         scaler.uiScaleMode = CanvasScaler.ScaleMode.ScaleWithScreenSize;
         scaler.referenceResolution = new Vector2(1920f, 1080f);
         scaler.matchWidthOrHeight = 0.5f;
+        GameplayHud.Register(canvasObject);
 
         GameObject badge = new GameObject("XP");
         badge.transform.SetParent(canvasObject.transform, false);
         RectTransform rect = badge.AddComponent<RectTransform>();
         rect.anchorMin = new Vector2(0.02f, 0.86f);
-        rect.anchorMax = new Vector2(0.34f, 0.98f);
+        rect.anchorMax = new Vector2(0.30f, 0.98f);
         rect.offsetMin = Vector2.zero;
         rect.offsetMax = Vector2.zero;
 
