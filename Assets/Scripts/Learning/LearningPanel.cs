@@ -28,6 +28,14 @@ public class LearningPanel : MonoBehaviour
     Text grammarText;
     Text audioText;
     Text dictionaryStatusText;
+    Text wordButtonLabel;
+    Text exampleButtonLabel;
+    Text testButtonLabel;
+    Button wordButton;
+    Button exampleButton;
+    GameObject exampleRow;
+    AudioClip currentWordClip;
+    AudioClip currentExampleClip;
     FirstPersonController pausedMovement;
     Font uiFont;
 
@@ -35,6 +43,7 @@ public class LearningPanel : MonoBehaviour
     {
         uiFont = FindJapaneseFont();
         EnsureEventSystem();
+        JapaneseAudioPlayer.Ensure();
         BuildCanvas();
         panelRoot.SetActive(false);
         promptRoot.SetActive(false);
@@ -52,6 +61,8 @@ public class LearningPanel : MonoBehaviour
         {
             Close();
         }
+
+        RefreshSpeakerButtons();
     }
 
     public void SetPrompt(string objectName)
@@ -71,13 +82,16 @@ public class LearningPanel : MonoBehaviour
             return;
         }
 
+        JapaneseAudioPlayer.Ensure().Stop();
         titleText.text = target.PromptName;
         if (!target.TryGetEntry(out VocabularyEntry word))
         {
             japaneseText.text = "No vocabulary entry";
             readingText.text = target.VocabularyId;
             translationText.text = "Add this id to the vocabulary catalog.";
-            SetLine(exampleText, string.Empty);
+            currentWordClip = null;
+            currentExampleClip = null;
+            exampleRow.SetActive(false);
             SetLine(exampleReadingText, string.Empty);
             SetLine(exampleTranslationText, string.Empty);
             SetLine(grammarText, string.Empty);
@@ -89,11 +103,19 @@ public class LearningPanel : MonoBehaviour
             japaneseText.text = WordOrFallback(word.japanese);
             readingText.text = WordOrFallback(word.reading);
             translationText.text = WordOrFallback(word.translation);
-            SetLine(exampleText, word.exampleSentence);
+            currentWordClip = word.wordClip;
+            currentExampleClip = word.exampleClip;
+            bool hasExample = !string.IsNullOrWhiteSpace(word.exampleSentence);
+            exampleRow.SetActive(hasExample);
+            if (hasExample)
+            {
+                exampleText.text = word.exampleSentence;
+            }
+
             SetLine(exampleReadingText, word.exampleReading);
             SetLine(exampleTranslationText, word.exampleTranslation);
             SetLine(grammarText, word.grammarExplanation);
-            SetLine(audioText, string.IsNullOrWhiteSpace(word.audioReference) ? string.Empty : "Audio: " + word.audioReference);
+            SetLine(audioText, MissingRecordingMessage(word));
             bool added = PersonalDictionary.Instance != null && PersonalDictionary.Instance.Discover(word.id);
             string status = added ? "Saved to your dictionary." : "Already in your dictionary.";
             if (added && PlayerProgression.Instance != null)
@@ -103,6 +125,8 @@ public class LearningPanel : MonoBehaviour
 
             SetLine(dictionaryStatusText, status);
         }
+
+        RefreshSpeakerButtons();
 
         panelRoot.SetActive(true);
         promptRoot.SetActive(false);
@@ -117,6 +141,11 @@ public class LearningPanel : MonoBehaviour
 
     public void Close()
     {
+        if (JapaneseAudioPlayer.Instance != null)
+        {
+            JapaneseAudioPlayer.Instance.Stop();
+        }
+
         panelRoot.SetActive(false);
         IsOpen = false;
 
@@ -180,7 +209,7 @@ public class LearningPanel : MonoBehaviour
 
         VerticalLayoutGroup layout = card.AddComponent<VerticalLayoutGroup>();
         layout.padding = new RectOffset(36, 36, 32, 32);
-        layout.spacing = 14;
+        layout.spacing = 8;
         layout.childAlignment = TextAnchor.UpperCenter;
         layout.childControlWidth = true;
         layout.childControlHeight = true;
@@ -188,16 +217,31 @@ public class LearningPanel : MonoBehaviour
         layout.childForceExpandHeight = false;
 
         titleText = AddLine(card.transform, "Title", 28, FontStyle.Bold, new Color(0.85f, 0.78f, 0.66f), 40);
-        japaneseText = AddLine(card.transform, "Japanese", 64, FontStyle.Bold, Color.white, 90);
+        CreateSpeakerRow(card.transform, "Japanese", 48, FontStyle.Bold, Color.white, 84, out japaneseText, out wordButton, out wordButtonLabel);
+        wordButton.onClick.AddListener(() => ToggleClip(currentWordClip));
         readingText = AddLine(card.transform, "Reading", 32, FontStyle.Normal, new Color(1f, 0.86f, 0.55f), 48);
         translationText = AddLine(card.transform, "Translation", 32, FontStyle.Normal, new Color(0.9f, 0.9f, 0.88f), 48);
         AddLine(card.transform, "Example Heading", 22, FontStyle.Bold, new Color(0.7f, 0.66f, 0.58f), 32).text = "Example";
-        exampleText = AddLine(card.transform, "Example", 28, FontStyle.Normal, Color.white, 64);
+        exampleRow = CreateSpeakerRow(card.transform, "Example", 26, FontStyle.Normal, Color.white, 72, out exampleText, out exampleButton, out exampleButtonLabel);
+        exampleButton.onClick.AddListener(() => ToggleClip(currentExampleClip));
         exampleReadingText = AddLine(card.transform, "Example Reading", 24, FontStyle.Normal, new Color(1f, 0.86f, 0.55f), 48);
         exampleTranslationText = AddLine(card.transform, "Example Translation", 24, FontStyle.Italic, new Color(0.82f, 0.82f, 0.78f), 56);
         grammarText = AddLine(card.transform, "Grammar", 22, FontStyle.Normal, new Color(0.78f, 0.84f, 0.78f), 72);
         audioText = AddLine(card.transform, "Audio", 20, FontStyle.Normal, new Color(0.7f, 0.7f, 0.66f), 36);
         dictionaryStatusText = AddLine(card.transform, "Dictionary Status", 22, FontStyle.Bold, new Color(0.78f, 0.9f, 0.75f), 36);
+
+        GameObject testObject = CreateRect("Test Tone", card.transform);
+        LayoutElement testLayout = testObject.AddComponent<LayoutElement>();
+        testLayout.preferredHeight = 64;
+        Image testImage = testObject.AddComponent<Image>();
+        testImage.color = new Color(0.28f, 0.26f, 0.24f, 1f);
+        Button testButton = testObject.AddComponent<Button>();
+        testButton.targetGraphic = testImage;
+        testButton.onClick.AddListener(() => JapaneseAudioPlayer.Ensure().PlayTestTone());
+        testButtonLabel = CreateLabel(testObject.transform, "Test Tone Label", 24, FontStyle.Bold, Color.white);
+        Stretch(testButtonLabel.rectTransform, Vector2.zero, Vector2.one);
+        testButtonLabel.alignment = TextAnchor.MiddleCenter;
+        testButtonLabel.text = "Test tone (not Japanese)";
 
         GameObject closeObject = CreateRect("Close", card.transform);
         LayoutElement closeLayout = closeObject.AddComponent<LayoutElement>();
@@ -211,6 +255,108 @@ public class LearningPanel : MonoBehaviour
         Stretch(closeText.rectTransform, Vector2.zero, Vector2.one);
         closeText.alignment = TextAnchor.MiddleCenter;
         closeText.text = "Close";
+    }
+
+    void ToggleClip(AudioClip clip)
+    {
+        if (clip == null)
+        {
+            return;
+        }
+
+        JapaneseAudioPlayer player = JapaneseAudioPlayer.Ensure();
+        if (player.IsPlaying(clip))
+        {
+            player.Stop();
+        }
+        else
+        {
+            player.Play(clip);
+        }
+
+        RefreshSpeakerButtons();
+    }
+
+    void RefreshSpeakerButtons()
+    {
+        SetSpeakerLabel(wordButton, wordButtonLabel, currentWordClip);
+        SetSpeakerLabel(exampleButton, exampleButtonLabel, currentExampleClip);
+        if (testButtonLabel != null && JapaneseAudioPlayer.Instance != null)
+        {
+            testButtonLabel.text = JapaneseAudioPlayer.Instance.IsPlayingTestTone()
+                ? "Stop test tone"
+                : "Test tone (not Japanese)";
+        }
+    }
+
+    static void SetSpeakerLabel(Button button, Text label, AudioClip clip)
+    {
+        if (button == null || label == null)
+        {
+            return;
+        }
+
+        if (clip == null)
+        {
+            button.interactable = false;
+            label.text = "No recording";
+            return;
+        }
+
+        button.interactable = true;
+        bool playing = JapaneseAudioPlayer.Instance != null && JapaneseAudioPlayer.Instance.IsPlaying(clip);
+        label.text = playing ? "Stop" : "Play";
+    }
+
+    static string MissingRecordingMessage(VocabularyEntry word)
+    {
+        if (word.wordClip != null && word.exampleClip != null)
+        {
+            return string.Empty;
+        }
+
+        if (string.IsNullOrWhiteSpace(word.audioReference))
+        {
+            return "No recording yet. Add audio clips on this word in the vocabulary catalog.";
+        }
+
+        return "No recording yet. File name: " + word.audioReference;
+    }
+
+    GameObject CreateSpeakerRow(Transform parent, string name, int size, FontStyle style, Color color, float height, out Text label, out Button button, out Text buttonLabel)
+    {
+        GameObject row = CreateRect(name + " Row", parent);
+        LayoutElement rowLayout = row.AddComponent<LayoutElement>();
+        rowLayout.preferredHeight = height;
+        rowLayout.minHeight = height;
+        HorizontalLayoutGroup group = row.AddComponent<HorizontalLayoutGroup>();
+        group.spacing = 12f;
+        group.childAlignment = TextAnchor.MiddleCenter;
+        group.childControlWidth = true;
+        group.childControlHeight = true;
+        group.childForceExpandWidth = false;
+        group.childForceExpandHeight = true;
+
+        label = CreateLabel(row.transform, name, size, style, color);
+        LayoutElement textLayout = label.gameObject.AddComponent<LayoutElement>();
+        textLayout.flexibleWidth = 1f;
+        label.alignment = TextAnchor.MiddleLeft;
+        label.horizontalOverflow = HorizontalWrapMode.Wrap;
+        label.verticalOverflow = VerticalWrapMode.Truncate;
+
+        GameObject buttonObject = CreateRect(name + " Speaker", row.transform);
+        LayoutElement buttonLayout = buttonObject.AddComponent<LayoutElement>();
+        buttonLayout.preferredWidth = 180f;
+        buttonLayout.flexibleWidth = 0f;
+        Image image = buttonObject.AddComponent<Image>();
+        image.color = new Color(0.22f, 0.32f, 0.4f, 1f);
+        button = buttonObject.AddComponent<Button>();
+        button.targetGraphic = image;
+        buttonLabel = CreateLabel(buttonObject.transform, name + " Speaker Label", 24, FontStyle.Bold, Color.white);
+        Stretch(buttonLabel.rectTransform, Vector2.zero, Vector2.one);
+        buttonLabel.alignment = TextAnchor.MiddleCenter;
+        buttonLabel.text = "Play";
+        return row;
     }
 
     Text AddLine(Transform parent, string name, int size, FontStyle style, Color color, float height)

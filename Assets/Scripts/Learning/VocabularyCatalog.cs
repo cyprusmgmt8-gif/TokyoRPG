@@ -38,6 +38,8 @@ public class VocabularyCatalog : ScriptableObject
             exampleSentence = record.exampleSentence,
             exampleReading = record.exampleReading,
             audioReference = record.audioReference,
+            wordClip = record.wordClip,
+            exampleClip = record.exampleClip,
             roomId = record.roomId,
             objectId = record.objectId,
             translation = translation != null ? translation.translation : string.Empty,
@@ -92,8 +94,14 @@ public class VocabularyRecord
     [Tooltip("Hiragana reading of the example sentence. Leave empty when the sentence is already in hiragana or katakana.")]
     public string exampleReading;
 
-    [Tooltip("File name for the pronunciation clip, without a folder. Example: bedroom_bed. Put the clip in Assets/Audio later.")]
+    [Tooltip("Reminder of the file name, for example bedroom_bed. The clips below are what the game plays.")]
     public string audioReference;
+
+    [Tooltip("Recording of this Japanese word. Drag a wav, mp3, or ogg file here.")]
+    public AudioClip wordClip;
+
+    [Tooltip("Recording of the example sentence. Drag a wav, mp3, or ogg file here.")]
+    public AudioClip exampleClip;
 
     [Tooltip("Room id, for example bedroom.")]
     public string roomId;
