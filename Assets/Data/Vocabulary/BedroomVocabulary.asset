@@ -1,0 +1,210 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e1a7c5b38d6e4f02bf4a5b6c7d8e9f01, type: 3}
+  m_Name: BedroomVocabulary
+  m_EditorClassIdentifier: 
+  entries:
+  - id: bedroom.bed
+    japanese: "ベッド"
+    reading: "ベッド"
+    exampleSentence: "これはベッドです。"
+    exampleReading: "これはベッドです。"
+    audioReference: bedroom_bed
+    roomId: bedroom
+    objectId: bed
+    translations:
+    - languageCode: en
+      translation: "bed"
+      exampleTranslation: "This is a bed."
+      grammarExplanation: "これは means \"this is\". です is the polite ending."
+  - id: bedroom.desk
+    japanese: "机"
+    reading: "つくえ"
+    exampleSentence: "机で勉強します。"
+    exampleReading: "つくえでべんきょうします。"
+    audioReference: bedroom_desk
+    roomId: bedroom
+    objectId: desk
+    translations:
+    - languageCode: en
+      translation: "desk"
+      exampleTranslation: "I study at the desk."
+      grammarExplanation: "で marks the place where an action happens."
+  - id: bedroom.chair
+    japanese: "椅子"
+    reading: "いす"
+    exampleSentence: "椅子に座ります。"
+    exampleReading: "いすにすわります。"
+    audioReference: bedroom_chair
+    roomId: bedroom
+    objectId: chair
+    translations:
+    - languageCode: en
+      translation: "chair"
+      exampleTranslation: "I sit on the chair."
+      grammarExplanation: "に marks the place you sit or exist."
+  - id: bedroom.door
+    japanese: "ドア"
+    reading: "ドア"
+    exampleSentence: "ドアを開けます。"
+    exampleReading: "ドアをあけます。"
+    audioReference: bedroom_door
+    roomId: bedroom
+    objectId: door
+    translations:
+    - languageCode: en
+      translation: "door"
+      exampleTranslation: "I open the door."
+      grammarExplanation: "を marks the thing the action is done to."
+  - id: bedroom.window
+    japanese: "窓"
+    reading: "まど"
+    exampleSentence: "窓を開けます。"
+    exampleReading: "まどをあけます。"
+    audioReference: bedroom_window
+    roomId: bedroom
+    objectId: window
+    translations:
+    - languageCode: en
+      translation: "window"
+      exampleTranslation: "I open the window."
+      grammarExplanation: ""
+  - id: bedroom.wardrobe
+    japanese: "箪笥"
+    reading: "たんす"
+    exampleSentence: "服は箪笥の中です。"
+    exampleReading: "ふくはたんすのなかです。"
+    audioReference: bedroom_wardrobe
+    roomId: bedroom
+    objectId: wardrobe
+    translations:
+    - languageCode: en
+      translation: "wardrobe"
+      exampleTranslation: "The clothes are in the wardrobe."
+      grammarExplanation: "の中 means inside."
+  - id: bedroom.refrigerator
+    japanese: "冷蔵庫"
+    reading: "れいぞうこ"
+    exampleSentence: "冷蔵庫に牛乳があります。"
+    exampleReading: "れいぞうこにぎゅうにゅうがあります。"
+    audioReference: bedroom_refrigerator
+    roomId: bedroom
+    objectId: refrigerator
+    translations:
+    - languageCode: en
+      translation: "refrigerator"
+      exampleTranslation: "There is milk in the refrigerator."
+      grammarExplanation: "があります means \"there is\" for an object."
+  - id: bedroom.television
+    japanese: "テレビ"
+    reading: "テレビ"
+    exampleSentence: "テレビを見ます。"
+    exampleReading: "テレビをみます。"
+    audioReference: bedroom_television
+    roomId: bedroom
+    objectId: television
+    translations:
+    - languageCode: en
+      translation: "television"
+      exampleTranslation: "I watch television."
+      grammarExplanation: ""
+  - id: bedroom.shelf
+    japanese: "棚"
+    reading: "たな"
+    exampleSentence: "本は棚の上です。"
+    exampleReading: "ほんはたなのうえです。"
+    audioReference: bedroom_shelf
+    roomId: bedroom
+    objectId: shelf
+    translations:
+    - languageCode: en
+      translation: "shelf"
+      exampleTranslation: "The book is on the shelf."
+      grammarExplanation: "の上 means on top of."
+  - id: bedroom.clock
+    japanese: "時計"
+    reading: "とけい"
+    exampleSentence: "時計を見ます。"
+    exampleReading: "とけいをみます。"
+    audioReference: bedroom_clock
+    roomId: bedroom
+    objectId: clock
+    translations:
+    - languageCode: en
+      translation: "clock"
+      exampleTranslation: "I look at the clock."
+      grammarExplanation: ""
+  - id: bedroom.plant
+    japanese: "植物"
+    reading: "しょくぶつ"
+    exampleSentence: "部屋に植物があります。"
+    exampleReading: "へやにしょくぶつがあります。"
+    audioReference: bedroom_plant
+    roomId: bedroom
+    objectId: plant
+    translations:
+    - languageCode: en
+      translation: "plant"
+      exampleTranslation: "There is a plant in the room."
+      grammarExplanation: ""
+  - id: bedroom.light
+    japanese: "電気"
+    reading: "でんき"
+    exampleSentence: "電気をつけます。"
+    exampleReading: "でんきをつけます。"
+    audioReference: bedroom_light
+    roomId: bedroom
+    objectId: light
+    translations:
+    - languageCode: en
+      translation: "light"
+      exampleTranslation: "I turn on the light."
+      grammarExplanation: "つけます means to turn something on, such as a light."
+  - id: bedroom.curtain
+    japanese: "カーテン"
+    reading: "カーテン"
+    exampleSentence: "カーテンを閉めます。"
+    exampleReading: "カーテンをしめます。"
+    audioReference: bedroom_curtain
+    roomId: bedroom
+    objectId: curtain
+    translations:
+    - languageCode: en
+      translation: "curtain"
+      exampleTranslation: "I close the curtain."
+      grammarExplanation: ""
+  - id: bedroom.rug
+    japanese: "絨毯"
+    reading: "じゅうたん"
+    exampleSentence: "絨毯の上に座ります。"
+    exampleReading: "じゅうたんのうえにすわります。"
+    audioReference: bedroom_rug
+    roomId: bedroom
+    objectId: rug
+    translations:
+    - languageCode: en
+      translation: "rug"
+      exampleTranslation: "I sit on the rug."
+      grammarExplanation: ""
+  - id: bedroom.nightstand
+    japanese: "目覚まし時計"
+    reading: "めざましどけい"
+    exampleSentence: "目覚まし時計が鳴ります。"
+    exampleReading: "めざましどけいがなります。"
+    audioReference: bedroom_nightstand
+    roomId: bedroom
+    objectId: nightstand
+    translations:
+    - languageCode: en
+      translation: "alarm clock"
+      exampleTranslation: "The alarm clock rings."
+      grammarExplanation: "が marks the thing that does the action."

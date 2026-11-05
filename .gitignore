@@ -1,0 +1,23 @@
+# Unity generated folders. These are recreated by the editor and are not part of the game.
+Library/
+Temp/
+Obj/
+Logs/
+UserSettings/
+MemoryCaptures/
+Build/
+Builds/
+build/
+
+# Local IDE and operating-system files
+.vs/
+.idea/
+.vscode/
+*.csproj
+*.unityproj
+*.sln
+*.suo
+*.user
+*.userprefs
+.DS_Store
+Thumbs.db

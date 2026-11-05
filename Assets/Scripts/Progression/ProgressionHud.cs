@@ -1,0 +1,101 @@
+using UnityEngine;
+using UnityEngine.UI;
+
+/// <summary>
+/// Shows the current level and XP at the top-left of the game view.
+/// This is added automatically by Player Progression when the scene plays.
+/// </summary>
+public class ProgressionHud : MonoBehaviour
+{
+    Text label;
+
+    void Awake()
+    {
+        BuildHud();
+    }
+
+    void OnEnable()
+    {
+        if (PlayerProgression.Instance != null)
+        {
+            PlayerProgression.Instance.Changed += Refresh;
+        }
+    }
+
+    void Start()
+    {
+        if (PlayerProgression.Instance != null)
+        {
+            PlayerProgression.Instance.Changed -= Refresh;
+            PlayerProgression.Instance.Changed += Refresh;
+        }
+
+        Refresh();
+    }
+
+    void OnDisable()
+    {
+        if (PlayerProgression.Instance != null)
+        {
+            PlayerProgression.Instance.Changed -= Refresh;
+        }
+    }
+
+    void Refresh()
+    {
+        if (label == null || PlayerProgression.Instance == null)
+        {
+            return;
+        }
+
+        PlayerProgression progress = PlayerProgression.Instance;
+        label.text = "Level " + progress.Level + "    " + progress.TotalXp + " XP\n"
+            + progress.XpUntilNextLevel + " XP to level " + (progress.Level + 1);
+    }
+
+    void BuildHud()
+    {
+        GameObject canvasObject = new GameObject("Progress Canvas");
+        canvasObject.transform.SetParent(transform, false);
+
+        Canvas canvas = canvasObject.AddComponent<Canvas>();
+        canvas.renderMode = RenderMode.ScreenSpaceOverlay;
+        canvas.sortingOrder = 25;
+
+        CanvasScaler scaler = canvasObject.AddComponent<CanvasScaler>();
+        scaler.uiScaleMode = CanvasScaler.ScaleMode.ScaleWithScreenSize;
+        scaler.referenceResolution = new Vector2(1920f, 1080f);
+        scaler.matchWidthOrHeight = 0.5f;
+
+        GameObject badge = new GameObject("XP");
+        badge.transform.SetParent(canvasObject.transform, false);
+        RectTransform rect = badge.AddComponent<RectTransform>();
+        rect.anchorMin = new Vector2(0.02f, 0.86f);
+        rect.anchorMax = new Vector2(0.34f, 0.98f);
+        rect.offsetMin = Vector2.zero;
+        rect.offsetMax = Vector2.zero;
+
+        Image background = badge.AddComponent<Image>();
+        background.color = new Color(0.14f, 0.13f, 0.12f, 0.92f);
+        background.raycastTarget = false;
+
+        GameObject textObject = new GameObject("Label");
+        textObject.transform.SetParent(badge.transform, false);
+        RectTransform textRect = textObject.AddComponent<RectTransform>();
+        textRect.anchorMin = Vector2.zero;
+        textRect.anchorMax = Vector2.one;
+        textRect.offsetMin = new Vector2(16f, 8f);
+        textRect.offsetMax = new Vector2(-16f, -8f);
+
+        label = textObject.AddComponent<Text>();
+        label.font = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
+        label.fontSize = 28;
+        label.fontStyle = FontStyle.Bold;
+        label.color = new Color(1f, 0.93f, 0.8f);
+        label.alignment = TextAnchor.MiddleLeft;
+        label.horizontalOverflow = HorizontalWrapMode.Wrap;
+        label.verticalOverflow = VerticalWrapMode.Truncate;
+        label.raycastTarget = false;
+        label.text = "Level 1    0 XP";
+    }
+}
