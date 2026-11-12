@@ -38,6 +38,7 @@ public static class CityDirectory
         new CityLocation("bedroom", "Bedroom", "寝室", "しんしつ", "Everyday words in your room.", true, GameScenes.Bedroom),
         new CityLocation("convenience-store", "Convenience Store", "コンビニ", "コンビニ", "Shopping and short polite phrases.", false, GameScenes.Konbini),
         new CityLocation("visitor-test", "Visitor Test", "テスト部屋", "テストべや", "A small room for checking a new location.", false, GameScenes.VisitorTest),
+        new CityLocation("airport", "Airport", "空港", "くうこう", "Arrivals, signs and asking the way.", false, GameScenes.Airport),
         new CityLocation("station", "Train Station", "駅", "えき", "Tickets, platforms and asking the way.", false, ""),
         new CityLocation("cafe", "Café", "カフェ", "カフェ", "Ordering a drink and a snack.", false, ""),
         new CityLocation("restaurant", "Restaurant", "レストラン", "レストラン", "Reading a menu and ordering food.", false, ""),
