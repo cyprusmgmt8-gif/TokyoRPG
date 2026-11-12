@@ -294,8 +294,10 @@ public class DictionaryPanel : MonoBehaviour
         layout.childControlHeight = true;
         layout.childForceExpandWidth = true;
         layout.childForceExpandHeight = false;
+        bool hasExample = found && !string.IsNullOrWhiteSpace(entry.exampleSentence);
+        bool hasAudio = found && (entry.wordClip != null || entry.exampleClip != null);
         LayoutElement element = row.AddComponent<LayoutElement>();
-        element.preferredHeight = found ? 530 : 80;
+        element.preferredHeight = !found ? 80 : (hasExample || hasAudio) ? 530 : 320;
 
         if (!found)
         {
@@ -327,15 +329,19 @@ public class DictionaryPanel : MonoBehaviour
         reviewButton.onClick.AddListener(() => ReviewWord(reviewId));
         Text reviewLabel = AddText(reviewObject.transform, "Review this word", 20, FontStyle.Bold, Color.white, 44, TextAnchor.MiddleCenter);
         Stretch(reviewLabel.rectTransform, Vector2.zero, Vector2.one);
-        AddText(row.transform, entry.exampleSentence, 22, FontStyle.Italic, new Color(0.82f, 0.82f, 0.78f), 48, TextAnchor.MiddleLeft);
-        if (!string.IsNullOrWhiteSpace(entry.exampleReading))
+        if (hasExample)
         {
-            AddText(row.transform, entry.exampleReading, 20, FontStyle.Normal, new Color(0.8f, 0.8f, 0.76f), 32, TextAnchor.MiddleLeft);
-        }
-        string exampleRomaji = JapaneseReading.ShownRomaji(entry.exampleSentence, entry.exampleReading, entry.exampleRomaji);
-        if (!string.IsNullOrEmpty(exampleRomaji))
-        {
-            AddText(row.transform, exampleRomaji, 20, FontStyle.Normal, new Color(1f, 0.86f, 0.55f), 36, TextAnchor.MiddleLeft);
+            AddText(row.transform, entry.exampleSentence, 22, FontStyle.Italic, new Color(0.82f, 0.82f, 0.78f), 48, TextAnchor.MiddleLeft);
+            if (!string.IsNullOrWhiteSpace(entry.exampleReading))
+            {
+                AddText(row.transform, entry.exampleReading, 20, FontStyle.Normal, new Color(0.8f, 0.8f, 0.76f), 32, TextAnchor.MiddleLeft);
+            }
+
+            string exampleRomaji = JapaneseReading.ShownRomaji(entry.exampleSentence, entry.exampleReading, entry.exampleRomaji);
+            if (!string.IsNullOrEmpty(exampleRomaji))
+            {
+                AddText(row.transform, exampleRomaji, 20, FontStyle.Normal, new Color(1f, 0.86f, 0.55f), 36, TextAnchor.MiddleLeft);
+            }
         }
 
         if (entry.wordClip != null || entry.exampleClip != null)
@@ -399,13 +405,13 @@ public class DictionaryPanel : MonoBehaviour
 
         dictionaryButton = CreateRect("Open Dictionary", canvasObject.transform);
         GameObject openButton = dictionaryButton;
-        Stretch(openButton.GetComponent<RectTransform>(), new Vector2(0.74f, 0.86f), new Vector2(0.98f, 0.98f));
+        Stretch(openButton.GetComponent<RectTransform>(), new Vector2(0.900f, 0.945f), new Vector2(0.988f, 0.985f));
         Image openImage = openButton.AddComponent<Image>();
-        openImage.color = new Color(0.14f, 0.13f, 0.12f, 0.92f);
+        openImage.color = new Color(0.11f, 0.105f, 0.1f, 0.72f);
         Button open = openButton.AddComponent<Button>();
         open.targetGraphic = openImage;
         open.onClick.AddListener(Toggle);
-        Text openLabel = AddText(openButton.transform, "Dictionary", 28, FontStyle.Bold, new Color(1f, 0.93f, 0.8f), 40, TextAnchor.MiddleCenter);
+        Text openLabel = AddText(openButton.transform, "Dictionary", 20, FontStyle.Bold, new Color(1f, 0.93f, 0.8f), 36, TextAnchor.MiddleCenter);
         Stretch(openLabel.rectTransform, Vector2.zero, Vector2.one);
 
         screenRoot = CreateRect("Dictionary Screen", canvasObject.transform);

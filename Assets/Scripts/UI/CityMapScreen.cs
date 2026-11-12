@@ -7,32 +7,82 @@ using UnityEngine.UI;
 /// </summary>
 public class CityMapScreen : MonoBehaviour
 {
+    public static bool IsOpenNow { get; private set; }
+
+    static bool openAsOverlay;
+    static CityMapScreen gameplayMap;
+
     Font font;
     Text nameText;
     Text accessText;
     Image avatarImage;
     Text avatarLetter;
     RectTransform listContent;
+    GameObject screenRoot;
     GameObject detailRoot;
     Text detailText;
     SettingsPanel settings;
+    FirstPersonController pausedMovement;
+    bool openedOverGameplay;
+    bool pausedByMap;
+
+    /// <summary>
+    /// Draws the existing city map over the current room.
+    /// The room stays loaded, so Back can close the map without moving the player.
+    /// </summary>
+    public static void OpenOverGameplay(Transform host)
+    {
+        if (host == null)
+        {
+            return;
+        }
+
+        if (gameplayMap != null)
+        {
+            gameplayMap.Show();
+            return;
+        }
+
+        openAsOverlay = true;
+        GameObject mapObject = new GameObject("City Map");
+        mapObject.transform.SetParent(host, false);
+        gameplayMap = mapObject.AddComponent<CityMapScreen>();
+    }
 
     void Awake()
     {
+        openedOverGameplay = openAsOverlay;
+        openAsOverlay = false;
+        if (openedOverGameplay)
+        {
+            gameplayMap = this;
+        }
+
         PlayerProfile.EnsureLoaded();
         AccessEntitlement.EnsureLoaded();
         MenuUi.ShowCursor();
-        MenuUi.PaintNightSky();
+        if (!openedOverGameplay)
+        {
+            MenuUi.PaintNightSky();
+        }
+
         font = MenuUi.FindFont();
         MenuUi.EnsureEventSystem();
 
-        Canvas canvas = MenuUi.CreateCanvas(transform, "Map Canvas", 10);
+        int sortOrder = openedOverGameplay ? 60 : 10;
+        Canvas canvas = MenuUi.CreateCanvas(transform, "Map Canvas", sortOrder);
+        screenRoot = canvas.gameObject;
         BuildMap(canvas.transform);
         settings = new SettingsPanel(canvas.transform, font, CloseSettings);
         settings.Root.SetActive(false);
         detailRoot.SetActive(false);
+        BuildBackButton(canvas.transform);
         RefreshHeader();
         RebuildList();
+        if (openedOverGameplay)
+        {
+            Show();
+        }
     }
 
     void OnEnable()
@@ -43,6 +93,19 @@ public class CityMapScreen : MonoBehaviour
     void OnDisable()
     {
         AccessEntitlement.Changed -= OnAccessChanged;
+        if (openedOverGameplay && IsOpenNow)
+        {
+            IsOpenNow = false;
+            ResumeMovement();
+        }
+    }
+
+    void OnDestroy()
+    {
+        if (gameplayMap == this)
+        {
+            gameplayMap = null;
+        }
     }
 
     void OnAccessChanged()
@@ -104,6 +167,91 @@ public class CityMapScreen : MonoBehaviour
         BuildDetail(parent);
     }
 
+    void BuildBackButton(Transform parent)
+    {
+        GameObject back = MenuUi.CreateRect("Back To Room", parent);
+        MenuUi.Stretch(back.GetComponent<RectTransform>(), new Vector2(0.055f, 0.905f), new Vector2(0.22f, 0.965f));
+        Image image = back.AddComponent<Image>();
+        image.color = MenuUi.Amber;
+        Button button = back.AddComponent<Button>();
+        button.targetGraphic = image;
+        button.onClick.AddListener(CloseMap);
+        Text label = MenuUi.AddText(back.transform, "Back", font, 28, FontStyle.Bold, Color.white, 56, TextAnchor.MiddleCenter);
+        MenuUi.Stretch(label.rectTransform, Vector2.zero, Vector2.one);
+        label.GetComponent<LayoutElement>().ignoreLayout = true;
+        back.SetActive(openedOverGameplay);
+    }
+
+    void Show()
+    {
+        if (screenRoot != null)
+        {
+            screenRoot.SetActive(true);
+        }
+
+        IsOpenNow = true;
+        MenuUi.ShowCursor();
+        PauseMovement();
+    }
+
+    void CloseMap()
+    {
+        if (!openedOverGameplay)
+        {
+            return;
+        }
+
+        if (screenRoot != null)
+        {
+            screenRoot.SetActive(false);
+        }
+
+        IsOpenNow = false;
+        ResumeMovement();
+    }
+
+    void PauseMovement()
+    {
+        if (pausedByMap)
+        {
+            return;
+        }
+
+        pausedMovement = GetComponentInParent<FirstPersonController>();
+        if (pausedMovement != null && pausedMovement.enabled)
+        {
+            pausedMovement.enabled = false;
+            pausedByMap = true;
+        }
+    }
+
+    void ResumeMovement()
+    {
+        if (!pausedByMap || pausedMovement == null)
+        {
+            return;
+        }
+
+        pausedByMap = false;
+        if (!AnotherScreenOpen())
+        {
+            pausedMovement.enabled = true;
+        }
+    }
+
+    static bool AnotherScreenOpen()
+    {
+        bool study = LearningPanel.Current != null && LearningPanel.Current.IsOpen;
+        return study
+            || DictionaryPanel.IsOpenNow
+            || GrammarPanel.IsOpenNow
+            || RevisionPanel.IsOpenNow
+            || QuestPanel.IsOpenNow
+            || BasketPanel.IsOpenNow
+            || CheckoutPanel.IsOpenNow
+            || DialoguePanel.IsOpenNow;
+    }
+
     void BuildDetail(Transform parent)
     {
         detailRoot = MenuUi.CreateRect("Detail", parent);
@@ -147,11 +295,11 @@ public class CityMapScreen : MonoBehaviour
 
     void CreateRow(CityLocation place)
     {
-        bool openNow = place.includedInFreeVersion || (AccessEntitlement.HasPremium && !string.IsNullOrEmpty(place.sceneName));
-        string status = place.includedInFreeVersion
+        bool openNow = CanEnter(place);
+        string status = place.includedInFreeVersion || CanEnter(place)
             ? "Open"
             : AccessEntitlement.HasPremium ? "Not built yet" : "Locked";
-        Color color = place.includedInFreeVersion
+        Color color = CanEnter(place)
             ? MenuUi.Amber
             : AccessEntitlement.HasPremium
                 ? new Color(0.24f, 0.34f, 0.46f, 1f)
@@ -184,8 +332,8 @@ public class CityMapScreen : MonoBehaviour
 
     void Select(CityLocation place)
     {
-        bool unlocked = place.includedInFreeVersion || AccessEntitlement.HasPremium;
-        if (unlocked && !string.IsNullOrEmpty(place.sceneName))
+        bool unlocked = CanEnter(place) || place.includedInFreeVersion || AccessEntitlement.HasPremium;
+        if (CanEnter(place))
         {
             GameScenes.Load(place.sceneName);
             return;
@@ -209,6 +357,25 @@ public class CityMapScreen : MonoBehaviour
         }
 
         detailRoot.SetActive(true);
+    }
+
+    static bool CanEnter(CityLocation place)
+    {
+        if (string.IsNullOrEmpty(place.sceneName))
+        {
+            return false;
+        }
+
+        if (place.includedInFreeVersion || AccessEntitlement.HasPremium)
+        {
+            return true;
+        }
+
+#if UNITY_EDITOR
+        return place.id == "convenience-store";
+#else
+        return false;
+#endif
     }
 
     static string PlaceHeading(CityLocation place)

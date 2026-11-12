@@ -1,0 +1,100 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e1a7c5b38d6e4f02bf4a5b6c7d8e9f01, type: 3}
+  m_Name: KonbiniVocabulary
+  m_EditorClassIdentifier: 
+  entries:
+  - id: konbini.green-tea
+    japanese: "お茶"
+    reading: "おちゃ"
+    romaji: "ocha"
+    exampleSentence: "これはお茶です。"
+    exampleReading: "これはおちゃです。"
+    exampleRomaji: "Kore wa ocha desu."
+    audioReference: konbini_green_tea
+    wordClip: {fileID: 0}
+    exampleClip: {fileID: 0}
+    roomId: konbini
+    objectId: green-tea
+    translations:
+    - languageCode: en
+      translation: "green tea"
+      exampleTranslation: "This is green tea."
+      grammarExplanation: "これは means \"this is\". は is the topic particle and is pronounced wa."
+  - id: konbini.water
+    japanese: "水"
+    reading: "みず"
+    romaji: "mizu"
+    exampleSentence: "水をください。"
+    exampleReading: "みずをください。"
+    exampleRomaji: "Mizu o kudasai."
+    audioReference: konbini_water
+    wordClip: {fileID: 0}
+    exampleClip: {fileID: 0}
+    roomId: konbini
+    objectId: water
+    translations:
+    - languageCode: en
+      translation: "water"
+      exampleTranslation: "Water, please."
+      grammarExplanation: "を marks what you are asking for and is pronounced o. ください means \"please give me\"."
+  - id: konbini.coffee
+    japanese: "コーヒー"
+    reading: "コーヒー"
+    romaji: "koohii"
+    exampleSentence: "熱いコーヒーをください。"
+    exampleReading: "あついコーヒーをください。"
+    exampleRomaji: "Atsui koohii o kudasai."
+    audioReference: konbini_coffee
+    wordClip: {fileID: 0}
+    exampleClip: {fileID: 0}
+    roomId: konbini
+    objectId: coffee
+    translations:
+    - languageCode: en
+      translation: "coffee"
+      exampleTranslation: "A hot coffee, please."
+      grammarExplanation: "熱い means hot. を marks the coffee and is pronounced o."
+  - id: konbini.onigiri
+    japanese: "おにぎり"
+    reading: "おにぎり"
+    romaji: "onigiri"
+    exampleSentence: "おにぎりを二つください。"
+    exampleReading: "おにぎりをふたつください。"
+    exampleRomaji: "Onigiri o futatsu kudasai."
+    audioReference: konbini_onigiri
+    wordClip: {fileID: 0}
+    exampleClip: {fileID: 0}
+    roomId: konbini
+    objectId: onigiri
+    translations:
+    - languageCode: en
+      translation: "onigiri"
+      exampleTranslation: "Two onigiri, please."
+      grammarExplanation: "二つ means two pieces. を marks the onigiri and is pronounced o."
+  - id: konbini.sandwich
+    japanese: "サンドイッチ"
+    reading: "サンドイッチ"
+    romaji: "sandoitchi"
+    exampleSentence: "このサンドイッチをください。"
+    exampleReading: "このサンドイッチをください。"
+    exampleRomaji: "Kono sandoitchi o kudasai."
+    audioReference: konbini_sandwich
+    wordClip: {fileID: 0}
+    exampleClip: {fileID: 0}
+    roomId: konbini
+    objectId: sandwich
+    translations:
+    - languageCode: en
+      translation: "sandwich"
+      exampleTranslation: "This sandwich, please."
+      grammarExplanation: "この means \"this\". を marks the sandwich and is pronounced o."

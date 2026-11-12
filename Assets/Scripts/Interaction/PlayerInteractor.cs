@@ -1,13 +1,19 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 /// <summary>
-/// Looks from the player camera. When the centre of the view hits an Interactable Object
-/// within reach, it highlights that object and shows a prompt.
-/// Press E, or tap the prompt, to open the learning panel.
+/// Looks from the player camera. The closest hit within reach decides the action.
+/// A product opens the study card. The register opens checkout. A person opens talk.
 /// </summary>
 public class PlayerInteractor : MonoBehaviour
 {
+    /// <summary>
+    /// Raised once when a study card opens for an object.
+    /// The vocabulary id is the id stored on that object.
+    /// </summary>
+    public static event Action<string> Studied;
+
     [Tooltip("How far in front of the camera the player can study an object, in metres.")]
     [SerializeField] float reach = 2.5f;
 
@@ -19,6 +25,8 @@ public class PlayerInteractor : MonoBehaviour
 
     readonly RaycastHit[] hits = new RaycastHit[16];
     InteractableObject current;
+    CheckoutPoint checkout;
+    DialoguePoint talk;
     FirstPersonController movement;
 
     void Awake()
@@ -39,6 +47,11 @@ public class PlayerInteractor : MonoBehaviour
         {
             GameObject panelObject = new GameObject("Learning Panel");
             learningPanel = panelObject.AddComponent<LearningPanel>();
+        }
+
+        if (FindAnyObjectByType<DialoguePoint>() != null && GetComponent<DialoguePanel>() == null)
+        {
+            gameObject.AddComponent<DialoguePanel>();
         }
     }
 
@@ -62,9 +75,11 @@ public class PlayerInteractor : MonoBehaviour
 
     void Update()
     {
-        if (DictionaryPanel.IsOpenNow || GrammarPanel.IsOpenNow || RevisionPanel.IsOpenNow || (learningPanel != null && learningPanel.IsOpen))
+        if (ScreenBlocksLook())
         {
             ClearFocus();
+            checkout = null;
+            talk = null;
             if (learningPanel != null)
             {
                 learningPanel.SetPrompt(null);
@@ -73,7 +88,7 @@ public class PlayerInteractor : MonoBehaviour
             return;
         }
 
-        InteractableObject lookedAt = FindLookTarget();
+        FindLookTarget(out InteractableObject lookedAt, out CheckoutPoint lookedCheckout, out DialoguePoint lookedTalk);
         if (lookedAt != current)
         {
             if (current != null)
@@ -89,18 +104,75 @@ public class PlayerInteractor : MonoBehaviour
             }
         }
 
+        checkout = lookedCheckout;
+        talk = lookedTalk;
+
         if (learningPanel != null)
         {
             learningPanel.SetPrompt(current != null ? current.PromptName : null);
         }
 
-        if (current != null && WasInteractPressed())
+        if (!WasInteractPressed())
+        {
+            return;
+        }
+
+        if (current != null)
         {
             Interact();
         }
+        else if (talk != null)
+        {
+            OpenTalk();
+        }
+    }
+
+    bool ScreenBlocksLook()
+    {
+        bool study = learningPanel != null && learningPanel.IsOpen;
+        return study || DictionaryPanel.IsOpenNow || GrammarPanel.IsOpenNow || RevisionPanel.IsOpenNow || BasketPanel.IsOpenNow || QuestPanel.IsOpenNow || CheckoutPanel.IsOpenNow || DialoguePanel.IsOpenNow || CityMapScreen.IsOpenNow;
     }
 
     public bool HasLookTarget => current != null;
+
+    /// <summary>
+    /// The object currently in the centre of the view, within reach.
+    /// The basket uses this. It does not cast its own ray.
+    /// </summary>
+    public InteractableObject LookTarget => current;
+
+    /// <summary>
+    /// The register currently in the centre of the view, when no study object is closer.
+    /// </summary>
+    public CheckoutPoint CheckoutTarget => checkout;
+
+    /// <summary>
+    /// The person currently in the centre of the view, when no product or register is closer.
+    /// </summary>
+    public DialoguePoint TalkTarget => talk;
+
+    void OpenTalk()
+    {
+        if (talk == null)
+        {
+            return;
+        }
+
+        DialoguePanel panel = GetComponent<DialoguePanel>();
+        if (panel == null)
+        {
+            return;
+        }
+
+        DialoguePoint selected = talk;
+        talk = null;
+        if (learningPanel != null)
+        {
+            learningPanel.SetPrompt(null);
+        }
+
+        panel.Open(selected);
+    }
 
     public void Interact()
     {
@@ -110,16 +182,26 @@ public class PlayerInteractor : MonoBehaviour
         }
 
         InteractableObject selected = current;
+        string vocabularyId = selected.VocabularyId;
         ClearFocus();
         learningPanel.SetPrompt(null);
         learningPanel.Open(selected, movement);
+        if (!learningPanel.IsOpen || string.IsNullOrWhiteSpace(vocabularyId))
+        {
+            return;
+        }
+
+        Studied?.Invoke(vocabularyId);
     }
 
-    InteractableObject FindLookTarget()
+    void FindLookTarget(out InteractableObject studyTarget, out CheckoutPoint checkoutTarget, out DialoguePoint talkTarget)
     {
+        studyTarget = null;
+        checkoutTarget = null;
+        talkTarget = null;
         if (eye == null)
         {
-            return null;
+            return;
         }
 
         Ray ray = new Ray(eye.position, eye.forward);
@@ -146,10 +228,16 @@ public class PlayerInteractor : MonoBehaviour
 
         if (!found)
         {
-            return null;
+            return;
         }
 
-        return closestHit.collider.GetComponentInParent<InteractableObject>();
+        studyTarget = closestHit.collider.GetComponentInParent<InteractableObject>();
+        if (studyTarget != null)
+        {
+            return;
+        }
+
+        talkTarget = closestHit.collider.GetComponentInParent<DialoguePoint>();
     }
 
     bool WasInteractPressed()

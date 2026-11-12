@@ -154,4 +154,20 @@ public class PlayerProgression : MonoBehaviour
         store.Save(data);
         Changed?.Invoke();
     }
+
+    /// <summary>
+    /// Adds quest XP once the quest log has decided the reward is due.
+    /// Discovery, grammar, and revision XP are unchanged.
+    /// </summary>
+    public void AwardQuestXp(int xp)
+    {
+        if (xp <= 0)
+        {
+            return;
+        }
+
+        data.totalXp += xp;
+        store.Save(data);
+        Changed?.Invoke();
+    }
 }

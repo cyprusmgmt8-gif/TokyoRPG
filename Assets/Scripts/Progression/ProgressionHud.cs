@@ -49,8 +49,7 @@ public class ProgressionHud : MonoBehaviour
         }
 
         PlayerProgression progress = PlayerProgression.Instance;
-        label.text = "Level " + progress.Level + "    " + progress.TotalXp + " XP\n"
-            + progress.XpUntilNextLevel + " XP to level " + (progress.Level + 1);
+        label.text = "Lv " + progress.Level + "  ·  " + progress.TotalXp + " XP";
     }
 
     void BuildHud()
@@ -71,13 +70,13 @@ public class ProgressionHud : MonoBehaviour
         GameObject badge = new GameObject("XP");
         badge.transform.SetParent(canvasObject.transform, false);
         RectTransform rect = badge.AddComponent<RectTransform>();
-        rect.anchorMin = new Vector2(0.02f, 0.86f);
-        rect.anchorMax = new Vector2(0.30f, 0.98f);
+        rect.anchorMin = new Vector2(0.015f, 0.945f);
+        rect.anchorMax = new Vector2(0.18f, 0.985f);
         rect.offsetMin = Vector2.zero;
         rect.offsetMax = Vector2.zero;
 
         Image background = badge.AddComponent<Image>();
-        background.color = new Color(0.14f, 0.13f, 0.12f, 0.92f);
+        background.color = new Color(0.11f, 0.105f, 0.1f, 0.72f);
         background.raycastTarget = false;
 
         GameObject textObject = new GameObject("Label");
@@ -85,12 +84,12 @@ public class ProgressionHud : MonoBehaviour
         RectTransform textRect = textObject.AddComponent<RectTransform>();
         textRect.anchorMin = Vector2.zero;
         textRect.anchorMax = Vector2.one;
-        textRect.offsetMin = new Vector2(16f, 8f);
-        textRect.offsetMax = new Vector2(-16f, -8f);
+        textRect.offsetMin = new Vector2(10f, 2f);
+        textRect.offsetMax = new Vector2(-10f, -2f);
 
         label = textObject.AddComponent<Text>();
         label.font = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
-        label.fontSize = 28;
+        label.fontSize = 20;
         label.fontStyle = FontStyle.Bold;
         label.color = new Color(1f, 0.93f, 0.8f);
         label.alignment = TextAnchor.MiddleLeft;

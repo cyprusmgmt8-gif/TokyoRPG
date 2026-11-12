@@ -58,7 +58,7 @@ public class GrammarPanel : MonoBehaviour
         bool learningOpen = learning != null && learning.IsOpen;
         if (openButton != null)
         {
-            openButton.SetActive(!IsOpenNow && !learningOpen && !DictionaryPanel.IsOpenNow && !RevisionPanel.IsOpenNow);
+            openButton.SetActive(!IsOpenNow && !learningOpen && !GameplayHud.Hidden);
         }
 
         if (!IsOpenNow)
@@ -449,13 +449,13 @@ public class GrammarPanel : MonoBehaviour
     {
         Canvas canvas = MenuUi.CreateCanvas(transform, "Grammar Canvas", 40);
         openButton = MenuUi.CreateRect("Open Grammar", canvas.transform);
-        MenuUi.Stretch(openButton.GetComponent<RectTransform>(), new Vector2(0.31f, 0.86f), new Vector2(0.42f, 0.98f));
+        MenuUi.Stretch(openButton.GetComponent<RectTransform>(), new Vector2(0.425f, 0.945f), new Vector2(0.513f, 0.985f));
         Image openImage = openButton.AddComponent<Image>();
-        openImage.color = new Color(0.14f, 0.13f, 0.12f, 0.92f);
+        openImage.color = new Color(0.11f, 0.105f, 0.1f, 0.72f);
         Button open = openButton.AddComponent<Button>();
         open.targetGraphic = openImage;
         open.onClick.AddListener(ShowList);
-        Text openLabel = MenuUi.AddText(openButton.transform, "Grammar", font, 24, FontStyle.Bold, MenuUi.Paper, 40, TextAnchor.MiddleCenter);
+        Text openLabel = MenuUi.AddText(openButton.transform, "Grammar", font, 20, FontStyle.Bold, MenuUi.Paper, 36, TextAnchor.MiddleCenter);
         MenuUi.Stretch(openLabel.rectTransform, Vector2.zero, Vector2.one);
         openLabel.GetComponent<LayoutElement>().ignoreLayout = true;
 

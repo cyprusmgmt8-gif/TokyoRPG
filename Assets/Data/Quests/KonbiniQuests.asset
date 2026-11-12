@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a91c4e70b2d64f1a8c3e5d7f90ab12c4, type: 3}
+  m_Name: KonbiniQuests
+  m_EditorClassIdentifier: 
+  quests:
+  - id: konbini.first-shopping
+    japanese: "はじめてのお買い物"
+    reading: "はじめてのお買い物"
+    romaji: Hajimete no okaimono
+    english: Your First Shopping Trip
+    description: Study the water and the onigiri.
+    rewardXp: 20
+    offerOnSceneStart: 1
+    objectives:
+    - id: water
+      type: interact
+      targetId: konbini.water
+      label: Water
+    - id: onigiri
+      type: interact
+      targetId: konbini.onigiri
+      label: Onigiri

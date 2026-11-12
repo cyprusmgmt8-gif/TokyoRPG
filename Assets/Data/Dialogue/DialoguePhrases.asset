@@ -1,0 +1,115 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9a1c4b72d8f4e0a9c3b5d7f1a2e4c60, type: 3}
+  m_Name: DialoguePhrases
+  m_EditorClassIdentifier: 
+  phrases:
+  - id: phrase.irasshaimase
+    japanese: "いらっしゃいませ。"
+    reading: "いらっしゃいませ。"
+    romaji: Irasshaimase.
+    english: Welcome.
+  - id: phrase.konnichiwa
+    japanese: "こんにちは。"
+    reading: "こんにちは。"
+    romaji: Konnichiwa.
+    english: Hello.
+  - id: phrase.arigatou
+    japanese: "ありがとうございます。"
+    reading: "ありがとうございます。"
+    romaji: Arigatou gozaimasu.
+    english: Thank you.
+  - id: phrase.okaikei
+    japanese: "お会計をお願いします。"
+    reading: "おかいけいをおねがいします。"
+    romaji: Okaikei o onegai shimasu.
+    english: The bill, please.
+  - id: phrase.nanika-osagashi
+    japanese: "こんにちは。何かお探しですか。"
+    reading: "こんにちは。なにかおさがしですか。"
+    romaji: Konnichiwa. Nanika osagashi desu ka.
+    english: Hello. Are you looking for something?
+  - id: phrase.chotto-miteru
+    japanese: "ちょっと見てるだけです。"
+    reading: "ちょっとみてるだけです。"
+    romaji: Chotto miteru dake desu.
+    english: I'm just looking.
+  - id: phrase.douitashimashite
+    japanese: "どういたしまして。"
+    reading: "どういたしまして。"
+    romaji: Dou itashimashite.
+    english: You're welcome.
+  - id: phrase.sayounara
+    japanese: "さようなら。"
+    reading: "さようなら。"
+    romaji: Sayounara.
+    english: Goodbye.
+  - id: phrase.yukkuri-douzo
+    japanese: "ゆっくりどうぞ。"
+    reading: "ゆっくりどうぞ。"
+    romaji: Yukkuri douzo.
+    english: Take your time.
+  - id: phrase.arigatou-gozaimashita
+    japanese: "ありがとうございました。"
+    reading: "ありがとうございました。"
+    romaji: Arigatou gozaimashita.
+    english: Thank you.
+  - id: phrase.mata-okoshi
+    japanese: "またお越しください。"
+    reading: "またおこしください。"
+    romaji: Mata okoshi kudasai.
+    english: Please come again.
+  - id: phrase.fukuro-goriyou
+    japanese: "袋はご利用ですか？"
+    reading: "ふくろはごりようですか？"
+    romaji: Fukuro wa goriyou desu ka?
+    english: Would you like a bag?
+  - id: phrase.hai-onegai
+    japanese: "はい、お願いします。"
+    reading: "はい、おねがいします。"
+    romaji: Hai, onegai shimasu.
+    english: Yes, please.
+  - id: phrase.iie-daijoubu
+    japanese: "いいえ、大丈夫です。"
+    reading: "いいえ、だいじょうぶです。"
+    romaji: Iie, daijoubu desu.
+    english: No, that's okay.
+  - id: phrase.oshiharai
+    japanese: "お支払い方法は？"
+    reading: "おしはらいほうほうは？"
+    romaji: Oshiharai houhou wa?
+    english: How would you like to pay?
+  - id: phrase.genkin
+    japanese: "現金でお願いします。"
+    reading: "げんきんでおねがいします。"
+    romaji: Genkin de onegai shimasu.
+    english: Cash, please.
+  - id: phrase.kaado
+    japanese: "カードでお願いします。"
+    reading: "カードでおねがいします。"
+    romaji: Kaado de onegai shimasu.
+    english: Card, please.
+  - id: phrase.arigatou-mata
+    japanese: "ありがとうございます。またお越しください。"
+    reading: "ありがとうございます。またおこしください。"
+    romaji: Arigatou gozaimasu. Mata okoshi kudasai.
+    english: Thank you very much. Please come again.
+  - id: phrase.empty-basket
+    japanese: "すみません。まだ何もありません。"
+    reading: "すみません。まだなにもありません。"
+    romaji: Sumimasen. Mada nanimo arimasen.
+    english: Sorry. There isn't anything to buy yet.
+  - id: phrase.wakarimashita
+    japanese: "わかりました。"
+    reading: "わかりました。"
+    romaji: Wakarimashita.
+    english: I understand.

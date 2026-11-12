@@ -1,18 +1,25 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// Points the game at the vocabulary catalog and the chosen interface language.
-/// Put this on the player. Assign both assets in the Inspector.
+/// Points the game at the vocabulary catalogs and the chosen interface language.
+/// Put this on the player. The primary catalog is searched first. Additional catalogs are searched after it.
 /// </summary>
 public class VocabularyLibrary : MonoBehaviour
 {
     public static VocabularyLibrary Instance { get; private set; }
 
-    [Tooltip("The asset that stores the words. Bedroom words are in Assets/Data/Vocabulary.")]
+    [Tooltip("The first catalog to search. Bedroom words stay in Assets/Data/Vocabulary/BedroomVocabulary.")]
     [SerializeField] VocabularyCatalog catalog;
 
     [Tooltip("The asset that chooses the translation language. It is in Assets/Data/Localization.")]
     [SerializeField] InterfaceLanguage interfaceLanguage;
+
+    [Tooltip("Catalogs searched after the primary catalog. The first matching id wins. Empty slots are skipped.")]
+    [SerializeField] List<VocabularyCatalog> additionalCatalogs = new List<VocabularyCatalog>();
+
+    [Tooltip("Spoken phrases searched after the word catalogs. Any NPC can share a phrase id.")]
+    [SerializeField] PhraseCatalog phraseCatalog;
 
     public string LanguageCode
     {
@@ -39,11 +46,30 @@ public class VocabularyLibrary : MonoBehaviour
     public bool TryGet(string vocabularyId, out VocabularyEntry entry)
     {
         entry = null;
-        if (catalog == null)
+        string languageCode = LanguageCode;
+        if (catalog != null && catalog.TryResolve(vocabularyId, languageCode, out entry))
         {
-            return false;
+            return true;
         }
 
-        return catalog.TryResolve(vocabularyId, LanguageCode, out entry);
+        if (additionalCatalogs != null)
+        {
+            for (int i = 0; i < additionalCatalogs.Count; i++)
+            {
+                VocabularyCatalog extra = additionalCatalogs[i];
+                if (extra != null && extra.TryResolve(vocabularyId, languageCode, out entry))
+                {
+                    return true;
+                }
+            }
+        }
+
+        if (phraseCatalog != null && phraseCatalog.TryResolve(vocabularyId, out entry))
+        {
+            return true;
+        }
+
+        entry = null;
+        return false;
     }
 }

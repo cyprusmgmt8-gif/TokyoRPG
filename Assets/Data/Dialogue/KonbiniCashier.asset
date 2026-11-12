@@ -1,0 +1,237 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4c8e2f19b304d6e8f7a1c2d3e4f5061, type: 3}
+  m_Name: KonbiniCashier
+  m_EditorClassIdentifier: 
+  npcId: konbini.cashier
+  speakerJapanese: "店員"
+  speakerReading: "てんいん"
+  speakerRomaji: tenin
+  speakerEnglish: Cashier
+  startLineId: welcome
+  lines:
+  - id: welcome
+    phrase:
+      id: phrase.irasshaimase
+      japanese: "いらっしゃいませ。"
+      reading: "いらっしゃいませ。"
+      romaji: Irasshaimase.
+      english: Welcome.
+    choices:
+    - phrase:
+        id: phrase.konnichiwa
+        japanese: "こんにちは。"
+        reading: "こんにちは。"
+        romaji: Konnichiwa.
+        english: Hello.
+      action: next
+      nextLineId: hello
+    - phrase:
+        id: phrase.arigatou
+        japanese: "ありがとうございます。"
+        reading: "ありがとうございます。"
+        romaji: Arigatou gozaimasu.
+        english: Thank you.
+      action: next
+      nextLineId: thanks
+    - phrase:
+        id: phrase.okaikei
+        japanese: "お会計をお願いします。"
+        reading: "おかいけいをおねがいします。"
+        romaji: Okaikei o onegai shimasu.
+        english: The bill, please.
+      action: checkout
+      nextLineId: 
+  - id: hello
+    phrase:
+      id: phrase.nanika-osagashi
+      japanese: "こんにちは。何かお探しですか。"
+      reading: "こんにちは。なにかおさがしですか。"
+      romaji: Konnichiwa. Nanika osagashi desu ka.
+      english: Hello. Are you looking for something?
+    choices:
+    - phrase:
+        id: phrase.chotto-miteru
+        japanese: "ちょっと見てるだけです。"
+        reading: "ちょっとみてるだけです。"
+        romaji: Chotto miteru dake desu.
+        english: I'm just looking.
+      action: next
+      nextLineId: looking
+    - phrase:
+        id: phrase.okaikei
+        japanese: "お会計をお願いします。"
+        reading: "おかいけいをおねがいします。"
+        romaji: Okaikei o onegai shimasu.
+        english: The bill, please.
+      action: checkout
+      nextLineId: 
+  - id: thanks
+    phrase:
+      id: phrase.douitashimashite
+      japanese: "どういたしまして。"
+      reading: "どういたしまして。"
+      romaji: Dou itashimashite.
+      english: You're welcome.
+    choices:
+    - phrase:
+        id: phrase.okaikei
+        japanese: "お会計をお願いします。"
+        reading: "おかいけいをおねがいします。"
+        romaji: Okaikei o onegai shimasu.
+        english: The bill, please.
+      action: checkout
+      nextLineId: 
+    - phrase:
+        id: phrase.sayounara
+        japanese: "さようなら。"
+        reading: "さようなら。"
+        romaji: Sayounara.
+        english: Goodbye.
+      action: next
+      nextLineId: bye
+  - id: looking
+    phrase:
+      id: phrase.yukkuri-douzo
+      japanese: "ゆっくりどうぞ。"
+      reading: "ゆっくりどうぞ。"
+      romaji: Yukkuri douzo.
+      english: Take your time.
+    choices:
+    - phrase:
+        id: phrase.okaikei
+        japanese: "お会計をお願いします。"
+        reading: "おかいけいをおねがいします。"
+        romaji: Okaikei o onegai shimasu.
+        english: The bill, please.
+      action: checkout
+      nextLineId: 
+    - phrase:
+        id: phrase.arigatou-gozaimashita
+        japanese: "ありがとうございました。"
+        reading: "ありがとうございました。"
+        romaji: Arigatou gozaimashita.
+        english: Thank you.
+      action: next
+      nextLineId: bye
+  - id: bye
+    phrase:
+      id: phrase.mata-okoshi
+      japanese: "またお越しください。"
+      reading: "またおこしください。"
+      romaji: Mata okoshi kudasai.
+      english: Please come again.
+    choices:
+    - phrase:
+        id: phrase.sayounara
+        japanese: "さようなら。"
+        reading: "さようなら。"
+        romaji: Sayounara.
+        english: Goodbye.
+      action: end
+      nextLineId: 
+  - id: bill
+    phrase:
+      id: phrase.irasshaimase
+      japanese: "いらっしゃいませ。"
+      reading: "いらっしゃいませ。"
+      romaji: Irasshaimase.
+      english: Welcome.
+    choices:
+    - phrase:
+        id: phrase.okaikei
+        japanese: "お会計をお願いします。"
+        reading: "おかいけいをおねがいします。"
+        romaji: Okaikei o onegai shimasu.
+        english: The bill, please.
+      action: checkout
+      nextLineId: 
+  - id: bag
+    phrase:
+      id: phrase.fukuro-goriyou
+      japanese: "袋はご利用ですか？"
+      reading: "ふくろはごりようですか？"
+      romaji: Fukuro wa goriyou desu ka?
+      english: Would you like a bag?
+    choices:
+    - phrase:
+        id: phrase.hai-onegai
+        japanese: "はい、お願いします。"
+        reading: "はい、おねがいします。"
+        romaji: Hai, onegai shimasu.
+        english: Yes, please.
+      action: next
+      nextLineId: payment
+    - phrase:
+        id: phrase.iie-daijoubu
+        japanese: "いいえ、大丈夫です。"
+        reading: "いいえ、だいじょうぶです。"
+        romaji: Iie, daijoubu desu.
+        english: No, that's okay.
+      action: next
+      nextLineId: payment
+  - id: payment
+    phrase:
+      id: phrase.oshiharai
+      japanese: "お支払い方法は？"
+      reading: "おしはらいほうほうは？"
+      romaji: Oshiharai houhou wa?
+      english: How would you like to pay?
+    choices:
+    - phrase:
+        id: phrase.genkin
+        japanese: "現金でお願いします。"
+        reading: "げんきんでおねがいします。"
+        romaji: Genkin de onegai shimasu.
+        english: Cash, please.
+      action: summary
+      nextLineId: 
+    - phrase:
+        id: phrase.kaado
+        japanese: "カードでお願いします。"
+        reading: "カードでおねがいします。"
+        romaji: Kaado de onegai shimasu.
+        english: Card, please.
+      action: summary
+      nextLineId: 
+  - id: empty-basket
+    phrase:
+      id: phrase.empty-basket
+      japanese: "すみません。まだ何もありません。"
+      reading: "すみません。まだなにもありません。"
+      romaji: Sumimasen. Mada nanimo arimasen.
+      english: Sorry. There isn't anything to buy yet.
+    choices:
+    - phrase:
+        id: phrase.wakarimashita
+        japanese: "わかりました。"
+        reading: "わかりました。"
+        romaji: Wakarimashita.
+        english: I understand.
+      action: next
+      nextLineId: welcome
+  - id: purchase-thanks
+    phrase:
+      id: phrase.arigatou-mata
+      japanese: "ありがとうございます。またお越しください。"
+      reading: "ありがとうございます。またおこしください。"
+      romaji: Arigatou gozaimasu. Mata okoshi kudasai.
+      english: Thank you very much. Please come again.
+    choices:
+    - phrase:
+        id: phrase.sayounara
+        japanese: "さようなら。"
+        reading: "さようなら。"
+        romaji: Sayounara.
+        english: Goodbye.
+      action: end
+      nextLineId: 

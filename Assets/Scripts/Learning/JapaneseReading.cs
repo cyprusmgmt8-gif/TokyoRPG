@@ -22,6 +22,9 @@ public enum JapaneseScriptDisplay
 [Serializable]
 public class JapanesePhrase
 {
+    [Tooltip("Stable id for the dictionary, for example phrase.konnichiwa. The same id can be used by any NPC. Leave empty when this line is not saved.")]
+    public string id;
+
     [TextArea(1, 3)]
     public string japanese;
 

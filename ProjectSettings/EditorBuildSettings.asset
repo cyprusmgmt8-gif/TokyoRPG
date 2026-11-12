@@ -15,6 +15,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Bedroom/Bedroom.unity
     guid: 247cf1c70c2a45298a27d61336510972
   - enabled: 1
+    path: Assets/Scenes/Konbini/Konbini.unity
+    guid: b71e4c0a9d2f4e6a8c1b3d5e7f901234
+  - enabled: 1
     path: Assets/Scenes/SampleScene.unity
     guid: 99c9720ab356a0642a771bea13969a05
   m_configObjects:

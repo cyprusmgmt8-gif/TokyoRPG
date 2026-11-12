@@ -2,10 +2,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// Shows or hides the bedroom bars that sit on their own canvases:
-/// the XP canvas, the Map canvas, and the Dictionary button.
-/// Those canvases are drawn on top of the study card, so the card cannot cover them.
-/// The learning card, revision screen, and grammar screen stay untouched.
+/// Hides the gameplay chips while a full panel is open.
+/// Registered objects are the chips only: XP, Map, Quests, and Basket.
+/// Each panel keeps its own screen and its own Close or Back button.
 /// </summary>
 public class GameplayHud : MonoBehaviour
 {
@@ -13,7 +12,7 @@ public class GameplayHud : MonoBehaviour
 
     public static bool ShouldHide(bool studyCardOpen, bool revisionOpen, bool grammarOpen)
     {
-        return studyCardOpen || revisionOpen || grammarOpen;
+        return studyCardOpen || revisionOpen || grammarOpen || OtherPanelOpen();
     }
 
     public static bool Hidden
@@ -23,6 +22,16 @@ public class GameplayHud : MonoBehaviour
             bool studyCardOpen = LearningPanel.Current != null && LearningPanel.Current.IsOpen;
             return ShouldHide(studyCardOpen, RevisionPanel.IsOpenNow, GrammarPanel.IsOpenNow);
         }
+    }
+
+    static bool OtherPanelOpen()
+    {
+        return QuestPanel.IsOpenNow
+            || BasketPanel.IsOpenNow
+            || DictionaryPanel.IsOpenNow
+            || DialoguePanel.IsOpenNow
+            || CheckoutPanel.IsOpenNow
+            || CityMapScreen.IsOpenNow;
     }
 
     public static void Register(GameObject root)

@@ -8748,6 +8748,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   catalog: {fileID: 11400000, guid: 11aa22bb33cc44dd55ee66ff77889900, type: 2}
   interfaceLanguage: {fileID: 11400000, guid: 22bb33cc44dd55ee66ff7788990011aa, type: 2}
+  additionalCatalogs:
+  - {fileID: 11400000, guid: c7a41e92d8b64f0a91e3b5c6d7f80912, type: 2}
+  phraseCatalog: {fileID: 11400000, guid: f0b2d5c83e9a4f1b0d4c6e8a2b3f5d71, type: 2}
 
 --- !u!114 &210050
 MonoBehaviour:
