@@ -130,7 +130,7 @@ public class PlayerInteractor : MonoBehaviour
     bool ScreenBlocksLook()
     {
         bool study = learningPanel != null && learningPanel.IsOpen;
-        return study || DictionaryPanel.IsOpenNow || GrammarPanel.IsOpenNow || RevisionPanel.IsOpenNow || BasketPanel.IsOpenNow || QuestPanel.IsOpenNow || CheckoutPanel.IsOpenNow || DialoguePanel.IsOpenNow || CityMapScreen.IsOpenNow;
+        return study || DictionaryPanel.IsOpenNow || GrammarPanel.IsOpenNow || RevisionPanel.IsOpenNow || BasketPanel.IsOpenNow || QuestPanel.IsOpenNow || CheckoutPanel.IsOpenNow || DialoguePanel.IsOpenNow || CityMapScreen.IsOpenNow || MainMenuScreen.IsOpenNow;
     }
 
     public bool HasLookTarget => current != null;

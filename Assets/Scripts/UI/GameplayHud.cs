@@ -31,7 +31,8 @@ public class GameplayHud : MonoBehaviour
             || DictionaryPanel.IsOpenNow
             || DialoguePanel.IsOpenNow
             || CheckoutPanel.IsOpenNow
-            || CityMapScreen.IsOpenNow;
+            || CityMapScreen.IsOpenNow
+            || MainMenuScreen.IsOpenNow;
     }
 
     public static void Register(GameObject root)

@@ -11,6 +11,7 @@ public static class GameScenes
     public const string CityMap = "CityMap";
     public const string Bedroom = "Bedroom";
     public const string Konbini = "Konbini";
+    public const string VisitorTest = "VisitorTest";
 
     public static void Load(string sceneName)
     {

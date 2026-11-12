@@ -21,7 +21,6 @@ public class CityMapScreen : MonoBehaviour
     GameObject screenRoot;
     GameObject detailRoot;
     Text detailText;
-    SettingsPanel settings;
     FirstPersonController pausedMovement;
     bool openedOverGameplay;
     bool pausedByMap;
@@ -32,7 +31,7 @@ public class CityMapScreen : MonoBehaviour
     /// </summary>
     public static void OpenOverGameplay(Transform host)
     {
-        if (host == null)
+        if (host == null || MainMenuScreen.IsOpenNow)
         {
             return;
         }
@@ -73,8 +72,6 @@ public class CityMapScreen : MonoBehaviour
         Canvas canvas = MenuUi.CreateCanvas(transform, "Map Canvas", sortOrder);
         screenRoot = canvas.gameObject;
         BuildMap(canvas.transform);
-        settings = new SettingsPanel(canvas.transform, font, CloseSettings);
-        settings.Root.SetActive(false);
         detailRoot.SetActive(false);
         BuildBackButton(canvas.transform);
         RefreshHeader();
@@ -150,18 +147,6 @@ public class CityMapScreen : MonoBehaviour
         nameLayout.flexibleWidth = 1;
 
         accessText = MenuUi.AddText(card.transform, "", font, 22, FontStyle.Normal, MenuUi.Muted, 64, TextAnchor.MiddleCenter);
-
-        GameObject buttons = MenuUi.CreateRect("Buttons", card.transform);
-        LayoutElement buttonLayout = buttons.AddComponent<LayoutElement>();
-        buttonLayout.preferredHeight = 64;
-        HorizontalLayoutGroup buttonRow = buttons.AddComponent<HorizontalLayoutGroup>();
-        buttonRow.spacing = 12;
-        buttonRow.childControlWidth = true;
-        buttonRow.childControlHeight = true;
-        buttonRow.childForceExpandWidth = true;
-        buttonRow.childForceExpandHeight = true;
-        MenuUi.CreateButton(buttons.transform, "Menu", font, MenuUi.Stone, () => GameScenes.Load(GameScenes.MainMenu), 64);
-        MenuUi.CreateButton(buttons.transform, "Settings", font, MenuUi.Stone, OpenSettings, 64);
 
         MenuUi.CreateScroll(card.transform, out listContent);
         BuildDetail(parent);
@@ -249,7 +234,8 @@ public class CityMapScreen : MonoBehaviour
             || QuestPanel.IsOpenNow
             || BasketPanel.IsOpenNow
             || CheckoutPanel.IsOpenNow
-            || DialoguePanel.IsOpenNow;
+            || DialoguePanel.IsOpenNow
+            || MainMenuScreen.IsOpenNow;
     }
 
     void BuildDetail(Transform parent)
@@ -260,7 +246,6 @@ public class CityMapScreen : MonoBehaviour
         dim.color = new Color(0f, 0f, 0f, 0.62f);
         GameObject card = MenuUi.CreateCard(detailRoot.transform, new Vector2(0.1f, 0.18f), new Vector2(0.9f, 0.82f));
         detailText = MenuUi.AddText(card.transform, "", font, 26, FontStyle.Normal, Color.white, 420, TextAnchor.UpperLeft);
-        MenuUi.CreateButton(card.transform, "Settings", font, MenuUi.Amber, OpenSettings, 72);
         MenuUi.CreateButton(card.transform, "Back", font, MenuUi.Stone, () => detailRoot.SetActive(false), 72);
     }
 
@@ -353,7 +338,7 @@ public class CityMapScreen : MonoBehaviour
                 + place.summary + "\n\n"
                 + "Premium access\n"
                 + "The free game includes the bedroom only. This place opens with premium access.\n\n"
-                + "This prototype does not take payment. Open Settings and turn on Simulate premium to test the unlocked map.";
+                + "This prototype does not take payment. Open the Menu, choose Settings, and turn on Simulate premium to test the unlocked map.";
         }
 
         detailRoot.SetActive(true);
@@ -372,7 +357,7 @@ public class CityMapScreen : MonoBehaviour
         }
 
 #if UNITY_EDITOR
-        return place.id == "convenience-store";
+        return true;
 #else
         return false;
 #endif
@@ -387,19 +372,5 @@ public class CityMapScreen : MonoBehaviour
         }
 
         return place.japaneseName + "  " + place.reading + "  " + romaji;
-    }
-
-    void OpenSettings()
-    {
-        detailRoot.SetActive(false);
-        settings.Refresh();
-        settings.Root.SetActive(true);
-    }
-
-    void CloseSettings()
-    {
-        settings.Root.SetActive(false);
-        RefreshHeader();
-        RebuildList();
     }
 }

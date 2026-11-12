@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e1a7c5b38d6e4f02bf4a5b6c7d8e9f01, type: 3}
+  m_Name: VisitorTestVocabulary
+  m_EditorClassIdentifier: 
+  entries:
+  - id: visitor-test.sign
+    japanese: "案内板"
+    reading: "あんないばん"
+    romaji: annai-ban
+    exampleSentence: "案内板を見ます。"
+    exampleReading: "あんないばんをみます。"
+    exampleRomaji: Annai-ban o mimasu.
+    audioReference: visitor_test_sign
+    wordClip: {fileID: 0}
+    exampleClip: {fileID: 0}
+    roomId: visitor-test
+    objectId: sign
+    translations:
+    - languageCode: en
+      translation: information board
+      exampleTranslation: I look at the information board.
+      grammarExplanation: "を marks what you look at and is pronounced o. 見ます means \"look\" or \"see\"."

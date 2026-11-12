@@ -113,3 +113,18 @@ MonoBehaviour:
     reading: "わかりました。"
     romaji: Wakarimashita.
     english: I understand.
+  - id: phrase.koe-o-kakete
+    japanese: "こんにちは。何かありましたら、声をかけてください。"
+    reading: "こんにちは。なにかありましたら、こえをかけてください。"
+    romaji: Konnichiwa. Nanika arimashitara, koe o kakete kudasai.
+    english: Hello. If you need anything, please let me know.
+  - id: phrase.chotto-mitekimasu
+    japanese: "ありがとうございます。ちょっと見てきます。"
+    reading: "ありがとうございます。ちょっとみてきます。"
+    romaji: Arigatou gozaimasu. Chotto mitekimasu.
+    english: Thank you. I'll have a look around.
+  - id: phrase.douzo-goyukkuri
+    japanese: "はい、どうぞごゆっくり。"
+    reading: "はい、どうぞごゆっくり。"
+    romaji: Hai, douzo goyukkuri.
+    english: Yes, please take your time.

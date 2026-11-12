@@ -8,6 +8,11 @@ using UnityEngine.UI;
 /// </summary>
 public class MainMenuScreen : MonoBehaviour
 {
+    public static bool IsOpenNow { get; private set; }
+
+    static bool openAsOverlay;
+    static MainMenuScreen gameplayMenu;
+
     Font font;
     GameObject homeRoot;
     GameObject createRoot;
@@ -26,23 +31,173 @@ public class MainMenuScreen : MonoBehaviour
     Image[] languageImages;
     string selectedAvatarId = "traveler";
     string selectedLanguageCode = "en";
+    GameObject screenRoot;
+    FirstPersonController pausedMovement;
+    bool openedOverGameplay;
+    bool pausedByMenu;
+
+    /// <summary>
+    /// Draws the existing title menu over the current room.
+    /// Back hides it. The room stays loaded, so the player does not move.
+    /// </summary>
+    public static void OpenOverGameplay(Transform host)
+    {
+        if (host == null || CityMapScreen.IsOpenNow)
+        {
+            return;
+        }
+
+        if (gameplayMenu != null)
+        {
+            gameplayMenu.Show();
+            return;
+        }
+
+        openAsOverlay = true;
+        GameObject menuObject = new GameObject("Gameplay Menu");
+        menuObject.transform.SetParent(host, false);
+        gameplayMenu = menuObject.AddComponent<MainMenuScreen>();
+    }
 
     void Awake()
     {
+        openedOverGameplay = openAsOverlay;
+        openAsOverlay = false;
+        if (openedOverGameplay)
+        {
+            gameplayMenu = this;
+        }
+
         PlayerProfile.EnsureLoaded();
         AccessEntitlement.EnsureLoaded();
         MenuUi.ShowCursor();
-        MenuUi.PaintNightSky();
+        if (!openedOverGameplay)
+        {
+            MenuUi.PaintNightSky();
+        }
+
         font = MenuUi.FindFont();
         MenuUi.EnsureEventSystem();
 
-        Canvas canvas = MenuUi.CreateCanvas(transform, "Menu Canvas", 10);
+        int sortOrder = openedOverGameplay ? 65 : 10;
+        Canvas canvas = MenuUi.CreateCanvas(transform, "Menu Canvas", sortOrder);
+        screenRoot = canvas.gameObject;
         homeRoot = BuildHome(canvas.transform);
         createRoot = BuildCreate(canvas.transform);
         confirmRoot = BuildConfirm(canvas.transform);
         profilesRoot = BuildProfiles(canvas.transform);
+        if (openedOverGameplay)
+        {
+            BuildBackButton(canvas.transform);
+        }
+
         settings = new SettingsPanel(canvas.transform, font, ShowHome);
         ShowHome();
+        if (openedOverGameplay)
+        {
+            Show();
+        }
+    }
+
+    void OnDisable()
+    {
+        if (openedOverGameplay && IsOpenNow)
+        {
+            IsOpenNow = false;
+            ResumeMovement();
+        }
+    }
+
+    void OnDestroy()
+    {
+        if (gameplayMenu == this)
+        {
+            gameplayMenu = null;
+        }
+    }
+
+    void Show()
+    {
+        if (screenRoot != null)
+        {
+            screenRoot.SetActive(true);
+        }
+
+        IsOpenNow = true;
+        MenuUi.ShowCursor();
+        PauseMovement();
+    }
+
+    void CloseMenu()
+    {
+        if (!openedOverGameplay)
+        {
+            return;
+        }
+
+        if (screenRoot != null)
+        {
+            screenRoot.SetActive(false);
+        }
+
+        IsOpenNow = false;
+        ResumeMovement();
+    }
+
+    void PauseMovement()
+    {
+        if (pausedByMenu)
+        {
+            return;
+        }
+
+        pausedMovement = GetComponentInParent<FirstPersonController>();
+        if (pausedMovement != null && pausedMovement.enabled)
+        {
+            pausedMovement.enabled = false;
+            pausedByMenu = true;
+        }
+    }
+
+    void ResumeMovement()
+    {
+        if (!pausedByMenu || pausedMovement == null)
+        {
+            return;
+        }
+
+        pausedByMenu = false;
+        if (!CityMapScreen.IsOpenNow && !AnotherScreenOpen())
+        {
+            pausedMovement.enabled = true;
+        }
+    }
+
+    static bool AnotherScreenOpen()
+    {
+        bool study = LearningPanel.Current != null && LearningPanel.Current.IsOpen;
+        return study
+            || DictionaryPanel.IsOpenNow
+            || GrammarPanel.IsOpenNow
+            || RevisionPanel.IsOpenNow
+            || QuestPanel.IsOpenNow
+            || BasketPanel.IsOpenNow
+            || CheckoutPanel.IsOpenNow
+            || DialoguePanel.IsOpenNow;
+    }
+
+    void BuildBackButton(Transform parent)
+    {
+        GameObject back = MenuUi.CreateRect("Back To Room", parent);
+        MenuUi.Stretch(back.GetComponent<RectTransform>(), new Vector2(0.055f, 0.905f), new Vector2(0.22f, 0.965f));
+        Image image = back.AddComponent<Image>();
+        image.color = MenuUi.Amber;
+        Button button = back.AddComponent<Button>();
+        button.targetGraphic = image;
+        button.onClick.AddListener(CloseMenu);
+        Text label = MenuUi.AddText(back.transform, "Back", font, 28, FontStyle.Bold, Color.white, 56, TextAnchor.MiddleCenter);
+        MenuUi.Stretch(label.rectTransform, Vector2.zero, Vector2.one);
+        label.GetComponent<LayoutElement>().ignoreLayout = true;
     }
 
     void ShowHome()

@@ -237,6 +237,9 @@ public class QuestPanel : MonoBehaviour
             text.Append(quest.description);
         }
 
+        text.Append('\n');
+        text.Append(RewardLine(quest.rewardXp));
+
         if (quest.objectives != null)
         {
             for (int i = 0; i < quest.objectives.Count; i++)
@@ -271,13 +274,17 @@ public class QuestPanel : MonoBehaviour
         if (record.state == (int)QuestState.Completed)
         {
             text.Append("\nComplete");
-            if (quest.rewardXp > 0)
-            {
-                text.Append("  +");
-                text.Append(quest.rewardXp);
-                text.Append(" XP");
-            }
         }
+    }
+
+    static string RewardLine(int rewardXp)
+    {
+        if (rewardXp <= 0)
+        {
+            return "XP Reward: none";
+        }
+
+        return "XP Reward: +" + rewardXp + " XP";
     }
 
     static bool LearningScreenOpen()
