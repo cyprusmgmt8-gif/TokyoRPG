@@ -143,3 +143,18 @@ MonoBehaviour:
     reading: "まっすぐいって、ひだりてです。"
     romaji: Massugu itte, hidarite desu.
     english: Go straight, and it is on the left.
+  - id: phrase.nanika-okomari
+    japanese: "何かお困りですか。"
+    reading: "なにかおこまりですか。"
+    romaji: Nanika okomari desu ka.
+    english: Is there anything I can help you with?
+  - id: phrase.homu-doko
+    japanese: "ホームはどこですか。"
+    reading: "ホームはどこですか。"
+    romaji: Hoomu wa doko desu ka.
+    english: Where is the platform?
+  - id: phrase.kaisatsu-massugu
+    japanese: "改札を通って、まっすぐ進んでください。"
+    reading: "かいさつをとおってまっすぐすすんでください。"
+    romaji: Kaisatsu o tootte, massugu susunde kudasai.
+    english: Go through the ticket gates and continue straight ahead.

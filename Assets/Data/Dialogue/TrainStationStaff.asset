@@ -1,0 +1,61 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4c8e2f19b304d6e8f7a1c2d3e4f5061, type: 3}
+  m_Name: TrainStationStaff
+  m_EditorClassIdentifier: 
+  npcId: station.staff
+  speakerJapanese: "駅員"
+  speakerReading: "えきいん"
+  speakerRomaji: ekiin
+  speakerEnglish: Station staff
+  startLineId: greeting
+  lines:
+  - id: greeting
+    phrase:
+      id: phrase.nanika-okomari
+      japanese: "何かお困りですか。"
+      reading: "なにかおこまりですか。"
+      romaji: Nanika okomari desu ka.
+      english: Is there anything I can help you with?
+    choices:
+    - phrase:
+        id: phrase.homu-doko
+        japanese: "ホームはどこですか。"
+        reading: "ホームはどこですか。"
+        romaji: Hoomu wa doko desu ka.
+        english: Where is the platform?
+      action: next
+      nextLineId: directions
+  - id: directions
+    phrase:
+      id: phrase.kaisatsu-massugu
+      japanese: "改札を通って、まっすぐ進んでください。"
+      reading: "かいさつをとおってまっすぐすすんでください。"
+      romaji: Kaisatsu o tootte, massugu susunde kudasai.
+      english: Go through the ticket gates and continue straight ahead.
+    choices:
+    - phrase:
+        id: phrase.arigatou
+        japanese: "ありがとうございます。"
+        reading: "ありがとうございます。"
+        romaji: Arigatou gozaimasu.
+        english: Thank you very much.
+      action: next
+      nextLineId: welcome
+  - id: welcome
+    phrase:
+      id: phrase.douitashimashite
+      japanese: "どういたしまして。"
+      reading: "どういたしまして。"
+      romaji: Dou itashimashite.
+      english: You're welcome.
+    choices: []

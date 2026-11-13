@@ -1,0 +1,117 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e1a7c5b38d6e4f02bf4a5b6c7d8e9f01, type: 3}
+  m_Name: TrainStationVocabulary
+  m_EditorClassIdentifier: 
+  entries:
+  - id: station.kenbaiki
+    japanese: "券売機"
+    reading: "けんばいき"
+    romaji: kenbaiki
+    exampleSentence: "券売機で切符を買います。"
+    exampleReading: "けんばいきできっぷをかいます。"
+    exampleRomaji: Kenbaiki de kippu o kaimasu.
+    audioReference: 
+    wordClip: {fileID: 0}
+    exampleClip: {fileID: 0}
+    roomId: train-station
+    objectId: ticket-machine-1
+    translations:
+    - languageCode: en
+      translation: "Ticket machine"
+      exampleTranslation: "I buy a ticket at the ticket machine."
+      grammarExplanation: "で marks the place. を marks 切符 and is pronounced o."
+  - id: station.kippu
+    japanese: "切符"
+    reading: "きっぷ"
+    romaji: kippu
+    exampleSentence: "この切符で乗れますか。"
+    exampleReading: "このきっぷでのれますか。"
+    exampleRomaji: Kono kippu de noremasu ka.
+    audioReference: 
+    wordClip: {fileID: 0}
+    exampleClip: {fileID: 0}
+    roomId: train-station
+    objectId: ticket-display
+    translations:
+    - languageCode: en
+      translation: "Ticket"
+      exampleTranslation: "Can I ride with this ticket?"
+      grammarExplanation: "で marks what you use. か turns the sentence into a question."
+  - id: station.kaisatsuguchi
+    japanese: "改札口"
+    reading: "かいさつぐち"
+    romaji: kaisatsuguchi
+    exampleSentence: "改札口はどこですか。"
+    exampleReading: "かいさつぐちはどこですか。"
+    exampleRomaji: Kaisatsuguchi wa doko desu ka.
+    audioReference: 
+    wordClip: {fileID: 0}
+    exampleClip: {fileID: 0}
+    roomId: train-station
+    objectId: ticket-gate-left
+    translations:
+    - languageCode: en
+      translation: "Ticket gate"
+      exampleTranslation: "Where is the ticket gate?"
+      grammarExplanation: "は marks the topic and is pronounced wa. か makes it a question."
+  - id: station.homu
+    japanese: "ホーム"
+    reading: "ホーム"
+    romaji: hoomu
+    exampleSentence: "ホームはあちらです。"
+    exampleReading: "ホームはあちらです。"
+    exampleRomaji: Hoomu wa achira desu.
+    audioReference: 
+    wordClip: {fileID: 0}
+    exampleClip: {fileID: 0}
+    roomId: train-station
+    objectId: platform-sign
+    translations:
+    - languageCode: en
+      translation: "Platform"
+      exampleTranslation: "The platform is over there."
+      grammarExplanation: "は is pronounced wa. あちら means over there."
+  - id: station.norikae
+    japanese: "乗り換え"
+    reading: "のりかえ"
+    romaji: norikae
+    exampleSentence: "次の駅で乗り換えます。"
+    exampleReading: "つぎのえきでのりかえます。"
+    exampleRomaji: Tsugi no eki de norikaemasu.
+    audioReference: 
+    wordClip: {fileID: 0}
+    exampleClip: {fileID: 0}
+    roomId: train-station
+    objectId: transfer-sign
+    translations:
+    - languageCode: en
+      translation: "Transfer"
+      exampleTranslation: "I transfer at the next station."
+      grammarExplanation: "で marks the place where you transfer. ます is the polite ending."
+  - id: station.densha
+    japanese: "電車"
+    reading: "でんしゃ"
+    romaji: densha
+    exampleSentence: "この電車は新宿へ行きますか。"
+    exampleReading: "このでんしゃはしんじゅくへいきますか。"
+    exampleRomaji: Kono densha wa Shinjuku e ikimasu ka.
+    audioReference: 
+    wordClip: {fileID: 0}
+    exampleClip: {fileID: 0}
+    roomId: train-station
+    objectId: train-sign
+    translations:
+    - languageCode: en
+      translation: "Train"
+      exampleTranslation: "Does this train go to Shinjuku?"
+      grammarExplanation: "は is pronounced wa. へ marks the destination and is pronounced e."
