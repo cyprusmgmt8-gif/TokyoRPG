@@ -15,7 +15,7 @@ MonoBehaviour:
   quests:
   - id: konbini.first-shopping
     japanese: "はじめてのお買い物"
-    reading: "はじめてのお買い物"
+    reading: "はじめてのおかいもの"
     romaji: Hajimete no okaimono
     english: Your First Shopping Trip
     description: Study the water and the onigiri.
@@ -25,8 +25,8 @@ MonoBehaviour:
     - id: water
       type: interact
       targetId: konbini.water
-      label: Water
+      label: Find and study the water.
     - id: onigiri
       type: interact
       targetId: konbini.onigiri
-      label: Onigiri
+      label: Find and study the onigiri.
