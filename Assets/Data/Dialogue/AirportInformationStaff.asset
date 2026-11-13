@@ -1,0 +1,53 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4c8e2f19b304d6e8f7a1c2d3e4f5061, type: 3}
+  m_Name: AirportInformationStaff
+  m_EditorClassIdentifier: 
+  npcId: airport.information-staff
+  speakerJapanese: "案内係"
+  speakerReading: "あんないがかり"
+  speakerRomaji: annai-gakari
+  speakerEnglish: Information staff
+  startLineId: greeting
+  lines:
+  - id: greeting
+    phrase:
+      id: phrase.dochira-osagashi
+      japanese: "はい。どちらをお探しですか。"
+      reading: "はい。どちらをおさがしですか。"
+      romaji: Hai. Dochira o osagashi desu ka.
+      english: Yes. What are you looking for?
+    choices:
+    - phrase:
+        id: phrase.tenimotsu-doko
+        japanese: "手荷物受取所はどこですか。"
+        reading: "てにもつうけとりじょはどこですか。"
+        romaji: Tenimotsu uketorijo wa doko desu ka.
+        english: Where is baggage claim?
+      action: next
+      nextLineId: directions
+  - id: directions
+    phrase:
+      id: phrase.massugu-hidarite
+      japanese: "まっすぐ行って、左手です。"
+      reading: "まっすぐいって、ひだりてです。"
+      romaji: Massugu itte, hidarite desu.
+      english: Go straight, and it is on the left.
+    choices:
+    - phrase:
+        id: phrase.arigatou
+        japanese: "ありがとうございます。"
+        reading: "ありがとうございます。"
+        romaji: Arigatou gozaimasu.
+        english: Thank you.
+      action: end
+      nextLineId: 

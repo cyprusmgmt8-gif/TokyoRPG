@@ -1,0 +1,100 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e1a7c5b38d6e4f02bf4a5b6c7d8e9f01, type: 3}
+  m_Name: AirportVocabulary
+  m_EditorClassIdentifier: 
+  entries:
+  - id: airport.annaiban
+    japanese: "案内板"
+    reading: "あんないばん"
+    romaji: annai-ban
+    exampleSentence: "案内板で出口を確認します。"
+    exampleReading: "あんないばんででぐちをかくにんします。"
+    exampleRomaji: Annaiban de deguchi o kakunin shimasu.
+    audioReference: 
+    wordClip: {fileID: 0}
+    exampleClip: {fileID: 0}
+    roomId: airport
+    objectId: arrivals-sign
+    translations:
+    - languageCode: en
+      translation: "Information sign"
+      exampleTranslation: "I check the exit on the information board."
+      grammarExplanation: "で marks the place where you check. を marks 出口 and is pronounced o."
+  - id: airport.deguchi
+    japanese: "出口"
+    reading: "でぐち"
+    romaji: deguchi
+    exampleSentence: "出口はあちらです。"
+    exampleReading: "でぐちはあちらです。"
+    exampleRomaji: Deguchi wa achira desu.
+    audioReference: 
+    wordClip: {fileID: 0}
+    exampleClip: {fileID: 0}
+    roomId: airport
+    objectId: exit-sign
+    translations:
+    - languageCode: en
+      translation: "Exit"
+      exampleTranslation: "The exit is over there."
+      grammarExplanation: "は marks the topic and is pronounced wa. あちら means over there."
+  - id: airport.baggage-claim
+    japanese: "手荷物受取所"
+    reading: "てにもつうけとりじょ"
+    romaji: tenimotsu uketorijo
+    exampleSentence: "手荷物受取所はどこですか。"
+    exampleReading: "てにもつうけとりじょはどこですか。"
+    exampleRomaji: Tenimotsu uketorijo wa doko desu ka.
+    audioReference: 
+    wordClip: {fileID: 0}
+    exampleClip: {fileID: 0}
+    roomId: airport
+    objectId: belt-south
+    translations:
+    - languageCode: en
+      translation: "Baggage claim"
+      exampleTranslation: "Where is baggage claim?"
+      grammarExplanation: "は is pronounced wa. か turns the sentence into a question."
+  - id: airport.ryogae
+    japanese: "両替"
+    reading: "りょうがえ"
+    romaji: ryogae
+    exampleSentence: "ここで両替できますか。"
+    exampleReading: "ここでりょうがえできますか。"
+    exampleRomaji: Koko de ryogae dekimasu ka.
+    audioReference: 
+    wordClip: {fileID: 0}
+    exampleClip: {fileID: 0}
+    roomId: airport
+    objectId: exchange-counter
+    translations:
+    - languageCode: en
+      translation: "Currency exchange"
+      exampleTranslation: "Can I exchange money here?"
+      grammarExplanation: "で marks the place. できますか asks whether something is possible."
+  - id: airport.taxi
+    japanese: "タクシー"
+    reading: "タクシー"
+    romaji: takushii
+    exampleSentence: "タクシー乗り場はどこですか。"
+    exampleReading: "タクシーのりばはどこですか。"
+    exampleRomaji: Takushii noriba wa doko desu ka.
+    audioReference: 
+    wordClip: {fileID: 0}
+    exampleClip: {fileID: 0}
+    roomId: airport
+    objectId: taxi-sign
+    translations:
+    - languageCode: en
+      translation: "Taxi"
+      exampleTranslation: "Where is the taxi stand?"
+      grammarExplanation: "乗り場 means the place where you catch a ride. は is pronounced wa."

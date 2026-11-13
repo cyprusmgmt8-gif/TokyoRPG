@@ -128,3 +128,18 @@ MonoBehaviour:
     reading: "はい、どうぞごゆっくり。"
     romaji: Hai, douzo goyukkuri.
     english: Yes, please take your time.
+  - id: phrase.dochira-osagashi
+    japanese: "はい。どちらをお探しですか。"
+    reading: "はい。どちらをおさがしですか。"
+    romaji: Hai. Dochira o osagashi desu ka.
+    english: Yes. What are you looking for?
+  - id: phrase.tenimotsu-doko
+    japanese: "手荷物受取所はどこですか。"
+    reading: "てにもつうけとりじょはどこですか。"
+    romaji: Tenimotsu uketorijo wa doko desu ka.
+    english: Where is baggage claim?
+  - id: phrase.massugu-hidarite
+    japanese: "まっすぐ行って、左手です。"
+    reading: "まっすぐいって、ひだりてです。"
+    romaji: Massugu itte, hidarite desu.
+    english: Go straight, and it is on the left.

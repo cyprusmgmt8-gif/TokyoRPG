@@ -119,6 +119,7 @@ MonoBehaviour:
   additionalCatalogs:
   - {fileID: 11400000, guid: c7a41e92d8b64f0a91e3b5c6d7f80912, type: 2}
   - {fileID: 11400000, guid: 3b8e6d14a9c24f0e8d7b5a3c1f0e9d28, type: 2}
+  - {fileID: 11400000, guid: 45bfbe720a8847dabe862b1e6e2dde41, type: 2}
   phraseCatalog: {fileID: 11400000, guid: f0b2d5c83e9a4f1b0d4c6e8a2b3f5d71, type: 2}
 --- !u!114 &800106
 MonoBehaviour:
