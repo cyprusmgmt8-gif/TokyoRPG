@@ -17,9 +17,9 @@ MonoBehaviour:
     japanese: "お茶"
     reading: "おちゃ"
     romaji: "ocha"
-    exampleSentence: "これはお茶です。"
-    exampleReading: "これはおちゃです。"
-    exampleRomaji: "Kore wa ocha desu."
+    exampleSentence: "お茶をください。"
+    exampleReading: "おちゃをください。"
+    exampleRomaji: "Ocha o kudasai."
     audioReference: konbini_green_tea
     wordClip: {fileID: 0}
     exampleClip: {fileID: 0}
@@ -27,9 +27,9 @@ MonoBehaviour:
     objectId: green-tea
     translations:
     - languageCode: en
-      translation: "green tea"
-      exampleTranslation: "This is green tea."
-      grammarExplanation: "これは means \"this is\". は is the topic particle and is pronounced wa."
+      translation: "Green tea"
+      exampleTranslation: "Green tea, please."
+      grammarExplanation: "を marks what you are asking for and is pronounced o. ください means \"please give me\"."
   - id: konbini.water
     japanese: "水"
     reading: "みず"
@@ -98,3 +98,71 @@ MonoBehaviour:
       translation: "sandwich"
       exampleTranslation: "This sandwich, please."
       grammarExplanation: "この means \"this\". を marks the sandwich and is pronounced o."
+  - id: konbini.register
+    japanese: "レジ"
+    reading: "レジ"
+    romaji: "reji"
+    exampleSentence: "レジはどこですか。"
+    exampleReading: "レジはどこですか。"
+    exampleRomaji: "Reji wa doko desu ka."
+    audioReference: 
+    wordClip: {fileID: 0}
+    exampleClip: {fileID: 0}
+    roomId: konbini
+    objectId: register
+    translations:
+    - languageCode: en
+      translation: "Register / checkout"
+      exampleTranslation: "Where is the checkout?"
+      grammarExplanation: "は marks the topic and is pronounced wa. か turns the sentence into a question."
+  - id: konbini.bag
+    japanese: "袋"
+    reading: "ふくろ"
+    romaji: "fukuro"
+    exampleSentence: "袋をお願いします。"
+    exampleReading: "ふくろをおねがいします。"
+    exampleRomaji: "Fukuro o onegai shimasu."
+    audioReference: 
+    wordClip: {fileID: 0}
+    exampleClip: {fileID: 0}
+    roomId: konbini
+    objectId: bag
+    translations:
+    - languageCode: en
+      translation: "Bag"
+      exampleTranslation: "A bag, please."
+      grammarExplanation: "を marks what you are asking for and is pronounced o."
+  - id: konbini.bento
+    japanese: "お弁当"
+    reading: "おべんとう"
+    romaji: "obentou"
+    exampleSentence: "このお弁当をください。"
+    exampleReading: "このおべんとうをください。"
+    exampleRomaji: "Kono obentou o kudasai."
+    audioReference: 
+    wordClip: {fileID: 0}
+    exampleClip: {fileID: 0}
+    roomId: konbini
+    objectId: bento
+    translations:
+    - languageCode: en
+      translation: "Bento / boxed meal"
+      exampleTranslation: "This bento, please."
+      grammarExplanation: "この means \"this\". を marks the bento and is pronounced o."
+  - id: konbini.receipt
+    japanese: "レシート"
+    reading: "レシート"
+    romaji: "reshiito"
+    exampleSentence: "レシートをお願いします。"
+    exampleReading: "レシートをおねがいします。"
+    exampleRomaji: "Reshiito o onegai shimasu."
+    audioReference: 
+    wordClip: {fileID: 0}
+    exampleClip: {fileID: 0}
+    roomId: konbini
+    objectId: receipt
+    translations:
+    - languageCode: en
+      translation: "Receipt"
+      exampleTranslation: "A receipt, please."
+      grammarExplanation: "を marks what you are asking for and is pronounced o."

@@ -42,7 +42,7 @@ MonoBehaviour:
     japanese: "ちょっと見てるだけです。"
     reading: "ちょっとみてるだけです。"
     romaji: Chotto miteru dake desu.
-    english: I'm just looking.
+    english: I'm just looking, thanks.
   - id: phrase.douitashimashite
     japanese: "どういたしまして。"
     reading: "どういたしまして。"
@@ -158,3 +158,18 @@ MonoBehaviour:
     reading: "かいさつをとおってまっすぐすすんでください。"
     romaji: Kaisatsu o tootte, massugu susunde kudasai.
     english: Go through the ticket gates and continue straight ahead.
+  - id: phrase.goyukkuri
+    japanese: "どうぞごゆっくり。"
+    reading: "どうぞごゆっくり。"
+    romaji: Douzo goyukkuri.
+    english: Please take your time.
+  - id: phrase.arigatou-gozaimashita-mata
+    japanese: "ありがとうございました。またお越しください。"
+    reading: "ありがとうございました。またおこしください。"
+    romaji: Arigatou gozaimashita. Mata okoshi kudasai.
+    english: Thank you very much. Please visit again.
+  - id: phrase.atatamemasu-ka
+    japanese: "温めますか？"
+    reading: "あたためますか？"
+    romaji: Atatamemasu ka?
+    english: Would you like me to heat it up?

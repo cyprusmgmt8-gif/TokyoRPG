@@ -25,46 +25,14 @@ MonoBehaviour:
       japanese: "いらっしゃいませ。"
       reading: "いらっしゃいませ。"
       romaji: Irasshaimase.
-      english: Welcome.
-    choices:
-    - phrase:
-        id: phrase.konnichiwa
-        japanese: "こんにちは。"
-        reading: "こんにちは。"
-        romaji: Konnichiwa.
-        english: Hello.
-      action: next
-      nextLineId: hello
-    - phrase:
-        id: phrase.arigatou
-        japanese: "ありがとうございます。"
-        reading: "ありがとうございます。"
-        romaji: Arigatou gozaimasu.
-        english: Thank you.
-      action: next
-      nextLineId: thanks
-    - phrase:
-        id: phrase.okaikei
-        japanese: "お会計をお願いします。"
-        reading: "おかいけいをおねがいします。"
-        romaji: Okaikei o onegai shimasu.
-        english: The bill, please.
-      action: checkout
-      nextLineId: 
-  - id: hello
-    phrase:
-      id: phrase.nanika-osagashi
-      japanese: "こんにちは。何かお探しですか。"
-      reading: "こんにちは。なにかおさがしですか。"
-      romaji: Konnichiwa. Nanika osagashi desu ka.
-      english: Hello. Are you looking for something?
+      english: Welcome!
     choices:
     - phrase:
         id: phrase.chotto-miteru
         japanese: "ちょっと見てるだけです。"
         reading: "ちょっとみてるだけです。"
         romaji: Chotto miteru dake desu.
-        english: I'm just looking.
+        english: I'm just looking, thanks.
       action: next
       nextLineId: looking
     - phrase:
@@ -75,70 +43,14 @@ MonoBehaviour:
         english: The bill, please.
       action: checkout
       nextLineId: 
-  - id: thanks
-    phrase:
-      id: phrase.douitashimashite
-      japanese: "どういたしまして。"
-      reading: "どういたしまして。"
-      romaji: Dou itashimashite.
-      english: You're welcome.
-    choices:
-    - phrase:
-        id: phrase.okaikei
-        japanese: "お会計をお願いします。"
-        reading: "おかいけいをおねがいします。"
-        romaji: Okaikei o onegai shimasu.
-        english: The bill, please.
-      action: checkout
-      nextLineId: 
-    - phrase:
-        id: phrase.sayounara
-        japanese: "さようなら。"
-        reading: "さようなら。"
-        romaji: Sayounara.
-        english: Goodbye.
-      action: next
-      nextLineId: bye
   - id: looking
     phrase:
-      id: phrase.yukkuri-douzo
-      japanese: "ゆっくりどうぞ。"
-      reading: "ゆっくりどうぞ。"
-      romaji: Yukkuri douzo.
-      english: Take your time.
-    choices:
-    - phrase:
-        id: phrase.okaikei
-        japanese: "お会計をお願いします。"
-        reading: "おかいけいをおねがいします。"
-        romaji: Okaikei o onegai shimasu.
-        english: The bill, please.
-      action: checkout
-      nextLineId: 
-    - phrase:
-        id: phrase.arigatou-gozaimashita
-        japanese: "ありがとうございました。"
-        reading: "ありがとうございました。"
-        romaji: Arigatou gozaimashita.
-        english: Thank you.
-      action: next
-      nextLineId: bye
-  - id: bye
-    phrase:
-      id: phrase.mata-okoshi
-      japanese: "またお越しください。"
-      reading: "またおこしください。"
-      romaji: Mata okoshi kudasai.
-      english: Please come again.
-    choices:
-    - phrase:
-        id: phrase.sayounara
-        japanese: "さようなら。"
-        reading: "さようなら。"
-        romaji: Sayounara.
-        english: Goodbye.
-      action: end
-      nextLineId: 
+      id: phrase.goyukkuri
+      japanese: "どうぞごゆっくり。"
+      reading: "どうぞごゆっくり。"
+      romaji: Douzo goyukkuri.
+      english: Please take your time.
+    choices: []
   - id: bill
     phrase:
       id: phrase.irasshaimase
@@ -221,17 +133,9 @@ MonoBehaviour:
       nextLineId: welcome
   - id: purchase-thanks
     phrase:
-      id: phrase.arigatou-mata
-      japanese: "ありがとうございます。またお越しください。"
-      reading: "ありがとうございます。またおこしください。"
-      romaji: Arigatou gozaimasu. Mata okoshi kudasai.
-      english: Thank you very much. Please come again.
-    choices:
-    - phrase:
-        id: phrase.sayounara
-        japanese: "さようなら。"
-        reading: "さようなら。"
-        romaji: Sayounara.
-        english: Goodbye.
-      action: end
-      nextLineId: 
+      id: phrase.arigatou-gozaimashita-mata
+      japanese: "ありがとうございました。またお越しください。"
+      reading: "ありがとうございました。またおこしください。"
+      romaji: Arigatou gozaimashita. Mata okoshi kudasai.
+      english: Thank you very much. Please visit again.
+    choices: []
