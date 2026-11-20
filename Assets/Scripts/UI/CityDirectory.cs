@@ -40,6 +40,7 @@ public static class CityDirectory
         new CityLocation("visitor-test", "Visitor Test", "テスト部屋", "テストべや", "A small room for checking a new location.", false, GameScenes.VisitorTest),
         new CityLocation("airport", "Airport", "空港", "くうこう", "Arrivals, signs and asking the way.", false, GameScenes.Airport),
         new CityLocation("train-station", "Train Station", "駅", "えき", "Tickets, platforms and asking the way.", false, GameScenes.TrainStation),
+        new CityLocation("ramen-shop", "Ramen Shop", "ラーメン屋", "ラーメンや", "Ordering ramen at the counter.", false, GameScenes.RamenShop),
         new CityLocation("cafe", "Café", "カフェ", "カフェ", "Ordering a drink and a snack.", false, ""),
         new CityLocation("restaurant", "Restaurant", "レストラン", "レストラン", "Reading a menu and ordering food.", false, ""),
         new CityLocation("supermarket", "Supermarket", "スーパー", "スーパー", "Food names and prices.", false, ""),

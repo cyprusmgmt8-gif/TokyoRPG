@@ -1,0 +1,117 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e1a7c5b38d6e4f02bf4a5b6c7d8e9f01, type: 3}
+  m_Name: RamenShopVocabulary
+  m_EditorClassIdentifier: 
+  entries:
+  - id: ramen.ramen
+    japanese: "ラーメン"
+    reading: "ラーメン"
+    romaji: raamen
+    exampleSentence: "ラーメンを一つください。"
+    exampleReading: "ラーメンをひとつください。"
+    exampleRomaji: Raamen o hitotsu kudasai.
+    audioReference: 
+    wordClip: {fileID: 0}
+    exampleClip: {fileID: 0}
+    roomId: ramen-shop
+    objectId: ramen-bowl
+    translations:
+    - languageCode: en
+      translation: "Ramen"
+      exampleTranslation: "One ramen, please."
+      grammarExplanation: "を marks what you are ordering and is pronounced o. 一つ means one bowl."
+  - id: ramen.menu
+    japanese: "メニュー"
+    reading: "メニュー"
+    romaji: menyuu
+    exampleSentence: "メニューを見せてください。"
+    exampleReading: "メニューをみせてください。"
+    exampleRomaji: Menyuu o misete kudasai.
+    audioReference: 
+    wordClip: {fileID: 0}
+    exampleClip: {fileID: 0}
+    roomId: ramen-shop
+    objectId: menu-board
+    translations:
+    - languageCode: en
+      translation: "Menu"
+      exampleTranslation: "Could I see the menu, please?"
+      grammarExplanation: "見せてください means \"please show me\"."
+  - id: ramen.shokken
+    japanese: "食券"
+    reading: "しょっけん"
+    romaji: shokken
+    exampleSentence: "食券をください。"
+    exampleReading: "しょっけんをください。"
+    exampleRomaji: Shokken o kudasai.
+    audioReference: 
+    wordClip: {fileID: 0}
+    exampleClip: {fileID: 0}
+    roomId: ramen-shop
+    objectId: meal-ticket
+    translations:
+    - languageCode: en
+      translation: "Meal ticket"
+      exampleTranslation: "A meal ticket, please."
+      grammarExplanation: "食券 is the paper ticket you buy before sitting down. を marks it and is pronounced o."
+  - id: ramen.men
+    japanese: "麺"
+    reading: "めん"
+    romaji: men
+    exampleSentence: "麺を硬めにしてください。"
+    exampleReading: "めんをかためにしてください。"
+    exampleRomaji: Men o katame ni shite kudasai.
+    audioReference: 
+    wordClip: {fileID: 0}
+    exampleClip: {fileID: 0}
+    roomId: ramen-shop
+    objectId: noodles
+    translations:
+    - languageCode: en
+      translation: "Noodles"
+      exampleTranslation: "Firm noodles, please."
+      grammarExplanation: "硬め means on the firm side. にしてください means \"please make it\"."
+  - id: ramen.soup
+    japanese: "スープ"
+    reading: "スープ"
+    romaji: suupu
+    exampleSentence: "スープを多めにお願いします。"
+    exampleReading: "スープをおおめにおねがいします。"
+    exampleRomaji: Suupu o oome ni onegai shimasu.
+    audioReference: 
+    wordClip: {fileID: 0}
+    exampleClip: {fileID: 0}
+    roomId: ramen-shop
+    objectId: soup
+    translations:
+    - languageCode: en
+      translation: "Soup"
+      exampleTranslation: "Extra soup, please."
+      grammarExplanation: "多め means a larger amount. お願いします is a polite way to ask."
+  - id: ramen.chashu
+    japanese: "チャーシュー"
+    reading: "チャーシュー"
+    romaji: chaashuu
+    exampleSentence: "チャーシューを追加できますか。"
+    exampleReading: "チャーシューをついかできますか。"
+    exampleRomaji: Chaashuu o tsuika dekimasu ka.
+    audioReference: 
+    wordClip: {fileID: 0}
+    exampleClip: {fileID: 0}
+    roomId: ramen-shop
+    objectId: chashu
+    translations:
+    - languageCode: en
+      translation: "Braised pork topping"
+      exampleTranslation: "Can I add chashu?"
+      grammarExplanation: "追加 means an extra topping. か turns the sentence into a question."
