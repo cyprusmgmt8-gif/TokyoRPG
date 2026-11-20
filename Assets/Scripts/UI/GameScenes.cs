@@ -14,6 +14,7 @@ public static class GameScenes
     public const string VisitorTest = "VisitorTest";
     public const string Airport = "Airport";
     public const string TrainStation = "TrainStation";
+    public const string RamenShop = "RamenShop";
 
     public static void Load(string sceneName)
     {

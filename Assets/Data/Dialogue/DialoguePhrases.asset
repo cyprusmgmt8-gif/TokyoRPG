@@ -173,3 +173,48 @@ MonoBehaviour:
     reading: "あたためますか？"
     romaji: Atatamemasu ka?
     english: Would you like me to heat it up?
+  - id: phrase.ramen-hitotsu
+    japanese: "ラーメンを一つお願いします。"
+    reading: "ラーメンをひとつおねがいします。"
+    romaji: Raamen o hitotsu onegai shimasu.
+    english: One ramen, please.
+  - id: phrase.omizu-kudasai
+    japanese: "お水をください。"
+    reading: "おみずをください。"
+    romaji: Omizu o kudasai.
+    english: Water, please.
+  - id: phrase.menyuu-miteimasu
+    japanese: "ちょっとメニューを見てもいいですか？"
+    reading: "ちょっとメニューをみてもいいですか？"
+    romaji: Chotto menyuu o mite mo ii desu ka?
+    english: Can I take a look at the menu?
+  - id: phrase.kashikomarimashita-toppingu
+    japanese: "かしこまりました。トッピングはどうしますか？"
+    reading: "かしこまりました。トッピングはどうしますか？"
+    romaji: Kashikomarimashita. Toppingu wa dou shimasu ka.
+    english: Certainly. Would you like any toppings?
+  - id: phrase.chaashuu-onegai
+    japanese: "チャーシューをお願いします。"
+    reading: "チャーシューをおねがいします。"
+    romaji: Chaashuu o onegai shimasu.
+    english: Chashu, please.
+  - id: phrase.sono-mama
+    japanese: "そのままでお願いします。"
+    reading: "そのままでおねがいします。"
+    romaji: Sono mama de onegai shimasu.
+    english: Just as it is, please.
+  - id: phrase.chaashuu-iri-omachi
+    japanese: "チャーシュー入りですね。少々お待ちください。"
+    reading: "チャーシューいりですね。しょうしょうおまちください。"
+    romaji: Chaashuu-iri desu ne. Shoushou omachi kudasai.
+    english: Chashu it is. One moment, please.
+  - id: phrase.sono-mama-omachi
+    japanese: "はい、そのままで。少々お待ちください。"
+    reading: "はい、そのままで。しょうしょうおまちください。"
+    romaji: Hai, sono mama de. Shoushou omachi kudasai.
+    english: Yes, just as it is. One moment, please.
+  - id: phrase.hai-douzo
+    japanese: "はい、どうぞ。"
+    reading: "はい、どうぞ。"
+    romaji: Hai, douzo.
+    english: Here you go.

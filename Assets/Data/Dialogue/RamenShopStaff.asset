@@ -1,0 +1,109 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4c8e2f19b304d6e8f7a1c2d3e4f5061, type: 3}
+  m_Name: RamenShopStaff
+  m_EditorClassIdentifier: 
+  npcId: ramen.staff
+  speakerJapanese: "ラーメン屋の店員"
+  speakerReading: "ラーメンやのてんいん"
+  speakerRomaji: raamen-ya no tenin
+  speakerEnglish: Ramen shop staff
+  startLineId: greeting
+  lines:
+  - id: greeting
+    phrase:
+      id: phrase.irasshaimase
+      japanese: "いらっしゃいませ。"
+      reading: "いらっしゃいませ。"
+      romaji: Irasshaimase.
+      english: Welcome.
+    choices:
+    - phrase:
+        id: phrase.ramen-hitotsu
+        japanese: "ラーメンを一つお願いします。"
+        reading: "ラーメンをひとつおねがいします。"
+        romaji: Raamen o hitotsu onegai shimasu.
+        english: One ramen, please.
+      action: next
+      nextLineId: toppings
+    - phrase:
+        id: phrase.omizu-kudasai
+        japanese: "お水をください。"
+        reading: "おみずをください。"
+        romaji: Omizu o kudasai.
+        english: Water, please.
+      action: next
+      nextLineId: water
+    - phrase:
+        id: phrase.menyuu-miteimasu
+        japanese: "ちょっとメニューを見てもいいですか？"
+        reading: "ちょっとメニューをみてもいいですか？"
+        romaji: Chotto menyuu o mite mo ii desu ka?
+        english: Can I take a look at the menu?
+      action: next
+      nextLineId: browsing
+  - id: toppings
+    phrase:
+      id: phrase.kashikomarimashita-toppingu
+      japanese: "かしこまりました。トッピングはどうしますか？"
+      reading: "かしこまりました。トッピングはどうしますか？"
+      romaji: Kashikomarimashita. Toppingu wa dou shimasu ka.
+      english: Certainly. Would you like any toppings?
+    choices:
+    - phrase:
+        id: phrase.chaashuu-onegai
+        japanese: "チャーシューをお願いします。"
+        reading: "チャーシューをおねがいします。"
+        romaji: Chaashuu o onegai shimasu.
+        english: Chashu, please.
+      action: next
+      nextLineId: chashu-ready
+    - phrase:
+        id: phrase.sono-mama
+        japanese: "そのままでお願いします。"
+        reading: "そのままでおねがいします。"
+        romaji: Sono mama de onegai shimasu.
+        english: Just as it is, please.
+      action: next
+      nextLineId: plain-ready
+  - id: chashu-ready
+    phrase:
+      id: phrase.chaashuu-iri-omachi
+      japanese: "チャーシュー入りですね。少々お待ちください。"
+      reading: "チャーシューいりですね。しょうしょうおまちください。"
+      romaji: Chaashuu-iri desu ne. Shoushou omachi kudasai.
+      english: Chashu it is. One moment, please.
+    choices: []
+  - id: plain-ready
+    phrase:
+      id: phrase.sono-mama-omachi
+      japanese: "はい、そのままで。少々お待ちください。"
+      reading: "はい、そのままで。しょうしょうおまちください。"
+      romaji: Hai, sono mama de. Shoushou omachi kudasai.
+      english: Yes, just as it is. One moment, please.
+    choices: []
+  - id: water
+    phrase:
+      id: phrase.hai-douzo
+      japanese: "はい、どうぞ。"
+      reading: "はい、どうぞ。"
+      romaji: Hai, douzo.
+      english: Here you go.
+    choices: []
+  - id: browsing
+    phrase:
+      id: phrase.goyukkuri
+      japanese: "どうぞごゆっくり。"
+      reading: "どうぞごゆっくり。"
+      romaji: Douzo goyukkuri.
+      english: Please take your time.
+    choices: []

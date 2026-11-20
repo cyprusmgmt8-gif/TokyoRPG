@@ -27,6 +27,9 @@ EditorBuildSettings:
     path: Assets/Scenes/TrainStation/TrainStation.unity
     guid: cf701442dead4928bdc3f9e415f17552
   - enabled: 1
+    path: Assets/Scenes/RamenShop/RamenShop.unity
+    guid: 322125352691452f8dbedfaf63ee5cde
+  - enabled: 1
     path: Assets/Scenes/SampleScene.unity
     guid: 99c9720ab356a0642a771bea13969a05
   m_configObjects:
