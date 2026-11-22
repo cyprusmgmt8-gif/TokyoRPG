@@ -1,0 +1,125 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4c8e2f19b304d6e8f7a1c2d3e4f5061, type: 3}
+  m_Name: HotelReception
+  m_EditorClassIdentifier: 
+  npcId: hotel.reception
+  speakerJapanese: "ホテルの受付"
+  speakerReading: "ホテルのうけつけ"
+  speakerRomaji: hoteru no uketsuke
+  speakerEnglish: Hotel receptionist
+  startLineId: greeting
+  lines:
+  - id: greeting
+    phrase:
+      id: phrase.irasshaimase
+      japanese: "いらっしゃいませ。"
+      reading: "いらっしゃいませ。"
+      romaji: Irasshaimase.
+      english: Welcome.
+    choices:
+    - phrase:
+        id: phrase.yoyaku-chekkuin
+        japanese: "予約しています。チェックインをお願いします。"
+        reading: "よやくしています。チェックインをおねがいします。"
+        romaji: Yoyaku shite imasu. Chekkuin o onegaishimasu.
+        english: I have a reservation. I'd like to check in.
+      action: next
+      nextLineId: ask-name
+    - phrase:
+        id: phrase.nimotsu-azukatte
+        japanese: "チェックアウト後、荷物を預かってもらえますか？"
+        reading: "チェックアウトご、にもつをあずかってもらえますか？"
+        romaji: Chekkuauto go, nimotsu o azukatte moraemasu ka?
+        english: Could you hold my luggage after checkout?
+      action: next
+      nextLineId: luggage
+    - phrase:
+        id: phrase.choushoku-nanji
+        japanese: "朝食は何時からですか？"
+        reading: "ちょうしょくはなんじからですか？"
+        romaji: Choushoku wa nanji kara desu ka?
+        english: What time does breakfast start?
+      action: next
+      nextLineId: breakfast
+    - phrase:
+        id: phrase.waifai-pasuwaado
+        japanese: "Wi-Fiのパスワードを教えてもらえますか？"
+        reading: "ワイファイのパスワードをおしえてもらえますか？"
+        romaji: Waifai no pasuwaado o oshiete moraemasu ka?
+        english: Could you tell me the Wi-Fi password?
+      action: next
+      nextLineId: wifi
+  - id: ask-name
+    phrase:
+      id: phrase.kashikomarimashita-onamae
+      japanese: "かしこまりました。お名前をお願いします。"
+      reading: "かしこまりました。おなまえをおねがいします。"
+      romaji: Kashikomarimashita. Onamae o onegaishimasu.
+      english: Certainly. May I have your name?
+    choices:
+    - phrase:
+        id: phrase.maikeru-desu
+        japanese: "マイケルです。"
+        reading: "マイケルです。"
+        romaji: Maikeru desu.
+        english: My name is Michael.
+      action: next
+      nextLineId: ask-passport
+  - id: ask-passport
+    phrase:
+      id: phrase.pasupooto-haiken
+      japanese: "ありがとうございます。パスポートを拝見してもよろしいですか？"
+      reading: "ありがとうございます。パスポートをはいけんしてもよろしいですか？"
+      romaji: Arigatou gozaimasu. Pasupooto o haiken shite mo yoroshii desu ka?
+      english: Thank you. May I see your passport?
+    choices:
+    - phrase:
+        id: phrase.hai-douzo
+        japanese: "はい、どうぞ。"
+        reading: "はい、どうぞ。"
+        romaji: Hai, douzo.
+        english: Here you go.
+      action: next
+      nextLineId: room-floor
+  - id: room-floor
+    phrase:
+      id: phrase.oheya-sankai
+      japanese: "ありがとうございます。お部屋は三階です。"
+      reading: "ありがとうございます。おへやはさんがいです。"
+      romaji: Arigatou gozaimasu. Oheya wa sankai desu.
+      english: Thank you. Your room is on the third floor.
+    choices: []
+  - id: luggage
+    phrase:
+      id: phrase.furonto-oazukari
+      japanese: "はい、フロントでお預かりできます。"
+      reading: "はい、フロントでおあずかりできます。"
+      romaji: Hai, furonto de oazukari dekimasu.
+      english: Yes, we can hold it at reception.
+    choices: []
+  - id: breakfast
+    phrase:
+      id: phrase.choushoku-shichiji
+      japanese: "朝食は朝七時からです。"
+      reading: "ちょうしょくはあさしちじからです。"
+      romaji: Choushoku wa asa shichiji kara desu.
+      english: Breakfast starts at 7 AM.
+    choices: []
+  - id: wifi
+    phrase:
+      id: phrase.waifai-heya-annai
+      japanese: "Wi-Fiのパスワードはお部屋にご案内があります。"
+      reading: "ワイファイのパスワードはおへやにごあんないがあります。"
+      romaji: Waifai no pasuwaado wa oheya ni goannai ga arimasu.
+      english: The Wi-Fi password information is in your room.
+    choices: []
