@@ -1,0 +1,93 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4c8e2f19b304d6e8f7a1c2d3e4f5061, type: 3}
+  m_Name: ClothingStoreStaff
+  m_EditorClassIdentifier: 
+  npcId: clothing.staff
+  speakerJapanese: "洋服屋の店員"
+  speakerReading: "ようふくやのてんいん"
+  speakerRomaji: youfuku-ya no tenin
+  speakerEnglish: Clothing store staff
+  startLineId: greeting
+  lines:
+  - id: greeting
+    phrase:
+      id: phrase.irasshaimase
+      japanese: "いらっしゃいませ。"
+      reading: "いらっしゃいませ。"
+      romaji: Irasshaimase.
+      english: Welcome.
+    choices:
+    - phrase:
+        id: phrase.emu-saizu-arimasu
+        japanese: "これのMサイズはありますか？"
+        reading: "これのエムサイズはありますか？"
+        romaji: Kore no emu saizu wa arimasu ka?
+        english: Do you have this in medium?
+      action: next
+      nextLineId: size
+    - phrase:
+        id: phrase.kore-shichaku-ii
+        japanese: "これ、試着してもいいですか？"
+        reading: "これ、しちゃくしてもいいですか？"
+        romaji: Kore, shichaku shite mo ii desu ka?
+        english: Can I try this on?
+      action: next
+      nextLineId: fitting
+    - phrase:
+        id: phrase.kore-ikura
+        japanese: "これ、いくらですか？"
+        reading: "これ、いくらですか？"
+        romaji: Kore, ikura desu ka?
+        english: How much is this?
+      action: next
+      nextLineId: price
+    - phrase:
+        id: phrase.chotto-miteru
+        japanese: "ちょっと見てるだけです。"
+        reading: "ちょっとみてるだけです。"
+        romaji: Chotto miteru dake desu.
+        english: I'm just looking, thanks.
+      action: next
+      nextLineId: browsing
+  - id: size
+    phrase:
+      id: phrase.hai-gozaimasu-shoushou
+      japanese: "はい、ございます。少々お待ちください。"
+      reading: "はい、ございます。しょうしょうおまちください。"
+      romaji: Hai, gozaimasu. Shoushou omachi kudasai.
+      english: Yes, we do. Just a moment, please.
+    choices: []
+  - id: fitting
+    phrase:
+      id: phrase.shichakushitsu-achira
+      japanese: "はい、どうぞ。試着室はあちらです。"
+      reading: "はい、どうぞ。しちゃくしつはあちらです。"
+      romaji: Hai, douzo. Shichakushitsu wa achira desu.
+      english: Of course. The fitting room is over there.
+    choices: []
+  - id: price
+    phrase:
+      id: phrase.sanzen-en
+      japanese: "こちらは三千円です。"
+      reading: "こちらはさんぜんえんです。"
+      romaji: Kochira wa sanzen en desu.
+      english: This one is 3,000 yen.
+    choices: []
+  - id: browsing
+    phrase:
+      id: phrase.kashikomarimashita-goran
+      japanese: "かしこまりました。ごゆっくりご覧ください。"
+      reading: "かしこまりました。ごゆっくりごらんください。"
+      romaji: Kashikomarimashita. Goyukkuri goran kudasai.
+      english: Certainly. Please take your time.
+    choices: []
