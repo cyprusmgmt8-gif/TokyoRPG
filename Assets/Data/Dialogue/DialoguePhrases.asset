@@ -253,3 +253,58 @@ MonoBehaviour:
     reading: "かしこまりました。ごゆっくりごらんください。"
     romaji: Kashikomarimashita. Goyukkuri goran kudasai.
     english: Certainly. Please take your time.
+  - id: phrase.yoyaku-chekkuin
+    japanese: "予約しています。チェックインをお願いします。"
+    reading: "よやくしています。チェックインをおねがいします。"
+    romaji: Yoyaku shite imasu. Chekkuin o onegaishimasu.
+    english: I have a reservation. I'd like to check in.
+  - id: phrase.kashikomarimashita-onamae
+    japanese: "かしこまりました。お名前をお願いします。"
+    reading: "かしこまりました。おなまえをおねがいします。"
+    romaji: Kashikomarimashita. Onamae o onegaishimasu.
+    english: Certainly. May I have your name?
+  - id: phrase.maikeru-desu
+    japanese: "マイケルです。"
+    reading: "マイケルです。"
+    romaji: Maikeru desu.
+    english: My name is Michael.
+  - id: phrase.pasupooto-haiken
+    japanese: "ありがとうございます。パスポートを拝見してもよろしいですか？"
+    reading: "ありがとうございます。パスポートをはいけんしてもよろしいですか？"
+    romaji: Arigatou gozaimasu. Pasupooto o haiken shite mo yoroshii desu ka?
+    english: Thank you. May I see your passport?
+  - id: phrase.oheya-sankai
+    japanese: "ありがとうございます。お部屋は三階です。"
+    reading: "ありがとうございます。おへやはさんがいです。"
+    romaji: Arigatou gozaimasu. Oheya wa sankai desu.
+    english: Thank you. Your room is on the third floor.
+  - id: phrase.nimotsu-azukatte
+    japanese: "チェックアウト後、荷物を預かってもらえますか？"
+    reading: "チェックアウトご、にもつをあずかってもらえますか？"
+    romaji: Chekkuauto go, nimotsu o azukatte moraemasu ka?
+    english: Could you hold my luggage after checkout?
+  - id: phrase.furonto-oazukari
+    japanese: "はい、フロントでお預かりできます。"
+    reading: "はい、フロントでおあずかりできます。"
+    romaji: Hai, furonto de oazukari dekimasu.
+    english: Yes, we can hold it at reception.
+  - id: phrase.choushoku-nanji
+    japanese: "朝食は何時からですか？"
+    reading: "ちょうしょくはなんじからですか？"
+    romaji: Choushoku wa nanji kara desu ka?
+    english: What time does breakfast start?
+  - id: phrase.choushoku-shichiji
+    japanese: "朝食は朝七時からです。"
+    reading: "ちょうしょくはあさしちじからです。"
+    romaji: Choushoku wa asa shichiji kara desu.
+    english: Breakfast starts at 7 AM.
+  - id: phrase.waifai-pasuwaado
+    japanese: "Wi-Fiのパスワードを教えてもらえますか？"
+    reading: "ワイファイのパスワードをおしえてもらえますか？"
+    romaji: Waifai no pasuwaado o oshiete moraemasu ka?
+    english: Could you tell me the Wi-Fi password?
+  - id: phrase.waifai-heya-annai
+    japanese: "Wi-Fiのパスワードはお部屋にご案内があります。"
+    reading: "ワイファイのパスワードはおへやにごあんないがあります。"
+    romaji: Waifai no pasuwaado wa oheya ni goannai ga arimasu.
+    english: The Wi-Fi password information is in your room.
