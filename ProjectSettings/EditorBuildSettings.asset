@@ -30,6 +30,9 @@ EditorBuildSettings:
     path: Assets/Scenes/RamenShop/RamenShop.unity
     guid: 322125352691452f8dbedfaf63ee5cde
   - enabled: 1
+    path: Assets/Scenes/ClothingStore/ClothingStore.unity
+    guid: f63ef7018bd346b295194ef096ff4328
+  - enabled: 1
     path: Assets/Scenes/SampleScene.unity
     guid: 99c9720ab356a0642a771bea13969a05
   m_configObjects:

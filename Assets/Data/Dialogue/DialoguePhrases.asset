@@ -218,3 +218,38 @@ MonoBehaviour:
     reading: "はい、どうぞ。"
     romaji: Hai, douzo.
     english: Here you go.
+  - id: phrase.emu-saizu-arimasu
+    japanese: "これのMサイズはありますか？"
+    reading: "これのエムサイズはありますか？"
+    romaji: Kore no emu saizu wa arimasu ka?
+    english: Do you have this in medium?
+  - id: phrase.hai-gozaimasu-shoushou
+    japanese: "はい、ございます。少々お待ちください。"
+    reading: "はい、ございます。しょうしょうおまちください。"
+    romaji: Hai, gozaimasu. Shoushou omachi kudasai.
+    english: Yes, we do. Just a moment, please.
+  - id: phrase.kore-shichaku-ii
+    japanese: "これ、試着してもいいですか？"
+    reading: "これ、しちゃくしてもいいですか？"
+    romaji: Kore, shichaku shite mo ii desu ka?
+    english: Can I try this on?
+  - id: phrase.shichakushitsu-achira
+    japanese: "はい、どうぞ。試着室はあちらです。"
+    reading: "はい、どうぞ。しちゃくしつはあちらです。"
+    romaji: Hai, douzo. Shichakushitsu wa achira desu.
+    english: Of course. The fitting room is over there.
+  - id: phrase.kore-ikura
+    japanese: "これ、いくらですか？"
+    reading: "これ、いくらですか？"
+    romaji: Kore, ikura desu ka?
+    english: How much is this?
+  - id: phrase.sanzen-en
+    japanese: "こちらは三千円です。"
+    reading: "こちらはさんぜんえんです。"
+    romaji: Kochira wa sanzen en desu.
+    english: This one is 3,000 yen.
+  - id: phrase.kashikomarimashita-goran
+    japanese: "かしこまりました。ごゆっくりご覧ください。"
+    reading: "かしこまりました。ごゆっくりごらんください。"
+    romaji: Kashikomarimashita. Goyukkuri goran kudasai.
+    english: Certainly. Please take your time.
