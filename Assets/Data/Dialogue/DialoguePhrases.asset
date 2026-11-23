@@ -308,3 +308,53 @@ MonoBehaviour:
     reading: "ワイファイのパスワードはおへやにごあんないがあります。"
     romaji: Waifai no pasuwaado wa oheya ni goannai ga arimasu.
     english: The Wi-Fi password information is in your room.
+  - id: phrase.tokyo.sumimasen-chotto
+    japanese: "すみません、ちょっといいですか？"
+    reading: "すみません、ちょっといいですか？"
+    romaji: Sumimasen, chotto ii desu ka?
+    english: Excuse me, do you have a moment?
+  - id: phrase.tokyo.dou-shimashita
+    japanese: "はい、どうしましたか？"
+    reading: "はい、どうしましたか？"
+    romaji: Hai, dou shimashita ka?
+    english: Sure, what's up?
+  - id: phrase.tokyo.eki-doko
+    japanese: "駅はどこですか？"
+    reading: "えきはどこですか？"
+    romaji: Eki wa doko desu ka?
+    english: Where is the station?
+  - id: phrase.tokyo.eki-saki
+    japanese: "駅なら、この道をまっすぐ行った先ですよ。"
+    reading: "えきなら、このみちをまっすぐいったさきですよ。"
+    romaji: Eki nara, kono michi o massugu itta saki desu yo.
+    english: If you're looking for the station, it's farther down this road.
+  - id: phrase.tokyo.eki-ikikata
+    japanese: "駅にはどうやって行けばいいですか？"
+    reading: "えきにはどうやっていけばいいですか？"
+    romaji: Eki ni wa dou yatte ikeba ii desu ka?
+    english: How do I get to the station?
+  - id: phrase.tokyo.eki-migi
+    japanese: "駅なら、この道をまっすぐ行って、先の交差点を右に曲がってください。"
+    reading: "えきなら、このみちをまっすぐいって、さきのこうさてんをみぎにまがってください。"
+    romaji: Eki nara, kono michi o massugu itte, saki no kousaten o migi ni magatte kudasai.
+    english: For the station, go straight along this road and turn right at the intersection farther ahead.
+  - id: phrase.tokyo.konbini-chikaku
+    japanese: "この近くにコンビニはありますか？"
+    reading: "このちかくにコンビニはありますか？"
+    romaji: Kono chikaku ni konbini wa arimasu ka?
+    english: Is there a convenience store nearby?
+  - id: phrase.tokyo.konbini-saki
+    japanese: "はい、この道をまっすぐ行った先にありますよ。"
+    reading: "はい、このみちをまっすぐいったさきにありますよ。"
+    romaji: Hai, kono michi o massugu itta saki ni arimasu yo.
+    english: Yes, there's one farther along this road.
+  - id: phrase.tokyo.massugu-migi
+    japanese: "まっすぐ行って、右ですね？"
+    reading: "まっすぐいって、みぎですね？"
+    romaji: Massugu itte, migi desu ne?
+    english: Straight ahead, then right, correct?
+  - id: phrase.tokyo.hai-soudesu
+    japanese: "はい、そうです。"
+    reading: "はい、そうです。"
+    romaji: Hai, sou desu.
+    english: Yes, that's right.

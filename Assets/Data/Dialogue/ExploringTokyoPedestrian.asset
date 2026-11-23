@@ -1,0 +1,109 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4c8e2f19b304d6e8f7a1c2d3e4f5061, type: 3}
+  m_Name: ExploringTokyoPedestrian
+  m_EditorClassIdentifier: 
+  npcId: tokyo.pedestrian
+  speakerJapanese: "通行人"
+  speakerReading: "つうこうにん"
+  speakerRomaji: tsuukounin
+  speakerEnglish: Pedestrian
+  startLineId: greeting
+  lines:
+  - id: greeting
+    phrase:
+      id: phrase.tokyo.dou-shimashita
+      japanese: "はい、どうしましたか？"
+      reading: "はい、どうしましたか？"
+      romaji: Hai, dou shimashita ka?
+      english: Sure, what's up?
+    choices:
+    - phrase:
+        id: phrase.tokyo.sumimasen-chotto
+        japanese: "すみません、ちょっといいですか？"
+        reading: "すみません、ちょっといいですか？"
+        romaji: Sumimasen, chotto ii desu ka?
+        english: Excuse me, do you have a moment?
+      action: next
+      nextLineId: questions
+  - id: questions
+    phrase:
+      id: phrase.tokyo.dou-shimashita
+      japanese: "はい、どうしましたか？"
+      reading: "はい、どうしましたか？"
+      romaji: Hai, dou shimashita ka?
+      english: Sure, what's up?
+    choices:
+    - phrase:
+        id: phrase.tokyo.eki-doko
+        japanese: "駅はどこですか？"
+        reading: "えきはどこですか？"
+        romaji: Eki wa doko desu ka?
+        english: Where is the station?
+      action: next
+      nextLineId: station-where
+    - phrase:
+        id: phrase.tokyo.eki-ikikata
+        japanese: "駅にはどうやって行けばいいですか？"
+        reading: "えきにはどうやっていけばいいですか？"
+        romaji: Eki ni wa dou yatte ikeba ii desu ka?
+        english: How do I get to the station?
+      action: next
+      nextLineId: station-how
+    - phrase:
+        id: phrase.tokyo.konbini-chikaku
+        japanese: "この近くにコンビニはありますか？"
+        reading: "このちかくにコンビニはありますか？"
+        romaji: Kono chikaku ni konbini wa arimasu ka?
+        english: Is there a convenience store nearby?
+      action: next
+      nextLineId: konbini
+  - id: station-where
+    phrase:
+      id: phrase.tokyo.eki-saki
+      japanese: "駅なら、この道をまっすぐ行った先ですよ。"
+      reading: "えきなら、このみちをまっすぐいったさきですよ。"
+      romaji: Eki nara, kono michi o massugu itta saki desu yo.
+      english: If you're looking for the station, it's farther down this road.
+    choices: []
+  - id: station-how
+    phrase:
+      id: phrase.tokyo.eki-migi
+      japanese: "駅なら、この道をまっすぐ行って、先の交差点を右に曲がってください。"
+      reading: "えきなら、このみちをまっすぐいって、さきのこうさてんをみぎにまがってください。"
+      romaji: Eki nara, kono michi o massugu itte, saki no kousaten o migi ni magatte kudasai.
+      english: For the station, go straight along this road and turn right at the intersection farther ahead.
+    choices:
+    - phrase:
+        id: phrase.tokyo.massugu-migi
+        japanese: "まっすぐ行って、右ですね？"
+        reading: "まっすぐいって、みぎですね？"
+        romaji: Massugu itte, migi desu ne?
+        english: Straight ahead, then right, correct?
+      action: next
+      nextLineId: confirm
+  - id: konbini
+    phrase:
+      id: phrase.tokyo.konbini-saki
+      japanese: "はい、この道をまっすぐ行った先にありますよ。"
+      reading: "はい、このみちをまっすぐいったさきにありますよ。"
+      romaji: Hai, kono michi o massugu itta saki ni arimasu yo.
+      english: Yes, there's one farther along this road.
+    choices: []
+  - id: confirm
+    phrase:
+      id: phrase.tokyo.hai-soudesu
+      japanese: "はい、そうです。"
+      reading: "はい、そうです。"
+      romaji: Hai, sou desu.
+      english: Yes, that's right.
+    choices: []
