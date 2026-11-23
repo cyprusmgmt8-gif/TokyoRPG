@@ -1,0 +1,151 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e1a7c5b38d6e4f02bf4a5b6c7d8e9f01, type: 3}
+  m_Name: ExploringTokyoVocabulary
+  m_EditorClassIdentifier: 
+  entries:
+  - id: tokyo.jidouhanbaiki
+    japanese: "自動販売機"
+    reading: "じどうはんばいき"
+    romaji: jidouhanbaiki
+    exampleSentence: "自動販売機で水を買います。"
+    exampleReading: "じどうはんばいきでみずをかいます。"
+    exampleRomaji: Jidouhanbaiki de mizu o kaimasu.
+    audioReference: 
+    wordClip: {fileID: 0}
+    exampleClip: {fileID: 0}
+    roomId: exploring-tokyo
+    objectId: vending-machine
+    translations:
+    - languageCode: en
+      translation: "Vending machine"
+      exampleTranslation: "I'll buy water from the vending machine."
+      grammarExplanation: "で marks the place where you buy. を marks the water."
+  - id: tokyo.shingou
+    japanese: "信号"
+    reading: "しんごう"
+    romaji: shingou
+    exampleSentence: "信号を渡ったら、右に曲がってください。"
+    exampleReading: "しんごうをわたったら、みぎにまがってください。"
+    exampleRomaji: Shingou o watattara, migi ni magatte kudasai.
+    audioReference: 
+    wordClip: {fileID: 0}
+    exampleClip: {fileID: 0}
+    roomId: exploring-tokyo
+    objectId: traffic-light
+    translations:
+    - languageCode: en
+      translation: "Traffic light"
+      exampleTranslation: "After crossing at the traffic light, please turn right."
+      grammarExplanation: "たら means after that action. 右に曲がる means turn right."
+  - id: tokyo.oudanhodou
+    japanese: "横断歩道"
+    reading: "おうだんほどう"
+    romaji: oudanhodou
+    exampleSentence: "横断歩道を渡ってください。"
+    exampleReading: "おうだんほどうをわたってください。"
+    exampleRomaji: Oudanhodou o watatte kudasai.
+    audioReference: 
+    wordClip: {fileID: 0}
+    exampleClip: {fileID: 0}
+    roomId: exploring-tokyo
+    objectId: crossing
+    translations:
+    - languageCode: en
+      translation: "Pedestrian crossing"
+      exampleTranslation: "Please cross at the pedestrian crossing."
+      grammarExplanation: "を marks the crossing you go across. ください makes a polite request."
+  - id: tokyo.kousaten
+    japanese: "交差点"
+    reading: "こうさてん"
+    romaji: kousaten
+    exampleSentence: "次の交差点を左に曲がってください。"
+    exampleReading: "つぎのこうさてんをひだりにまがってください。"
+    exampleRomaji: Tsugi no kousaten o hidari ni magatte kudasai.
+    audioReference: 
+    wordClip: {fileID: 0}
+    exampleClip: {fileID: 0}
+    roomId: exploring-tokyo
+    objectId: intersection
+    translations:
+    - languageCode: en
+      translation: "Intersection"
+      exampleTranslation: "Please turn left at the next intersection."
+      grammarExplanation: "次の means the next one. 左に曲がる means turn left."
+  - id: tokyo.basutei
+    japanese: "バス停"
+    reading: "バスてい"
+    romaji: basutei
+    exampleSentence: "バス停はどこですか？"
+    exampleReading: "バスていはどこですか？"
+    exampleRomaji: Basutei wa doko desu ka?
+    audioReference: 
+    wordClip: {fileID: 0}
+    exampleClip: {fileID: 0}
+    roomId: exploring-tokyo
+    objectId: bus-stop
+    translations:
+    - languageCode: en
+      translation: "Bus stop"
+      exampleTranslation: "Where is the bus stop?"
+      grammarExplanation: "は marks the topic and is pronounced wa. か turns this into a question."
+  - id: tokyo.jitensha
+    japanese: "自転車"
+    reading: "じてんしゃ"
+    romaji: jitensha
+    exampleSentence: "ここに自転車を止めてもいいですか？"
+    exampleReading: "ここにじてんしゃをとめてもいいですか？"
+    exampleRomaji: Koko ni jitensha o tomete mo ii desu ka?
+    audioReference: 
+    wordClip: {fileID: 0}
+    exampleClip: {fileID: 0}
+    roomId: exploring-tokyo
+    objectId: bicycle
+    translations:
+    - languageCode: en
+      translation: "Bicycle"
+      exampleTranslation: "Can I park my bicycle here?"
+      grammarExplanation: "てもいいですか asks for permission."
+  - id: tokyo.chizu
+    japanese: "地図"
+    reading: "ちず"
+    romaji: chizu
+    exampleSentence: "地図を見てもいいですか？"
+    exampleReading: "ちずをみてもいいですか？"
+    exampleRomaji: Chizu o mite mo ii desu ka?
+    audioReference: 
+    wordClip: {fileID: 0}
+    exampleClip: {fileID: 0}
+    roomId: exploring-tokyo
+    objectId: map
+    translations:
+    - languageCode: en
+      translation: "Map"
+      exampleTranslation: "May I look at the map?"
+      grammarExplanation: "を marks the map. てもいいですか asks for permission."
+  - id: tokyo.michi
+    japanese: "道"
+    reading: "みち"
+    romaji: michi
+    exampleSentence: "この道をまっすぐ行ってください。"
+    exampleReading: "このみちをまっすぐいってください。"
+    exampleRomaji: Kono michi o massugu itte kudasai.
+    audioReference: 
+    wordClip: {fileID: 0}
+    exampleClip: {fileID: 0}
+    roomId: exploring-tokyo
+    objectId: road
+    translations:
+    - languageCode: en
+      translation: "Road / Way"
+      exampleTranslation: "Please go straight along this road."
+      grammarExplanation: "この means this. まっすぐ means straight ahead."

@@ -17,6 +17,7 @@ public static class GameScenes
     public const string RamenShop = "RamenShop";
     public const string ClothingStore = "ClothingStore";
     public const string Hotel = "Hotel";
+    public const string ExploringTokyo = "ExploringTokyo";
 
     public static void Load(string sceneName)
     {
