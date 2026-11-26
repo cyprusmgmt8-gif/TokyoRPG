@@ -346,21 +346,7 @@ public class CityMapScreen : MonoBehaviour
 
     static bool CanEnter(CityLocation place)
     {
-        if (string.IsNullOrEmpty(place.sceneName))
-        {
-            return false;
-        }
-
-        if (place.includedInFreeVersion || AccessEntitlement.HasPremium)
-        {
-            return true;
-        }
-
-#if UNITY_EDITOR
-        return true;
-#else
-        return false;
-#endif
+        return CityDirectory.CanEnter(place);
     }
 
     static string PlaceHeading(CityLocation place)
