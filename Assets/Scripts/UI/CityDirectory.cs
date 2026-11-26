@@ -57,4 +57,52 @@ public static class CityDirectory
         new CityLocation("shopping-street", "Shopping Street", "商店街", "しょうてんがい", "Shops, directions and prices.", false, ""),
         new CityLocation("city-hall", "City Hall", "市役所", "しやくしょ", "Addresses, forms and public services.", false, "")
     };
+
+    /// <summary>
+    /// Finds the map place that loads this scene. Empty scene names are not a match.
+    /// </summary>
+    public static bool TryGetByScene(string sceneName, out CityLocation place)
+    {
+        place = null;
+        if (string.IsNullOrEmpty(sceneName))
+        {
+            return false;
+        }
+
+        for (int i = 0; i < All.Length; i++)
+        {
+            CityLocation item = All[i];
+            if (item != null && item.sceneName == sceneName)
+            {
+                place = item;
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    /// <summary>
+    /// Same rule as the city map. Free places and premium stay open.
+    /// In the Editor, any place with a scene can be entered for testing.
+    /// A player build keeps non-free places closed until premium is on.
+    /// </summary>
+    public static bool CanEnter(CityLocation place)
+    {
+        if (place == null || string.IsNullOrEmpty(place.sceneName))
+        {
+            return false;
+        }
+
+        if (place.includedInFreeVersion || AccessEntitlement.HasPremium)
+        {
+            return true;
+        }
+
+#if UNITY_EDITOR
+        return true;
+#else
+        return false;
+#endif
+    }
 }

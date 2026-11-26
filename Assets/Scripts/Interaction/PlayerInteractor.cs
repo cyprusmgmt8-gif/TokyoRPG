@@ -1,10 +1,12 @@
 using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 /// <summary>
 /// Looks from the player camera. The closest hit within reach decides the action.
 /// A product opens the study card. The register opens checkout. A person opens talk.
+/// A doorway loads its scene. Study and talk are checked first.
 /// </summary>
 public class PlayerInteractor : MonoBehaviour
 {
@@ -27,7 +29,10 @@ public class PlayerInteractor : MonoBehaviour
     InteractableObject current;
     CheckoutPoint checkout;
     DialoguePoint talk;
+    SceneEntrance entrance;
     FirstPersonController movement;
+    GameObject entrancePrompt;
+    Text entrancePromptText;
 
     void Awake()
     {
@@ -53,6 +58,8 @@ public class PlayerInteractor : MonoBehaviour
         {
             gameObject.AddComponent<DialoguePanel>();
         }
+
+        BuildEntrancePrompt();
     }
 
     void OnEnable()
@@ -71,6 +78,8 @@ public class PlayerInteractor : MonoBehaviour
         }
 
         ClearFocus();
+        entrance = null;
+        ShowEntrancePrompt(false);
     }
 
     void Update()
@@ -80,6 +89,8 @@ public class PlayerInteractor : MonoBehaviour
             ClearFocus();
             checkout = null;
             talk = null;
+            entrance = null;
+            ShowEntrancePrompt(false);
             if (learningPanel != null)
             {
                 learningPanel.SetPrompt(null);
@@ -88,7 +99,7 @@ public class PlayerInteractor : MonoBehaviour
             return;
         }
 
-        FindLookTarget(out InteractableObject lookedAt, out CheckoutPoint lookedCheckout, out DialoguePoint lookedTalk);
+        FindLookTarget(out InteractableObject lookedAt, out CheckoutPoint lookedCheckout, out DialoguePoint lookedTalk, out SceneEntrance lookedEntrance);
         if (lookedAt != current)
         {
             if (current != null)
@@ -106,11 +117,14 @@ public class PlayerInteractor : MonoBehaviour
 
         checkout = lookedCheckout;
         talk = lookedTalk;
+        entrance = lookedEntrance;
 
         if (learningPanel != null)
         {
             learningPanel.SetPrompt(current != null ? current.PromptName : null);
         }
+
+        ShowEntrancePrompt(current == null && talk == null && entrance != null);
 
         if (!WasInteractPressed())
         {
@@ -124,6 +138,13 @@ public class PlayerInteractor : MonoBehaviour
         else if (talk != null)
         {
             OpenTalk();
+        }
+        else if (entrance != null)
+        {
+            SceneEntrance selected = entrance;
+            entrance = null;
+            ShowEntrancePrompt(false);
+            selected.Enter();
         }
     }
 
@@ -194,11 +215,12 @@ public class PlayerInteractor : MonoBehaviour
         Studied?.Invoke(vocabularyId);
     }
 
-    void FindLookTarget(out InteractableObject studyTarget, out CheckoutPoint checkoutTarget, out DialoguePoint talkTarget)
+    void FindLookTarget(out InteractableObject studyTarget, out CheckoutPoint checkoutTarget, out DialoguePoint talkTarget, out SceneEntrance entranceTarget)
     {
         studyTarget = null;
         checkoutTarget = null;
         talkTarget = null;
+        entranceTarget = null;
         if (eye == null)
         {
             return;
@@ -238,6 +260,60 @@ public class PlayerInteractor : MonoBehaviour
         }
 
         talkTarget = closestHit.collider.GetComponentInParent<DialoguePoint>();
+        if (talkTarget != null)
+        {
+            return;
+        }
+
+        entranceTarget = closestHit.collider.GetComponentInParent<SceneEntrance>();
+    }
+
+    void BuildEntrancePrompt()
+    {
+        Font font = MenuUi.FindFont();
+        Canvas canvas = MenuUi.CreateCanvas(transform, "Entrance Prompt Canvas", 17);
+        entrancePrompt = MenuUi.CreateRect("Entrance Prompt", canvas.transform);
+        MenuUi.Stretch(entrancePrompt.GetComponent<RectTransform>(), new Vector2(0.30f, 0.40f), new Vector2(0.70f, 0.52f));
+        Image image = entrancePrompt.AddComponent<Image>();
+        image.color = new Color(0.08f, 0.08f, 0.1f, 0.88f);
+        Button button = entrancePrompt.AddComponent<Button>();
+        button.targetGraphic = image;
+        button.onClick.AddListener(EnterFromPrompt);
+        entrancePromptText = MenuUi.AddText(entrancePrompt.transform, "E  —  Enter", font, 32, FontStyle.Bold, MenuUi.Paper, 56, TextAnchor.MiddleCenter);
+        MenuUi.Stretch(entrancePromptText.rectTransform, Vector2.zero, Vector2.one);
+        entrancePromptText.GetComponent<LayoutElement>().ignoreLayout = true;
+        entrancePrompt.SetActive(false);
+    }
+
+    void ShowEntrancePrompt(bool show)
+    {
+        if (entrancePrompt == null)
+        {
+            return;
+        }
+
+        if (show && entrance != null && entrancePromptText != null)
+        {
+            entrancePromptText.text = "E  —  " + entrance.PromptLabel;
+        }
+
+        if (entrancePrompt.activeSelf != show)
+        {
+            entrancePrompt.SetActive(show);
+        }
+    }
+
+    void EnterFromPrompt()
+    {
+        if (entrance == null || ScreenBlocksLook())
+        {
+            return;
+        }
+
+        SceneEntrance selected = entrance;
+        entrance = null;
+        ShowEntrancePrompt(false);
+        selected.Enter();
     }
 
     bool WasInteractPressed()

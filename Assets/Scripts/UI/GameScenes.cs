@@ -21,10 +21,29 @@ public static class GameScenes
 
     public static void Load(string sceneName)
     {
+        Load(sceneName, "");
+    }
+
+    /// <summary>
+    /// Loads a scene. An empty return id clears any pending doorway return,
+    /// which is what the city map and the menus use.
+    /// </summary>
+    public static void Load(string sceneName, string returnPointId)
+    {
         if (!Application.CanStreamedLevelBeLoaded(sceneName))
         {
+            SceneTransitionContext.Clear();
             Debug.LogError("Add " + sceneName + " in File > Build Profiles, then try again.");
             return;
+        }
+
+        if (string.IsNullOrWhiteSpace(returnPointId))
+        {
+            SceneTransitionContext.Clear();
+        }
+        else
+        {
+            SceneTransitionContext.Set(sceneName, returnPointId);
         }
 
         SceneManager.LoadScene(sceneName);

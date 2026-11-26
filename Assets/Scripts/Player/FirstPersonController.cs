@@ -40,6 +40,45 @@ public class FirstPersonController : MonoBehaviour
     readonly List<RaycastResult> uiHits = new List<RaycastResult>();
 
     /// <summary>
+    /// Moves the body to a return spot. The controller is switched off for the move
+    /// so it does not stay stuck in the old place.
+    /// </summary>
+    public void PlaceAt(Transform point)
+    {
+        if (point == null)
+        {
+            return;
+        }
+
+        if (body == null)
+        {
+            body = GetComponent<CharacterController>();
+        }
+
+        bool restoreBody = body != null && body.enabled;
+        if (body != null)
+        {
+            body.enabled = false;
+        }
+
+        transform.SetPositionAndRotation(point.position, point.rotation);
+        verticalSpeed = -2f;
+        pitch = 0f;
+        pendingLook = Vector2.zero;
+        if (eyeCamera != null)
+        {
+            eyeCamera.localRotation = Quaternion.identity;
+        }
+
+        Physics.SyncTransforms();
+
+        if (restoreBody)
+        {
+            body.enabled = true;
+        }
+    }
+
+    /// <summary>
     /// Joystick input. X is strafe, Y is forward. Each axis is from -1 to 1.
     /// </summary>
     public void SetTouchMove(Vector2 axes)
